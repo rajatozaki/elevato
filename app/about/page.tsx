@@ -76,15 +76,47 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold mb-10 text-text-primary">Founders</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-4xl">
               {[founders.yash, founders.rajat].map((founder) => (
-                <div key={founder.name} className="p-8 border border-border-subtle rounded-2xl bg-surface shadow-xs">
-                  <div className="w-18 h-18 bg-surface-elevated border border-border-subtle rounded-full flex items-center justify-center text-2xl font-bold font-mono text-text-primary mb-6">
-                    {founder.name.charAt(0)}
+                <div key={founder.name} className="p-8 border border-border-subtle rounded-2xl bg-surface shadow-xs flex flex-col justify-between">
+                  <div>
+                    <div className="w-18 h-18 bg-surface-elevated border border-border-subtle rounded-full flex items-center justify-center text-2xl font-bold font-mono text-text-primary mb-6">
+                      {founder.name.charAt(0)}
+                    </div>
+                    <h3 className="text-2xl font-bold mb-1 text-text-primary">{founder.name}</h3>
+                    <p className="text-accent-dark dark:text-accent font-mono text-xs uppercase tracking-wider font-semibold mb-4">{founder.title}</p>
+                    <p className="text-text-secondary leading-relaxed text-sm mb-6">
+                      {founder.description}
+                    </p>
                   </div>
-                  <h3 className="text-2xl font-bold mb-1 text-text-primary">{founder.name}</h3>
-                  <p className="text-accent-dark dark:text-accent font-mono text-xs uppercase tracking-wider font-semibold mb-4">{founder.title}</p>
-                  <p className="text-text-secondary leading-relaxed text-sm">
-                    {founder.description}
-                  </p>
+
+                  <div className="flex items-center gap-2 pt-4 border-t border-border-subtle">
+                    <a
+                      href={founder.social.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border-subtle bg-surface-elevated text-xs font-mono text-text-secondary hover:text-text-primary hover:border-accent/40 transition-colors"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                      LinkedIn
+                    </a>
+                    {'github' in founder.social && (
+                      <a
+                        href={(founder.social as { github: string }).github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border-subtle bg-surface-elevated text-xs font-mono text-text-secondary hover:text-text-primary hover:border-accent/40 transition-colors"
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        GitHub
+                      </a>
+                    )}
+                    <a
+                      href={`mailto:${founder.social.email}`}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border-subtle bg-surface-elevated text-xs font-mono text-text-secondary hover:text-text-primary hover:border-accent/40 transition-colors"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                      Email
+                    </a>
+                  </div>
                 </div>
               ))}
             </div>

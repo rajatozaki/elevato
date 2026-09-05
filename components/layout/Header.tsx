@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import { Logo } from './Logo';
 import { MobileMenu } from './MobileMenu';
 import { navLinks, ctaLink } from '@/data/navigation';
+import { siteConfig } from '@/data/site';
 import { Button } from '../ui/Button';
 import { Container } from '../ui/Container';
 import { ThemeToggle } from '../ui/ThemeToggle';
@@ -37,7 +38,16 @@ export function Header() {
       >
         <Container>
           <div className="flex items-center justify-between">
-            <Logo />
+            <div className="flex items-center gap-3.5">
+              <Logo />
+              <Link 
+                href="/contact" 
+                className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-border-subtle bg-surface text-[11px] font-mono text-text-secondary hover:text-text-primary hover:border-accent/40 transition-colors shadow-2xs"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                <span>{siteConfig.availability.badge}</span>
+              </Link>
+            </div>
             
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-8 bg-surface px-6 py-2 rounded-full border border-border-subtle shadow-xs">

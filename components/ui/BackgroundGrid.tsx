@@ -1,3 +1,3 @@
-export function BackgroundGrid({ glow }: { glow?: boolean } = {}) {
+export function BackgroundGrid() {
   return null;
 }

@@ -72,19 +72,19 @@ export default function AISection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <AnimateIn>
             <SectionHeading 
-              label="Automation"
-              title="When repetitive work starts slowing the business down" 
+              label="Workflow Leverage"
+              title="Eliminate repetitive work that slows your team down" 
               align="left" 
             />
             <div className="mt-8 space-y-6 text-text-secondary text-lg leading-relaxed">
               <p>
-                Once the digital foundation is in place, Elevato can help identify repetitive processes that consume time every week.
+                Once a fast digital foundation is live, Elevato audits the manual processes that quietly consume hours of your team&apos;s week.
               </p>
               <p>
-                This may include handling incoming leads, preparing reports, updating systems, organising documents, following up with customers, or moving information between tools.
+                This includes routing incoming client enquiries, updating CRM records, compiling weekly reports, organizing files, and synchronizing customer information across disconnected software tools.
               </p>
               <p>
-                We design workflows around the business process first, then choose the technology required to run them.
+                We map your actual business operations first, then build reliable, error-monitored automation pipelines around them.
               </p>
             </div>
             <div className="mt-10">

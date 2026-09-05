@@ -1,6 +1,7 @@
 import Hero from '@/components/sections/Hero';
 import ProblemSection from '@/components/sections/ProblemSection';
 import ServicesPreview from '@/components/sections/ServicesPreview';
+import ComparisonSection from '@/components/sections/ComparisonSection';
 import WebsiteHighlight from '@/components/sections/WebsiteHighlight';
 import AISection from '@/components/sections/AISection';
 import WorkPreview from '@/components/sections/WorkPreview';
@@ -14,6 +15,7 @@ export default function HomePage() {
       <Hero />
       <ProblemSection />
       <ServicesPreview />
+      <ComparisonSection />
       <WebsiteHighlight />
       <AISection />
       <WorkPreview />

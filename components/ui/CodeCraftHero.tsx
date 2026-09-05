@@ -47,7 +47,7 @@ export function CodeCraftHero() {
                   : "text-[#9E9E9B] hover:text-[#EDEDEB]"
               )}
             >
-              02 {'//'} AI Automation
+              02 {'//'} Workflow Pipeline
             </button>
           </div>
 
@@ -107,7 +107,7 @@ export function CodeCraftHero() {
           ) : (
             <div className="space-y-2 text-[#EDEDEB]">
               <div className="text-[#737370]">
-                {`// Practical AI automation replacing manual spreadsheet workflows`}
+                {`// Reliable webhook pipeline eliminating manual spreadsheet work`}
               </div>
               <div>
                 <span className="text-[#60A5FA] font-semibold">async function </span>

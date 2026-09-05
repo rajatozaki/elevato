@@ -7,13 +7,13 @@ export default function Hero() {
   return (
     <section className="min-h-screen pt-32 pb-24 flex items-center relative">
       <Container className="max-w-5xl mx-auto text-center relative z-10">
-        {/* Studio Pill Badge */}
+        {/* Studio Availability Pill Badge */}
         <AnimateIn direction="up">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border-subtle bg-surface text-xs font-mono text-text-secondary mb-8 shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-accent inline-block" />
-            <span className="text-text-primary font-medium">Elevato Studio</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border-subtle bg-surface text-xs font-mono text-text-secondary mb-8 shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-accent inline-block animate-pulse" />
+            <span className="text-text-primary font-semibold">Available for Q3/Q4</span>
             <span className="text-text-tertiary">/</span>
-            <span>Websites &amp; AI Systems</span>
+            <span>2 Client Spots Open</span>
           </div>
         </AnimateIn>
 
@@ -27,7 +27,7 @@ export default function Hero() {
         {/* Supporting Copy */}
         <AnimateIn direction="up" delay={200}>
           <p className="text-lg md:text-xl text-text-secondary mt-6 max-w-2xl mx-auto leading-relaxed">
-            Elevato builds modern websites for established businesses and helps teams automate repetitive work using practical AI systems.
+            Elevato builds fast, high-converting websites for established businesses and eliminates routine operational bottlenecks.
           </p>
         </AnimateIn>
         
