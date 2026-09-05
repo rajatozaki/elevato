@@ -69,11 +69,11 @@ export default function Hero() {
           </AnimateIn>
 
           {/* CTAs */}
-          <AnimateIn direction="up" delay={300} className="mt-8 flex flex-wrap items-center gap-4">
-            <Button variant="primary" size="lg" href="/contact">
+          <AnimateIn direction="up" delay={300} className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
+            <Button variant="primary" size="lg" href="/contact" className="w-full sm:w-44 text-center justify-center">
               Start a Project
             </Button>
-            <Button variant="secondary" size="lg" href="/work">
+            <Button variant="secondary" size="lg" href="/work" className="w-full sm:w-44 text-center justify-center">
               View Our Work
             </Button>
           </AnimateIn>

@@ -15,7 +15,7 @@ const features = [
 
 export default function WebsiteHighlight() {
   return (
-    <section className="bg-dark text-text-on-dark py-24 lg:py-32 overflow-hidden relative border-t border-border-dark">
+    <section className="py-24 lg:py-32 overflow-hidden relative border-t border-border-subtle bg-surface/50">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
@@ -24,9 +24,8 @@ export default function WebsiteHighlight() {
                 label="Entry Service"
                 title="A stronger digital front door for your business" 
                 align="left" 
-                inverted={true}
               />
-              <p className="text-text-muted-dark text-lg mt-6 mb-8 leading-relaxed">
+              <p className="text-text-secondary text-lg mt-6 mb-8 leading-relaxed">
                 Elevato builds professional, highly performant websites designed specifically for established companies. We focus on clarity, reliability, and generating genuine enquiries.
               </p>
               
@@ -34,7 +33,7 @@ export default function WebsiteHighlight() {
                 {features.map((feature, i) => (
                   <li key={i} className="flex items-center gap-3">
                     <span className="w-2 h-2 rounded-full bg-accent flex-shrink-0" />
-                    <span className="text-text-on-dark font-medium text-sm md:text-base">{feature}</span>
+                    <span className="text-text-primary font-medium text-sm md:text-base">{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -47,40 +46,40 @@ export default function WebsiteHighlight() {
           
           <div className="relative mt-8 lg:mt-0">
             <AnimateIn direction="left" delay={200}>
-              <div className="aspect-[4/3] rounded-2xl border border-border-dark bg-[#1A1A19] overflow-hidden flex flex-col shadow-2xl relative">
-                <div className="h-10 border-b border-border-dark flex items-center px-4 gap-2 bg-[#141413]">
+              <div className="aspect-[4/3] rounded-2xl border border-border-subtle bg-surface overflow-hidden flex flex-col shadow-xl relative">
+                <div className="h-10 border-b border-border-subtle flex items-center px-4 gap-2 bg-surface-elevated">
                   <div className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
                   <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
                   <div className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
-                  <div className="ml-3 flex-1 h-5 rounded-md bg-[#222221] text-[10px] font-mono text-text-muted-dark/70 flex items-center px-2.5">
+                  <div className="ml-3 flex-1 h-5 rounded-md bg-surface border border-border-subtle text-[10px] font-mono text-text-tertiary flex items-center px-2.5">
                     https://your-business.com
                   </div>
                 </div>
-                <div className="flex-1 p-6 relative">
-                  <div className="w-1/3 h-5 bg-[#2A2A28] rounded-md mb-6" />
-                  <div className="w-3/4 h-10 bg-[#242423] rounded-md mb-3" />
-                  <div className="w-1/2 h-8 bg-[#242423] rounded-md mb-8" />
+                <div className="flex-1 p-6 relative bg-surface-elevated/30">
+                  <div className="w-1/3 h-5 bg-text-primary/10 rounded-md mb-6" />
+                  <div className="w-3/4 h-10 bg-text-primary/15 rounded-md mb-3" />
+                  <div className="w-1/2 h-8 bg-text-primary/10 rounded-md mb-8" />
                   <div className="w-36 h-10 bg-accent rounded-lg flex items-center justify-center text-xs font-bold text-[#111111] font-mono">
                     SCHEDULE INQUIRY
                   </div>
                   
-                  <div className="absolute bottom-6 right-6 w-[55%] h-[65%] rounded-xl border border-border-dark bg-[#1F1F1E]/95 backdrop-blur-md shadow-2xl p-4">
-                    <div className="flex items-center justify-between mb-3 border-b border-border-dark pb-2">
-                      <span className="text-[11px] font-mono text-accent">● Core Metrics</span>
-                      <span className="text-[10px] font-mono text-text-muted-dark">99/100</span>
+                  <div className="absolute bottom-6 right-6 w-[55%] h-[65%] rounded-xl border border-border-subtle bg-surface/95 backdrop-blur-md shadow-2xl p-4">
+                    <div className="flex items-center justify-between mb-3 border-b border-border-subtle pb-2">
+                      <span className="text-[11px] font-mono text-accent-dark dark:text-accent font-semibold">● Core Metrics</span>
+                      <span className="text-[10px] font-mono text-text-secondary">99/100</span>
                     </div>
-                    <div className="space-y-2 text-[11px] font-mono text-text-muted-dark">
+                    <div className="space-y-2 text-[11px] font-mono text-text-secondary">
                       <div className="flex justify-between">
                         <span>Speed Index</span>
-                        <span className="text-text-on-dark font-medium">0.5s</span>
+                        <span className="text-text-primary font-semibold">0.4s</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Accessibility</span>
-                        <span className="text-text-on-dark font-medium">100%</span>
+                        <span className="text-text-primary font-semibold">100%</span>
                       </div>
                       <div className="flex justify-between">
                         <span>SEO Health</span>
-                        <span className="text-text-on-dark font-medium">100%</span>
+                        <span className="text-text-primary font-semibold">100%</span>
                       </div>
                     </div>
                   </div>
