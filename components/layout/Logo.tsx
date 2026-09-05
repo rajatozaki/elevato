@@ -30,7 +30,7 @@ export function Logo({ className, variant = 'auto', showMarkOnly = false }: Logo
         >
           <path
             d="M4 9L10.5 23H14L7.5 9H4Z"
-            className={variant === 'dark' ? 'fill-white' : 'fill-current text-text-primary'}
+            fill="currentColor"
           />
           <path
             d="M9.5 23L19.8 3.5C20.4 2.4 21.8 2 22.9 2.6C24 3.2 24.4 4.6 23.8 5.7L13.5 23H9.5Z"
@@ -63,7 +63,7 @@ export function Logo({ className, variant = 'auto', showMarkOnly = false }: Logo
           {/* Left stroke */}
           <path 
             d="M3 8.5L9.5 22.5H13L6.5 8.5H3Z" 
-            className={variant === 'dark' ? 'fill-white' : 'fill-current text-text-primary'}
+            fill="currentColor"
           />
           {/* Right upward green stroke */}
           <path 

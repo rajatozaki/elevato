@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { AnimateIn } from '@/components/ui/AnimateIn';
+import { ElevateCraftBackground } from '@/components/ui/ElevateCraftBackground';
 
 const heroPillars = [
   {
@@ -28,21 +28,9 @@ const heroPillars = [
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[92vh] pt-32 sm:pt-36 pb-20 flex items-center overflow-hidden">
-      {/* Atmospheric 'Elevate' Background Art */}
-      <div className="absolute inset-0 -z-10 select-none pointer-events-none">
-        <Image
-          src="/images/elevate-hero.jpg"
-          alt="Elevato Mountain Peaks"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[75%_center] md:object-center opacity-35 dark:opacity-25 transition-opacity duration-700 filter saturate-[1.1]"
-        />
-        {/* Gradient overlays for seamless text readability and dark/light mode blend */}
-        <div className="absolute inset-0 bg-gradient-to-r from-starlight via-starlight/85 to-transparent dark:from-dark dark:via-dark/85 dark:to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-starlight via-transparent to-starlight/40 dark:from-dark dark:via-transparent dark:to-dark/40" />
-      </div>
+    <section className="relative min-h-[90vh] pt-32 sm:pt-36 pb-20 flex items-center overflow-hidden">
+      {/* Abstract 'Elevate' Craft Background */}
+      <ElevateCraftBackground />
 
       <Container className="relative z-10">
         <div className="max-w-3xl text-left">
@@ -58,9 +46,9 @@ export default function Hero() {
 
           {/* Expressive Display Headline (Sample Inspired) */}
           <AnimateIn direction="up" delay={100}>
-            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[6.5rem] font-extrabold tracking-[-0.045em] leading-[0.92] text-text-primary uppercase">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[6.5rem] font-extrabold tracking-[-0.045em] leading-[0.92] text-text-primary uppercase">
               rise{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-[#22C55E]">
+              <span className="text-accent-dark dark:text-accent">
                 above.
               </span>
             </h1>
@@ -68,7 +56,7 @@ export default function Hero() {
 
           {/* Short Phrase Tagline */}
           <AnimateIn direction="up" delay={200}>
-            <p className="text-xl sm:text-2xl md:text-3xl font-medium tracking-tight text-text-primary mt-6 max-w-2xl leading-snug">
+            <p className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-text-primary mt-6 max-w-2xl leading-snug">
               In a sea of ordinary, make sure your website is set apart from the competition.
             </p>
           </AnimateIn>
