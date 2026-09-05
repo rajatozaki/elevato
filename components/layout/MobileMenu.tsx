@@ -36,16 +36,16 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
   return (
     <div 
-      className="fixed inset-0 z-50 bg-dark text-text-on-dark flex flex-col animate-in fade-in duration-300"
+      className="fixed inset-0 z-50 bg-[#080808]/95 backdrop-blur-2xl text-text-on-dark flex flex-col animate-in fade-in duration-300"
       ref={overlayRef}
       role="dialog"
       aria-modal="true"
     >
-      <div className="flex items-center justify-between h-20 px-6">
+      <div className="flex items-center justify-between h-20 px-6 border-b border-border-dark">
         <Logo variant="dark" />
         <button 
           onClick={onClose}
-          className="p-2 -mr-2 text-text-on-dark hover:text-accent transition-colors"
+          className="p-2 -mr-2 text-text-on-dark hover:text-accent transition-colors rounded-lg focus-visible:ring-2 focus-visible:ring-accent"
           aria-label="Close menu"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -55,20 +55,20 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         </button>
       </div>
 
-      <nav className="flex-1 flex flex-col justify-center px-6 gap-8 pb-20">
+      <nav className="flex-1 flex flex-col justify-center px-8 gap-8 pb-12">
         {navLinks.map((link) => (
           <Link 
             key={link.href}
             href={link.href}
             onClick={onClose}
-            className="text-4xl font-semibold tracking-tight hover:text-accent transition-colors"
+            className="text-3xl font-semibold tracking-tight hover:text-accent transition-colors"
           >
             {link.label}
           </Link>
         ))}
       </nav>
 
-      <div className="p-6 border-t border-border-dark">
+      <div className="p-6 border-t border-border-dark bg-[#0E0E0E]">
         <Button 
           href={ctaLink.href} 
           variant="primary" 

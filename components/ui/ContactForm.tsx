@@ -58,8 +58,8 @@ export default function ContactForm() {
 
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // Ready for API route or webhook
+    await new Promise((resolve) => setTimeout(resolve, 800));
     console.log('Form Submitted:', formData);
     
     setIsSubmitting(false);
@@ -68,107 +68,123 @@ export default function ContactForm() {
 
   if (isSubmitted) {
     return (
-      <div className="max-w-2xl mx-auto p-12 text-center border border-border-subtle rounded-2xl bg-white shadow-sm">
-        <div className="w-16 h-16 bg-accent-glow rounded-full flex items-center justify-center mx-auto mb-6">
-          <svg className="w-8 h-8 text-accent-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+      <div className="max-w-2xl mx-auto p-10 md:p-14 text-center border border-border-subtle dark:border-border-subtle rounded-2xl bg-surface/90 dark:bg-surface/90 backdrop-blur-md shadow-lg">
+        <div className="w-16 h-16 bg-accent/15 text-accent-dark dark:text-accent rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-3xl font-bold mb-4">Thank you</h3>
-        <p className="text-lg text-text-secondary">We will be in touch soon.</p>
+        <h3 className="text-2xl md:text-3xl font-bold mb-3 text-text-primary dark:text-text-on-dark">Enquiry Received</h3>
+        <p className="text-base md:text-lg text-text-secondary dark:text-text-muted-dark">
+          Thank you for reaching out. We will review your project requirements and get back to you shortly.
+        </p>
       </div>
     );
   }
 
+  const inputClasses = (hasError?: boolean) => cn(
+    "w-full px-4 py-3 rounded-lg text-text-primary dark:text-text-on-dark bg-surface dark:bg-surface-elevated/70 border outline-none transition-all duration-200 text-sm",
+    hasError 
+      ? "border-red-500 focus:ring-2 focus:ring-red-500/20" 
+      : "border-border-subtle dark:border-border-subtle focus:border-accent focus:ring-2 focus:ring-accent/20"
+  );
+
   return (
-    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6">
+    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6 p-6 sm:p-10 rounded-2xl border border-border-subtle dark:border-border-subtle bg-surface/80 dark:bg-surface/60 backdrop-blur-md shadow-sm">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="flex flex-col gap-2">
-          <label htmlFor="name" className="text-sm font-medium text-text-primary">Name <span className="text-red-500">*</span></label>
+          <label htmlFor="name" className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary dark:text-text-on-dark">
+            Name <span className="text-accent-dark dark:text-accent">*</span>
+          </label>
           <input
             id="name"
             name="name"
             type="text"
+            placeholder="Jane Doe"
             value={formData.name}
             onChange={handleChange}
             aria-describedby={errors.name ? 'name-error' : undefined}
-            className={cn(
-              "w-full px-4 py-3 bg-white border rounded-lg text-text-primary outline-none transition-colors",
-              errors.name ? "border-red-500 focus:ring-1 focus:ring-red-500" : "border-border-subtle focus:border-accent focus:ring-1 focus:ring-accent"
-            )}
+            className={inputClasses(!!errors.name)}
           />
-          {errors.name && <span id="name-error" className="text-red-500 text-sm">{errors.name}</span>}
+          {errors.name && <span id="name-error" className="text-red-500 text-xs">{errors.name}</span>}
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="company" className="text-sm font-medium text-text-primary">Company</label>
+          <label htmlFor="company" className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary dark:text-text-on-dark">
+            Company
+          </label>
           <input
             id="company"
             name="company"
             type="text"
+            placeholder="Acme Health / Real Estate"
             value={formData.company}
             onChange={handleChange}
-            className="w-full px-4 py-3 bg-white border border-border-subtle rounded-lg text-text-primary focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
+            className={inputClasses()}
           />
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="text-sm font-medium text-text-primary">Email <span className="text-red-500">*</span></label>
+          <label htmlFor="email" className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary dark:text-text-on-dark">
+            Email <span className="text-accent-dark dark:text-accent">*</span>
+          </label>
           <input
             id="email"
             name="email"
             type="email"
+            placeholder="jane@company.com"
             value={formData.email}
             onChange={handleChange}
             aria-describedby={errors.email ? 'email-error' : undefined}
-            className={cn(
-              "w-full px-4 py-3 bg-white border rounded-lg text-text-primary outline-none transition-colors",
-              errors.email ? "border-red-500 focus:ring-1 focus:ring-red-500" : "border-border-subtle focus:border-accent focus:ring-1 focus:ring-accent"
-            )}
+            className={inputClasses(!!errors.email)}
           />
-          {errors.email && <span id="email-error" className="text-red-500 text-sm">{errors.email}</span>}
+          {errors.email && <span id="email-error" className="text-red-500 text-xs">{errors.email}</span>}
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="phone" className="text-sm font-medium text-text-primary">Phone</label>
+          <label htmlFor="phone" className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary dark:text-text-on-dark">
+            Phone <span className="text-text-tertiary font-normal text-[11px]">(Optional)</span>
+          </label>
           <input
             id="phone"
             name="phone"
             type="tel"
+            placeholder="+1 (555) 000-0000"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full px-4 py-3 bg-white border border-border-subtle rounded-lg text-text-primary focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
+            className={inputClasses()}
           />
         </div>
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="serviceType" className="text-sm font-medium text-text-primary">Service Type <span className="text-red-500">*</span></label>
+        <label htmlFor="serviceType" className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary dark:text-text-on-dark">
+          What do you need help with? <span className="text-accent-dark dark:text-accent">*</span>
+        </label>
         <select
           id="serviceType"
           name="serviceType"
           value={formData.serviceType}
           onChange={handleChange}
           aria-describedby={errors.serviceType ? 'serviceType-error' : undefined}
-          className={cn(
-            "w-full px-4 py-3 bg-white border rounded-lg text-text-primary outline-none transition-colors appearance-none",
-            errors.serviceType ? "border-red-500 focus:ring-1 focus:ring-red-500" : "border-border-subtle focus:border-accent focus:ring-1 focus:ring-accent"
-          )}
+          className={inputClasses(!!errors.serviceType)}
         >
-          <option value="" disabled>Select a service...</option>
-          <option value="Website">Website</option>
-          <option value="Landing Page">Landing Page</option>
+          <option value="" disabled>Select service area...</option>
+          <option value="Website">Website Development</option>
+          <option value="Landing Page">Landing Page &amp; Lead Funnel</option>
           <option value="AI Automation">AI Automation</option>
           <option value="AI Enablement">AI Enablement</option>
           <option value="Not Sure Yet">Not Sure Yet</option>
         </select>
-        {errors.serviceType && <span id="serviceType-error" className="text-red-500 text-sm">{errors.serviceType}</span>}
+        {errors.serviceType && <span id="serviceType-error" className="text-red-500 text-xs">{errors.serviceType}</span>}
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="details" className="text-sm font-medium text-text-primary">Project Details <span className="text-red-500">*</span></label>
+        <label htmlFor="details" className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary dark:text-text-on-dark">
+          Project Details <span className="text-accent-dark dark:text-accent">*</span>
+        </label>
         <textarea
           id="details"
           name="details"
@@ -176,18 +192,17 @@ export default function ContactForm() {
           value={formData.details}
           onChange={handleChange}
           aria-describedby={errors.details ? 'details-error' : undefined}
-          className={cn(
-            "w-full px-4 py-3 bg-white border rounded-lg text-text-primary outline-none transition-colors resize-y",
-            errors.details ? "border-red-500 focus:ring-1 focus:ring-red-500" : "border-border-subtle focus:border-accent focus:ring-1 focus:ring-accent"
-          )}
-          placeholder="Tell us about what you want to build..."
+          className={inputClasses(!!errors.details)}
+          placeholder="Tell us about your current digital setup and what is slowing your business down..."
         />
-        {errors.details && <span id="details-error" className="text-red-500 text-sm">{errors.details}</span>}
+        {errors.details && <span id="details-error" className="text-red-500 text-xs">{errors.details}</span>}
       </div>
 
-      <Button type="submit" variant="primary" disabled={isSubmitting} className="w-full sm:w-auto">
-        {isSubmitting ? 'Sending...' : 'Send Enquiry'}
-      </Button>
+      <div className="pt-2">
+        <Button type="submit" variant="primary" size="lg" disabled={isSubmitting} className="w-full sm:w-auto">
+          {isSubmitting ? 'Sending Enquiry...' : 'Send Enquiry'}
+        </Button>
+      </div>
     </form>
   );
 }

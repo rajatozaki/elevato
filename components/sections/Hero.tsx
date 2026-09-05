@@ -1,24 +1,42 @@
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { AnimateIn } from '@/components/ui/AnimateIn';
+import { BackgroundGrid } from '@/components/ui/BackgroundGrid';
+import { CodeCraftHero } from '@/components/ui/CodeCraftHero';
 
 export default function Hero() {
   return (
-    <section className="min-h-[90vh] flex items-center relative overflow-hidden">
-      <Container className="max-w-4xl mx-auto text-center relative z-10">
+    <section className="min-h-screen pt-32 pb-20 flex items-center relative overflow-hidden">
+      {/* Code Craft Technical Grid Background with Ambient Glow */}
+      <BackgroundGrid />
+
+      <Container className="max-w-5xl mx-auto text-center relative z-10">
+        {/* Engineering Studio Badge */}
         <AnimateIn direction="up">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-border-subtle dark:border-border-dark bg-white/90 dark:bg-[#121212]/90 backdrop-blur-md text-xs font-mono text-text-secondary dark:text-text-muted-dark mb-8 shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+            <span className="text-text-primary dark:text-text-on-dark font-medium">Elevato Studio</span>
+            <span className="text-text-tertiary">/</span>
+            <span>Websites &amp; AI Systems</span>
+          </div>
+        </AnimateIn>
+
+        {/* Main Headline */}
+        <AnimateIn direction="up" delay={100}>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.08] text-text-primary dark:text-text-on-dark max-w-4xl mx-auto">
             Websites and automation built around how your business actually works.
           </h1>
         </AnimateIn>
         
-        <AnimateIn direction="up" delay={100}>
-          <p className="text-lg lg:text-xl text-text-secondary mt-6 max-w-2xl mx-auto">
+        {/* Supporting Copy */}
+        <AnimateIn direction="up" delay={200}>
+          <p className="text-lg md:text-xl text-text-secondary dark:text-text-muted-dark mt-6 max-w-2xl mx-auto leading-relaxed">
             Elevato builds modern websites for established businesses and helps teams automate repetitive work using practical AI systems.
           </p>
         </AnimateIn>
         
-        <AnimateIn direction="up" delay={200} className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        {/* Action CTAs */}
+        <AnimateIn direction="up" delay={300} className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button variant="primary" size="lg" href="/contact">
             Start a Project
           </Button>
@@ -27,10 +45,9 @@ export default function Hero() {
           </Button>
         </AnimateIn>
         
-        <AnimateIn delay={400} className="mt-24 flex justify-center opacity-40">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-accent">
-            <path d="M12 4L12 20M12 4L6 10M12 4L18 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+        {/* Code Craft Architecture Canvas */}
+        <AnimateIn direction="up" delay={400}>
+          <CodeCraftHero />
         </AnimateIn>
       </Container>
     </section>

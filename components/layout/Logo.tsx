@@ -13,24 +13,14 @@ export function Logo({ className, variant = 'light' }: LogoProps) {
     <Link 
       href="/" 
       className={cn(
-        "flex items-center gap-1 font-semibold text-xl tracking-tight", 
-        isDark ? "text-text-on-dark" : "text-text-primary",
+        "flex items-center gap-1.5 font-bold text-xl tracking-tight transition-colors", 
+        isDark ? "text-text-on-dark" : "text-text-primary dark:text-text-on-dark",
         className
       )}
       aria-label="Elevato Home"
     >
-      Elevato
-      <svg 
-        width="8" 
-        height="8" 
-        viewBox="0 0 8 8" 
-        fill="none" 
-        xmlns="http://www.w3.org/2000/svg"
-        className="text-accent mt-1"
-        aria-hidden="true"
-      >
-        <circle cx="4" cy="4" r="4" fill="currentColor" />
-      </svg>
+      <span>Elevato</span>
+      <span className="w-2 h-2 rounded-full bg-accent inline-block mt-0.5" />
     </Link>
   );
 }

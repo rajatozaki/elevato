@@ -4,14 +4,29 @@ import { AnimateIn } from '@/components/ui/AnimateIn';
 
 export default function FinalCTA() {
   return (
-    <section className="bg-dark text-text-on-dark py-24 lg:py-32">
+    <section className="bg-dark dark:bg-[#060606] text-text-on-dark py-28 lg:py-36 relative overflow-hidden border-t border-border-dark">
+      {/* Subtle Background Glow */}
+      <div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-accent/10 rounded-full blur-[140px] pointer-events-none -z-10"
+        aria-hidden="true"
+      />
+      <div 
+        className="absolute inset-0 bg-grid-pattern opacity-25 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_50%,transparent_100%)] pointer-events-none -z-10"
+        aria-hidden="true"
+      />
+
       <Container>
-        <div className="max-w-2xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto text-center">
           <AnimateIn>
-            <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight mb-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border-dark bg-[#121212] text-xs font-mono text-text-muted-dark mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+              <span>Direct Discovery · Transparent Scope</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight mb-6 text-text-on-dark leading-tight">
               Have a website or workflow that needs improving?
             </h2>
-            <p className="text-text-muted-dark text-lg mb-10">
+            <p className="text-text-muted-dark text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
               Tell us what is slowing your business down. We can help determine whether the right starting point is a website, a better lead flow, automation, or a combination of them.
             </p>
             <Button variant="primary" size="lg" href="/contact">
