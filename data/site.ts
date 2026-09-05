@@ -2,8 +2,8 @@ export const siteConfig = {
   name: 'Elevato',
   url: 'https://elevato.in',
   description:
-    'Elevato builds high-performance websites and practical workflow automation for established businesses looking to modernize operations.',
-  tagline: 'Modern websites and practical workflow automation for established businesses.',
+    'In a sea of ordinary, Elevato builds high-performance websites and practical workflow systems that elevate your business.',
+  tagline: 'In a sea of ordinary, make sure your digital presence elevates your business.',
   availability: {
     status: 'Available for Q3/Q4',
     badge: 'Booking Open',
