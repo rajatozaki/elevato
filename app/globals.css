@@ -2,39 +2,39 @@
 
 @layer base {
   :root {
-    --color-starlight: #F7F7F3;
+    --color-starlight: #F9F9F7;
     --color-surface: #FFFFFF;
-    --color-surface-elevated: #F0F0EC;
-    --color-dark: #1A1A19;
-    --color-dark-lighter: #242423;
-    --color-text-primary: #111111;
+    --color-surface-elevated: #F2F2EE;
+    --color-dark: #121212;
+    --color-dark-lighter: #1E1E1E;
+    --color-text-primary: #121212;
     --color-text-secondary: #555555;
     --color-text-tertiary: #888888;
-    --color-text-on-dark: #F7F7F3;
-    --color-text-muted-dark: #9E9E9B;
-    --color-accent: #8FD400;
-    --color-accent-dark: #7ABF00;
-    --color-accent-glow: rgba(143, 212, 0, 0.15);
-    --color-border-subtle: #E5E5E0;
-    --color-border-dark: #2D2D2B;
+    --color-text-on-dark: #FFFFFF;
+    --color-text-muted-dark: #A7A7A7;
+    --color-accent: #1DB954;
+    --color-accent-dark: #169C46;
+    --color-accent-glow: rgba(29, 185, 84, 0.18);
+    --color-border-subtle: #E6E6E1;
+    --color-border-dark: #282828;
   }
 
   .dark {
-    --color-starlight: #141413;
-    --color-surface: #1E1E1D;
-    --color-surface-elevated: #262624;
-    --color-dark: #10100F;
-    --color-dark-lighter: #1A1A18;
-    --color-text-primary: #EDEDEB;
-    --color-text-secondary: #9E9E9B;
-    --color-text-tertiary: #6E6E6B;
-    --color-text-on-dark: #EDEDEB;
-    --color-text-muted-dark: #9E9E9B;
-    --color-accent: #8FD400;
-    --color-accent-dark: #7ABF00;
-    --color-accent-glow: rgba(143, 212, 0, 0.15);
-    --color-border-subtle: #282826;
-    --color-border-dark: #242422;
+    --color-starlight: #121212;
+    --color-surface: #181818;
+    --color-surface-elevated: #242424;
+    --color-dark: #0D0D0D;
+    --color-dark-lighter: #1A1A1A;
+    --color-text-primary: #EDEDED;
+    --color-text-secondary: #A7A7A7;
+    --color-text-tertiary: #727272;
+    --color-text-on-dark: #FFFFFF;
+    --color-text-muted-dark: #A7A7A7;
+    --color-accent: #1DB954;
+    --color-accent-dark: #1ED760;
+    --color-accent-glow: rgba(29, 185, 84, 0.22);
+    --color-border-subtle: #282828;
+    --color-border-dark: #222222;
   }
 }
 
