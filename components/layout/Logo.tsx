@@ -7,14 +7,14 @@ interface LogoProps {
 }
 
 export function Logo({ className, variant = 'light' }: LogoProps) {
-  const isDark = variant === 'dark';
+  const isDarkVariant = variant === 'dark';
   
   return (
     <Link 
       href="/" 
       className={cn(
         "flex items-center gap-1.5 font-bold text-xl tracking-tight transition-colors", 
-        isDark ? "text-text-on-dark" : "text-text-primary dark:text-text-on-dark",
+        isDarkVariant ? "text-text-on-dark" : "text-text-primary",
         className
       )}
       aria-label="Elevato Home"

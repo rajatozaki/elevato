@@ -3,7 +3,6 @@ import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import ContactForm from '@/components/ui/ContactForm';
 import { AnimateIn } from '@/components/ui/AnimateIn';
-import { BackgroundGrid } from '@/components/ui/BackgroundGrid';
 import { siteConfig } from '@/data/site';
 
 export const metadata: Metadata = {
@@ -14,8 +13,6 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div className="py-24 lg:py-32 relative overflow-hidden">
-      <BackgroundGrid glow={true} />
-
       <Container>
         <AnimateIn>
           <SectionHeading 
@@ -31,9 +28,9 @@ export default function ContactPage() {
             <ContactForm />
             
             {siteConfig.email && (
-              <p className="mt-8 text-center text-text-secondary dark:text-text-muted-dark text-sm">
+              <p className="mt-8 text-center text-text-secondary text-sm">
                 You can also reach us directly at{' '}
-                <a href={`mailto:${siteConfig.email}`} className="text-text-primary dark:text-text-on-dark font-medium hover:text-accent-dark dark:hover:text-accent transition-colors underline underline-offset-4">
+                <a href={`mailto:${siteConfig.email}`} className="text-text-primary font-medium hover:text-accent-dark dark:hover:text-accent transition-colors underline underline-offset-4">
                   {siteConfig.email}
                 </a>
               </p>

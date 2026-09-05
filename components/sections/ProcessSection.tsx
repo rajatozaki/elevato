@@ -1,3 +1,4 @@
+
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { AnimateIn } from '@/components/ui/AnimateIn';
@@ -27,12 +28,12 @@ const steps = [
 
 export default function ProcessSection() {
   return (
-    <section className="bg-dark dark:bg-[#060606] text-text-on-dark py-24 lg:py-32 relative border-t border-border-dark">
+    <section className="bg-dark text-text-on-dark py-24 lg:py-32 relative border-t border-border-dark">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           <div className="lg:col-span-5">
             <AnimateIn>
-              <SectionHeading label="Process" title="How we work" align="left" className="text-text-on-dark" />
+              <SectionHeading label="Process" title="How we work" align="left" inverted={true} />
               <p className="mt-6 text-text-muted-dark leading-relaxed">
                 Clear milestones and direct communication. No disappearing for weeks.
               </p>

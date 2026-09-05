@@ -5,6 +5,7 @@ interface SectionHeadingProps {
   title: string;
   description?: string;
   align?: 'left' | 'center';
+  inverted?: boolean;
   className?: string;
 }
 
@@ -13,6 +14,7 @@ export function SectionHeading({
   title,
   description,
   align = 'left',
+  inverted = false,
   className
 }: SectionHeadingProps) {
   return (
@@ -22,17 +24,21 @@ export function SectionHeading({
       className
     )}>
       {label && (
-        <div className="inline-flex items-center gap-1.5 mb-3 font-mono text-xs uppercase tracking-widest text-accent-dark dark:text-accent font-semibold">
+        <div className="inline-flex items-center gap-1.5 mb-3 font-mono text-xs uppercase tracking-widest text-accent font-semibold">
           <span className="w-1.5 h-1.5 rounded-full bg-accent" />
           <span>{label}</span>
         </div>
       )}
-      <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight text-text-primary dark:text-text-on-dark">
+      <h2 className={cn(
+        "text-3xl lg:text-4xl font-bold tracking-tight",
+        inverted ? "text-text-on-dark" : "text-text-primary"
+      )}>
         {title}
       </h2>
       {description && (
         <p className={cn(
-          "text-lg text-text-secondary dark:text-text-muted-dark mt-4 max-w-2xl leading-relaxed",
+          "text-lg mt-4 max-w-2xl leading-relaxed",
+          inverted ? "text-text-muted-dark" : "text-text-secondary",
           align === 'center' && "mx-auto"
         )}>
           {description}

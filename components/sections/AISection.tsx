@@ -67,7 +67,7 @@ const examples = [
 
 export default function AISection() {
   return (
-    <section className="py-24 lg:py-32 relative border-t border-border-subtle dark:border-border-subtle">
+    <section className="py-24 lg:py-32 relative border-t border-border-subtle">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <AnimateIn>
@@ -76,7 +76,7 @@ export default function AISection() {
               title="When repetitive work starts slowing the business down" 
               align="left" 
             />
-            <div className="mt-8 space-y-6 text-text-secondary dark:text-text-muted-dark text-lg leading-relaxed">
+            <div className="mt-8 space-y-6 text-text-secondary text-lg leading-relaxed">
               <p>
                 Once the digital foundation is in place, Elevato can help identify repetitive processes that consume time every week.
               </p>
@@ -97,11 +97,11 @@ export default function AISection() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-8 lg:mt-0">
             {examples.map((example, i) => (
               <AnimateIn key={example.label} delay={i * 50}>
-                <div className="bg-surface/90 dark:bg-surface/90 border border-border-subtle dark:border-border-subtle p-5 rounded-xl shadow-xs flex flex-col items-center text-center gap-3 h-full transition-all duration-200 hover:border-accent/40 dark:hover:border-accent/40 hover:-translate-y-0.5">
-                  <div className="w-10 h-10 rounded-xl bg-starlight dark:bg-surface-elevated border border-border-subtle dark:border-border-subtle flex items-center justify-center text-accent-dark dark:text-accent">
+                <div className="bg-surface border border-border-subtle p-5 rounded-xl shadow-xs flex flex-col items-center text-center gap-3 h-full transition-all duration-200 hover:border-accent/40 hover:-translate-y-0.5">
+                  <div className="w-10 h-10 rounded-xl bg-surface-elevated border border-border-subtle flex items-center justify-center text-accent-dark dark:text-accent">
                     {example.icon}
                   </div>
-                  <span className="text-sm font-medium text-text-primary dark:text-text-on-dark">
+                  <span className="text-sm font-medium text-text-primary">
                     {example.label}
                   </span>
                 </div>

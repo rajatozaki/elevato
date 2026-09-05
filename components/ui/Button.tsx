@@ -23,9 +23,9 @@ export function Button({
   
   const variants = {
     primary: "bg-accent text-[#080808] font-semibold hover:bg-accent-dark shadow-xs hover:shadow-md hover:shadow-accent/15 active:scale-[0.99]",
-    secondary: "border border-border-subtle dark:border-border-dark bg-surface/90 dark:bg-surface-elevated/90 text-text-primary dark:text-text-on-dark hover:border-accent/50 dark:hover:border-accent/50 hover:bg-surface dark:hover:bg-surface-elevated shadow-xs active:scale-[0.99]",
-    dark: "bg-dark dark:bg-[#181818] border border-border-dark text-text-on-dark hover:bg-dark-lighter dark:hover:bg-[#222222] shadow-xs active:scale-[0.99]",
-    ghost: "text-text-primary dark:text-text-on-dark hover:text-accent-dark dark:hover:text-accent hover:bg-black/5 dark:hover:bg-white/5",
+    secondary: "border border-border-subtle bg-surface text-text-primary hover:border-accent/50 hover:bg-surface-elevated shadow-xs active:scale-[0.99]",
+    dark: "bg-dark border border-border-dark text-text-on-dark hover:bg-dark-lighter shadow-xs active:scale-[0.99]",
+    ghost: "text-text-primary hover:text-accent-dark dark:hover:text-accent hover:bg-black/5 dark:hover:bg-white/5",
   };
   
   const sizes = {

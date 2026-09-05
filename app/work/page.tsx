@@ -4,7 +4,6 @@ import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { ProjectCard } from '@/components/ui/ProjectCard';
 import { AnimateIn } from '@/components/ui/AnimateIn';
-import { BackgroundGrid } from '@/components/ui/BackgroundGrid';
 
 export const metadata: Metadata = {
   title: 'Work',
@@ -14,8 +13,6 @@ export const metadata: Metadata = {
 export default function WorkPage() {
   return (
     <div className="py-24 lg:py-32 relative overflow-hidden">
-      <BackgroundGrid glow={false} />
-
       <Container>
         <AnimateIn>
           <SectionHeading 

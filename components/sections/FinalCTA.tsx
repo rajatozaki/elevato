@@ -4,22 +4,12 @@ import { AnimateIn } from '@/components/ui/AnimateIn';
 
 export default function FinalCTA() {
   return (
-    <section className="bg-dark dark:bg-[#060606] text-text-on-dark py-28 lg:py-36 relative overflow-hidden border-t border-border-dark">
-      {/* Subtle Background Glow */}
-      <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-accent/10 rounded-full blur-[140px] pointer-events-none -z-10"
-        aria-hidden="true"
-      />
-      <div 
-        className="absolute inset-0 bg-grid-pattern opacity-25 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_50%,transparent_100%)] pointer-events-none -z-10"
-        aria-hidden="true"
-      />
-
+    <section className="bg-dark text-text-on-dark py-28 lg:py-36 relative border-t border-border-dark">
       <Container>
         <div className="max-w-3xl mx-auto text-center">
           <AnimateIn>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border-dark bg-[#121212] text-xs font-mono text-text-muted-dark mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border-dark bg-[#222220] text-xs font-mono text-text-muted-dark mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
               <span>Direct Discovery · Transparent Scope</span>
             </div>
 

@@ -7,7 +7,7 @@ import { AnimateIn } from '@/components/ui/AnimateIn';
 
 export default function WorkPreview() {
   return (
-    <section className="py-24 lg:py-32 relative border-t border-border-subtle dark:border-border-subtle">
+    <section className="py-24 lg:py-32 relative border-t border-border-subtle">
       <Container>
         <AnimateIn>
           <SectionHeading label="Work" title="Selected Work" />

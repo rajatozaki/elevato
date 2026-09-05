@@ -68,14 +68,14 @@ export default function ContactForm() {
 
   if (isSubmitted) {
     return (
-      <div className="max-w-2xl mx-auto p-10 md:p-14 text-center border border-border-subtle dark:border-border-subtle rounded-2xl bg-surface/90 dark:bg-surface/90 backdrop-blur-md shadow-lg">
+      <div className="max-w-2xl mx-auto p-10 md:p-14 text-center border border-border-subtle rounded-2xl bg-surface shadow-lg">
         <div className="w-16 h-16 bg-accent/15 text-accent-dark dark:text-accent rounded-full flex items-center justify-center mx-auto mb-6">
           <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-2xl md:text-3xl font-bold mb-3 text-text-primary dark:text-text-on-dark">Enquiry Received</h3>
-        <p className="text-base md:text-lg text-text-secondary dark:text-text-muted-dark">
+        <h3 className="text-2xl md:text-3xl font-bold mb-3 text-text-primary">Enquiry Received</h3>
+        <p className="text-base md:text-lg text-text-secondary">
           Thank you for reaching out. We will review your project requirements and get back to you shortly.
         </p>
       </div>
@@ -83,17 +83,17 @@ export default function ContactForm() {
   }
 
   const inputClasses = (hasError?: boolean) => cn(
-    "w-full px-4 py-3 rounded-lg text-text-primary dark:text-text-on-dark bg-surface dark:bg-surface-elevated/70 border outline-none transition-all duration-200 text-sm",
+    "w-full px-4 py-3 rounded-lg text-text-primary bg-surface border outline-none transition-all duration-200 text-sm",
     hasError 
       ? "border-red-500 focus:ring-2 focus:ring-red-500/20" 
-      : "border-border-subtle dark:border-border-subtle focus:border-accent focus:ring-2 focus:ring-accent/20"
+      : "border-border-subtle focus:border-accent focus:ring-2 focus:ring-accent/20"
   );
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6 p-6 sm:p-10 rounded-2xl border border-border-subtle dark:border-border-subtle bg-surface/80 dark:bg-surface/60 backdrop-blur-md shadow-sm">
+    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6 p-6 sm:p-10 rounded-2xl border border-border-subtle bg-surface shadow-sm">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="flex flex-col gap-2">
-          <label htmlFor="name" className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary dark:text-text-on-dark">
+          <label htmlFor="name" className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary">
             Name <span className="text-accent-dark dark:text-accent">*</span>
           </label>
           <input
@@ -110,7 +110,7 @@ export default function ContactForm() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="company" className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary dark:text-text-on-dark">
+          <label htmlFor="company" className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary">
             Company
           </label>
           <input
@@ -127,7 +127,7 @@ export default function ContactForm() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary dark:text-text-on-dark">
+          <label htmlFor="email" className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary">
             Email <span className="text-accent-dark dark:text-accent">*</span>
           </label>
           <input
@@ -144,7 +144,7 @@ export default function ContactForm() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="phone" className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary dark:text-text-on-dark">
+          <label htmlFor="phone" className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary">
             Phone <span className="text-text-tertiary font-normal text-[11px]">(Optional)</span>
           </label>
           <input
@@ -160,7 +160,7 @@ export default function ContactForm() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="serviceType" className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary dark:text-text-on-dark">
+        <label htmlFor="serviceType" className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary">
           What do you need help with? <span className="text-accent-dark dark:text-accent">*</span>
         </label>
         <select
@@ -182,7 +182,7 @@ export default function ContactForm() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="details" className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary dark:text-text-on-dark">
+        <label htmlFor="details" className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary">
           Project Details <span className="text-accent-dark dark:text-accent">*</span>
         </label>
         <textarea

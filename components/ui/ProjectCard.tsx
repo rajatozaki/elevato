@@ -14,7 +14,7 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
     <Link 
       href={`/work/${project.slug}`}
       className={cn(
-        "group block rounded-2xl border border-border-subtle dark:border-border-subtle bg-surface/90 dark:bg-surface/90 p-4 transition-all duration-300 hover:border-accent/40 dark:hover:border-accent/40 hover:shadow-xl hover:shadow-accent/5 hover:-translate-y-1",
+        "group block rounded-2xl border border-border-subtle bg-surface p-4 transition-all duration-300 hover:border-accent/40 hover:shadow-xl hover:shadow-accent/5 hover:-translate-y-1",
         className
       )}
     >
@@ -33,10 +33,10 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
         <span className="text-[11px] font-mono uppercase tracking-widest text-accent-dark dark:text-accent block mb-1.5 font-medium">
           {project.category}
         </span>
-        <h3 className="text-xl font-semibold mb-2 text-text-primary dark:text-text-on-dark group-hover:text-accent-dark dark:group-hover:text-accent transition-colors">
+        <h3 className="text-xl font-semibold mb-2 text-text-primary group-hover:text-accent-dark dark:group-hover:text-accent transition-colors">
           {project.title}
         </h3>
-        <p className="text-text-secondary dark:text-text-muted-dark text-sm leading-relaxed line-clamp-2">
+        <p className="text-text-secondary text-sm leading-relaxed line-clamp-2">
           {project.description}
         </p>
       </div>

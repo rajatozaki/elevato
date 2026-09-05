@@ -29,9 +29,9 @@ export function Header() {
     <>
       <header 
         className={cn(
-          "fixed top-0 inset-x-0 z-40 transition-all duration-300",
+          "fixed top-0 inset-x-0 z-40 transition-all duration-200",
           isScrolled 
-            ? "bg-starlight/85 dark:bg-starlight/85 backdrop-blur-md border-b border-border-subtle dark:border-border-subtle py-3 shadow-xs" 
+            ? "bg-starlight/90 backdrop-blur-md border-b border-border-subtle py-3.5 shadow-xs" 
             : "bg-transparent border-b border-transparent py-5"
         )}
       >
@@ -40,7 +40,7 @@ export function Header() {
             <Logo />
             
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8 bg-surface/80 dark:bg-surface/80 px-6 py-2 rounded-full border border-border-subtle dark:border-border-subtle shadow-xs backdrop-blur-md">
+            <nav className="hidden lg:flex items-center gap-8 bg-surface px-6 py-2 rounded-full border border-border-subtle shadow-xs">
               {navLinks.map((link) => (
                 <Link 
                   key={link.href} 

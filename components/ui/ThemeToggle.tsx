@@ -18,7 +18,7 @@ export function ThemeToggle({ className }: { className?: string }) {
     return (
       <div 
         className={cn(
-          "w-9 h-9 rounded-lg border border-border-subtle dark:border-border-subtle flex items-center justify-center text-text-secondary dark:text-text-muted-dark opacity-0",
+          "w-9 h-9 rounded-lg border border-border-subtle flex items-center justify-center text-text-secondary opacity-0",
           className
         )}
         aria-hidden="true"
@@ -33,7 +33,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       type="button"
       onClick={toggleTheme}
       className={cn(
-        "w-9 h-9 rounded-lg border border-border-subtle dark:border-border-subtle flex items-center justify-center text-text-secondary dark:text-text-muted-dark hover:text-text-primary dark:hover:text-text-on-dark hover:border-accent/50 dark:hover:border-accent/50 bg-surface/80 dark:bg-surface/80 backdrop-blur-sm transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent",
+        "w-9 h-9 rounded-lg border border-border-subtle flex items-center justify-center text-text-secondary hover:text-text-primary hover:border-accent/50 bg-surface transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent",
         className
       )}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
