@@ -55,11 +55,11 @@ export default function Hero() {
           <div className="flex items-center justify-between text-xs font-mono text-text-secondary border-b border-border-subtle pb-2.5">
             <div className="flex items-center gap-2">
               <span className="text-accent-dark dark:text-accent font-bold">01 //</span>
-              <span className="font-semibold text-text-primary uppercase tracking-wider">Elevato Architecture</span>
-              <span className="hidden md:inline text-text-tertiary">/ Web Infrastructure & Triage Flow</span>
+              <span className="font-semibold text-text-primary uppercase tracking-wider">Studio Service Blueprint</span>
+              <span className="hidden md:inline text-text-tertiary">/ Web Infrastructure, Lead Triage & Founder Delivery</span>
             </div>
             <span className="text-[11px] font-mono text-text-tertiary uppercase tracking-widest hidden sm:inline-block">
-              Interactive Workspace
+              Interactive Process Flow
             </span>
           </div>
         </AnimateIn>

@@ -3,211 +3,291 @@
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
-interface WorkspacePillar {
+interface ServiceArchitecture {
   id: string;
+  tabLabel: string;
+  category: string;
   title: string;
-  subtitle: string;
-  badge: string;
-  nodes: {
-    step: string;
-    label: string;
-    desc: string;
+  summary: string;
+  stages: {
+    number: string;
+    name: string;
+    deliverable: string;
+    tech: string[];
   }[];
-  note: string;
-  metrics: {
-    label: string;
+  outcomes: {
     value: string;
+    label: string;
   }[];
+  clientGuarantee: string;
 }
 
-const pillars: WorkspacePillar[] = [
+const architectures: ServiceArchitecture[] = [
   {
-    id: 'website',
-    title: 'Website Architecture',
-    subtitle: 'NEXT.JS · TURBOPACK · 0.4s LOAD',
-    badge: 'CORE ENGINE',
-    nodes: [
-      { step: '01', label: 'Discovery Audit', desc: 'Map business bottlenecks & user journey' },
-      { step: '02', label: 'Custom App Router', desc: 'SSG static prerendering with zero bloat' },
-      { step: '03', label: 'High-Converting UI', desc: 'Designed for mobile lead generation' },
-      { step: '04', label: '100% Lighthouse Score', desc: 'Sub-second Core Web Vitals benchmark' },
+    id: 'web',
+    tabLabel: '01. Web Architecture',
+    category: 'Custom Engineering',
+    title: 'High-Performance Website Infrastructure',
+    summary: 'Custom-built Next.js digital presence designed for sub-second speeds, flawless mobile responsiveness, and high conversion.',
+    stages: [
+      {
+        number: '01',
+        name: 'Discovery & UX Blueprint',
+        deliverable: 'Structure pages around actual customer decision triggers and inquiry paths.',
+        tech: ['Figma Wireframes', 'Information Architecture'],
+      },
+      {
+        number: '02',
+        name: 'Next.js App Router Build',
+        deliverable: 'Clean TypeScript codebase with static prerendering and zero third-party plugin bloat.',
+        tech: ['Next.js 15', 'Tailwind CSS', 'TypeScript'],
+      },
+      {
+        number: '03',
+        name: 'Speed & SEO Calibration',
+        deliverable: 'Optimized Core Web Vitals, sub-second LCP, structured metadata, and OG sharing cards.',
+        tech: ['0.4s LCP', '100% Lighthouse', 'Edge CDN'],
+      },
+      {
+        number: '04',
+        name: 'Deployment & Full Handoff',
+        deliverable: 'Direct Vercel deployment with 100% repository transfer to your company GitHub.',
+        tech: ['Vercel Edge', 'Zero Lock-in', 'Full IP Transfer'],
+      },
     ],
-    note: 'Zero WordPress plugin fragility. A dedicated TypeScript foundation transferred to your GitHub.',
-    metrics: [
-      { label: 'Speed Index', value: '0.4s' },
-      { label: 'Mobile Performance', value: '100/100' },
-      { label: 'Code Ownership', value: '100%' },
+    outcomes: [
+      { value: '0.4s', label: 'Average Page Load Time' },
+      { value: '100/100', label: 'Mobile Performance Target' },
+      { value: '100%', label: 'Code & Asset Ownership' },
     ],
+    clientGuarantee: 'No WordPress vulnerabilities or slow page-builder bloat. You receive a proprietary, enterprise-speed asset you fully own.',
   },
   {
     id: 'automation',
-    title: 'Lead Automation Flow',
-    subtitle: 'TRIAGE · WHATSAPP · CRM SYNC',
-    badge: 'LEAD PIPELINES',
-    nodes: [
-      { step: '01', label: 'Lead Ingestion', desc: 'Frictionless multi-step inquiry form' },
-      { step: '02', label: 'Instant Triage', desc: 'Automated validation & priority sorting' },
-      { step: '03', label: 'Direct Notification', desc: 'Real-time alert to WhatsApp / Slack in <2m' },
-      { step: '04', label: 'CRM Sync', desc: 'Auto-updated database without manual entry' },
+    tabLabel: '02. Lead Automation',
+    category: 'Operational Pipelines',
+    title: 'Automated Lead Capture & Triage Pipeline',
+    summary: 'Eliminate missed inquiries and slow follow-ups by routing high-intent prospects directly to your phone or team within minutes.',
+    stages: [
+      {
+        number: '01',
+        name: 'Frictionless Ingestion',
+        deliverable: 'Fast, validated multi-channel inquiry capture directly on your web property.',
+        tech: ['Smart Forms', 'Spam Defense', 'Zero Latency'],
+      },
+      {
+        number: '02',
+        name: 'Automated Qualification',
+        deliverable: 'Webhook-driven instant triage classifying project budget, urgency, and fit.',
+        tech: ['Serverless Webhooks', 'Data Normalization'],
+      },
+      {
+        number: '03',
+        name: 'Real-Time Team Alerts',
+        deliverable: 'Instant push notifications to WhatsApp, Telegram, or Slack for immediate sales action.',
+        tech: ['<2 Min Alert', 'Telegram / WhatsApp API'],
+      },
+      {
+        number: '04',
+        name: 'CRM & Spreadsheet Sync',
+        deliverable: 'Automatic logging into Notion, HubSpot, or Google Sheets with zero manual data entry.',
+        tech: ['Auto CRM Sync', 'Zero Manual Copying'],
+      },
     ],
-    note: 'Eliminate lost inquiries. Every prospect is categorized and alerted to your team in under 2 minutes.',
-    metrics: [
-      { label: 'Lead Response Time', value: '< 2 Mins' },
-      { label: 'Routing Accuracy', value: '99.9%' },
-      { label: 'Manual Admin Saved', value: '12h/wk' },
+    outcomes: [
+      { value: '< 2 Mins', label: 'Inquiry-to-Alert Time' },
+      { value: '0', label: 'Dropped Inquiries' },
+      { value: '12+ hrs', label: 'Admin Saved per Week' },
     ],
+    clientGuarantee: 'Every prospect who reaches out is qualified, timestamped, and pinged directly to your active channels before they look elsewhere.',
   },
   {
     id: 'delivery',
-    title: 'Direct Founder Delivery',
-    subtitle: 'YASH & RAJAT · NO JUNIOR LAYERS',
-    badge: 'EXECUTION SYSTEM',
-    nodes: [
-      { step: '01', label: 'Strategy with Yash', desc: 'Discovery, pricing, and solution scoping' },
-      { step: '02', label: 'Build with Rajat', desc: 'Production engineering and QA testing' },
-      { step: '03', label: 'Async Video Signoffs', desc: 'Weekly video walkthroughs, no silence' },
-      { step: '04', label: 'Direct Production Launch', desc: 'Deployed on Vercel with zero lock-in' },
+    tabLabel: '03. Studio Delivery',
+    category: 'Founder Execution',
+    title: 'Direct Founder Partnership & Governance',
+    summary: 'Work directly with Yash and Rajat. No account managers, no junior handoffs, and complete transparency from kickoff to launch.',
+    stages: [
+      {
+        number: '01',
+        name: 'Strategy with Yash',
+        deliverable: 'Business discovery, conversion strategy, workflow design, and fixed-scope pricing.',
+        tech: ['Direct Consultation', 'Clear Deliverables'],
+      },
+      {
+        number: '02',
+        name: 'Engineering with Rajat',
+        deliverable: 'Production engineering, QA testing, custom component builds, and speed benchmarks.',
+        tech: ['Senior Engineering', 'Rigorous QA'],
+      },
+      {
+        number: '03',
+        name: 'Async Video Walkthroughs',
+        deliverable: 'Weekly video progress updates with clickable staging environments for swift feedback.',
+        tech: ['Loom Demos', 'Live Staging Previews'],
+      },
+      {
+        number: '04',
+        name: 'Launch & Systems Training',
+        deliverable: 'Production rollout, thorough documentation, and walkthrough on managing your new setup.',
+        tech: ['Documentation', 'Hands-on Handoff'],
+      },
     ],
-    note: 'Projects stay close to the people understanding, building, and delivering the work.',
-    metrics: [
-      { label: 'Direct Founder Access', value: 'Yes' },
-      { label: 'Delivery Cadence', value: 'Weekly Async' },
-      { label: 'Vendor Lock-in', value: '0%' },
+    outcomes: [
+      { value: '2 Founders', label: 'Direct Accountability' },
+      { value: 'Weekly', label: 'Async Video Check-ins' },
+      { value: '0%', label: 'Agency Bureaucracy' },
     ],
+    clientGuarantee: 'You communicate directly with the individuals architecting and coding your solution. Fast decisions, honest advice, zero fluff.',
   },
 ];
 
 export function SystemFlowWorkspace() {
-  const [activeTab, setActiveTab] = useState<string>('website');
+  const [activeTab, setActiveTab] = useState<string>('web');
+  const [activeStageIndex, setActiveStageIndex] = useState<number | null>(null);
 
-  const activePillar = pillars.find((p) => p.id === activeTab) || pillars[0];
+  const activeArch = architectures.find((a) => a.id === activeTab) || architectures[0];
 
   return (
     <div className="w-full rounded-2xl border border-border-subtle bg-surface shadow-xs overflow-hidden">
-      {/* Workspace System Title Bar */}
-      <div className="h-10 bg-surface-elevated/70 border-b border-border-subtle flex items-center justify-between px-4 text-xs font-mono">
-        <div className="flex items-center gap-2 text-text-tertiary">
-          <span className="flex gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-            <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-            <span className="w-2.5 h-2.5 rounded-full bg-accent/80" />
-          </span>
-          <span className="ml-2 font-semibold text-text-primary tracking-wider uppercase">
-            Elevato / Workspace / Core Systems
-          </span>
+      {/* Studio Process Navigation Bar */}
+      <div className="border-b border-border-subtle bg-surface-elevated/40 px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          {architectures.map((arch) => {
+            const isActive = arch.id === activeTab;
+            return (
+              <button
+                key={arch.id}
+                onClick={() => {
+                  setActiveTab(arch.id);
+                  setActiveStageIndex(null);
+                }}
+                className={cn(
+                  'px-3 sm:px-4 py-1.5 rounded-lg text-xs font-mono font-medium transition-all duration-150',
+                  isActive
+                    ? 'bg-surface text-text-primary shadow-xs border border-border-subtle font-semibold text-accent-dark dark:text-accent'
+                    : 'text-text-secondary hover:text-text-primary hover:bg-surface/50'
+                )}
+              >
+                {arch.tabLabel}
+              </button>
+            );
+          })}
         </div>
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-          <span className="text-accent-dark dark:text-accent font-semibold tracking-wider uppercase text-[11px]">
-            Ready for Deployment
-          </span>
+
+        <div className="hidden md:flex items-center gap-2 text-xs font-mono text-text-tertiary">
+          <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+          <span className="uppercase tracking-wider">{activeArch.category}</span>
         </div>
       </div>
 
-      {/* Main Workspace Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-border-subtle">
-        {/* Left Sidebar: Expertise Tabs */}
-        <div className="lg:col-span-4 p-5 sm:p-6 bg-surface-elevated/20 flex flex-col justify-between gap-6">
-          <div>
-            <span className="text-[11px] font-mono uppercase tracking-widest text-text-tertiary font-semibold block mb-4">
-              Expertise & Architecture
-            </span>
-
-            <div className="space-y-2">
-              {pillars.map((pillar) => {
-                const isActive = pillar.id === activeTab;
-                return (
-                  <button
-                    key={pillar.id}
-                    onClick={() => setActiveTab(pillar.id)}
-                    className={cn(
-                      "w-full text-left p-3.5 rounded-xl border transition-all duration-150 flex flex-col gap-1",
-                      isActive
-                        ? "bg-surface border-accent/40 shadow-xs ring-1 ring-accent/20"
-                        : "bg-transparent border-transparent hover:bg-surface hover:border-border-subtle text-text-secondary"
-                    )}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className={cn("text-xs font-mono font-semibold", isActive ? "text-accent-dark dark:text-accent" : "text-text-tertiary")}>
-                        ■ {pillar.badge}
-                      </span>
-                      {isActive && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                      )}
-                    </div>
-                    <span className={cn("text-sm font-bold tracking-tight", isActive ? "text-text-primary" : "text-text-secondary")}>
-                      {pillar.title}
-                    </span>
-                    <span className="text-[11px] font-mono text-text-tertiary">
-                      {pillar.subtitle}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+      {/* Main Architecture Showcase */}
+      <div className="p-6 sm:p-8 lg:p-10">
+        {/* Architecture Header */}
+        <div className="max-w-3xl mb-8">
+          <div className="inline-flex items-center gap-2 text-xs font-mono text-accent-dark dark:text-accent font-semibold uppercase tracking-wider mb-2">
+            <span>● Architecture Blueprint</span>
+            <span className="text-text-tertiary">/</span>
+            <span className="text-text-secondary">{activeArch.category}</span>
           </div>
+          <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-text-primary mb-2">
+            {activeArch.title}
+          </h3>
+          <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
+            {activeArch.summary}
+          </p>
+        </div>
 
-          {/* Sticky Note Callout */}
-          <div className="p-4 rounded-xl border border-accent/20 bg-accent/[0.04] dark:bg-accent/[0.08] text-xs">
-            <span className="font-mono text-[10px] text-accent-dark dark:text-accent font-semibold block mb-1 uppercase tracking-wider">
-              Note // Core Philosophy
-            </span>
-            <p className="text-text-secondary leading-relaxed">
-              {activePillar.note}
-            </p>
+        {/* Process Flow Diagram (Connected Pipeline) */}
+        <div className="relative mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+            {activeArch.stages.map((stage, idx) => {
+              const isSelected = activeStageIndex === idx;
+              return (
+                <div
+                  key={stage.number}
+                  onMouseEnter={() => setActiveStageIndex(idx)}
+                  onMouseLeave={() => setActiveStageIndex(null)}
+                  className={cn(
+                    'relative p-5 rounded-xl border transition-all duration-200 flex flex-col justify-between cursor-default group',
+                    isSelected
+                      ? 'border-accent bg-surface-elevated shadow-xs ring-1 ring-accent/30'
+                      : 'border-border-subtle bg-surface-elevated/30 hover:border-border hover:bg-surface-elevated/60'
+                  )}
+                >
+                  {/* Step Number & Connector Marker */}
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-xs font-mono font-bold text-accent-dark dark:text-accent">
+                        STAGE {stage.number}
+                      </span>
+                      <span className="text-[10px] font-mono text-text-tertiary uppercase tracking-widest">
+                        0{idx + 1}/04
+                      </span>
+                    </div>
+
+                    <h4 className="text-sm font-bold text-text-primary mb-2 group-hover:text-accent-dark dark:group-hover:text-accent transition-colors">
+                      {stage.name}
+                    </h4>
+
+                    <p className="text-xs text-text-secondary leading-relaxed mb-4">
+                      {stage.deliverable}
+                    </p>
+                  </div>
+
+                  {/* Tech / Standard Micro Badges */}
+                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-border-subtle/50">
+                    {stage.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="inline-block px-2 py-0.5 rounded text-[10px] font-mono bg-surface border border-border-subtle text-text-tertiary font-medium"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Flow Arrow for desktop (between items) */}
+                  {idx < 3 && (
+                    <div className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-6 h-6 rounded-full bg-surface border border-border-subtle items-center justify-center text-text-tertiary shadow-xs pointer-events-none">
+                      <svg className="w-3 h-3 text-text-tertiary" viewBox="0 0 16 16" fill="none" stroke="currentColor">
+                        <path d="M6 12L10 8L6 4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Right Canvas: Interactive Flowchart & Live Metrics */}
-        <div className="lg:col-span-8 p-6 sm:p-8 bg-surface flex flex-col justify-between gap-8 relative">
-          {/* Subtle Canvas Dot Matrix */}
-          <div className="absolute inset-0 bg-[radial-gradient(#888_0.75px,transparent_0.75px)] [background-size:16px_16px] opacity-[0.07] dark:opacity-[0.12] pointer-events-none" />
-
-          {/* System Nodes Pipeline */}
-          <div className="relative z-10">
-            <div className="flex items-center justify-between mb-6 pb-2 border-b border-border-subtle">
-              <span className="text-xs font-mono uppercase tracking-wider text-text-secondary font-semibold">
-                Execution Pipeline // {activePillar.title}
-              </span>
-              <span className="text-[11px] font-mono text-accent-dark dark:text-accent font-medium">
-                Standard: Production Grade
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-              {activePillar.nodes.map((node, index) => (
-                <div
-                  key={node.step}
-                  className="p-4 rounded-xl border border-border-subtle bg-surface-elevated/40 hover:border-accent/40 transition-colors flex flex-col gap-1.5 relative group"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono text-accent-dark dark:text-accent font-bold">
-                      STEP {node.step}
-                    </span>
-                    <span className="text-[10px] font-mono text-text-tertiary">
-                      0{index + 1}/04
-                    </span>
-                  </div>
-                  <h4 className="text-sm font-bold text-text-primary">
-                    {node.label}
-                  </h4>
-                  <p className="text-xs text-text-secondary leading-relaxed">
-                    {node.desc}
-                  </p>
-                </div>
-              ))}
+        {/* Deliverables & Measurable Outcomes Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center pt-6 border-t border-border-subtle">
+          {/* Left: Studio Guarantee / Takeaway */}
+          <div className="lg:col-span-6">
+            <div className="p-4 rounded-xl border border-accent/20 bg-accent/[0.03] dark:bg-accent/[0.06]">
+              <div className="flex items-center gap-2 text-xs font-mono text-accent-dark dark:text-accent font-semibold mb-1">
+                <span>✓</span>
+                <span className="uppercase tracking-wider">Studio Guarantee</span>
+              </div>
+              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+                {activeArch.clientGuarantee}
+              </p>
             </div>
           </div>
 
-          {/* Live Metrics Footer Strip */}
-          <div className="relative z-10 pt-6 border-t border-border-subtle grid grid-cols-3 gap-4 text-center">
-            {activePillar.metrics.map((m) => (
-              <div key={m.label} className="p-3 rounded-lg bg-surface-elevated/30 border border-border-subtle/60">
-                <span className="text-lg sm:text-2xl font-extrabold text-text-primary tracking-tight font-mono block">
-                  {m.value}
+          {/* Right: Quantifiable Outcome Metrics */}
+          <div className="lg:col-span-6 grid grid-cols-3 gap-3 text-center">
+            {activeArch.outcomes.map((item) => (
+              <div
+                key={item.label}
+                className="p-3.5 rounded-xl bg-surface-elevated/40 border border-border-subtle flex flex-col justify-center"
+              >
+                <span className="text-lg sm:text-2xl font-extrabold text-text-primary tracking-tight font-mono">
+                  {item.value}
                 </span>
-                <span className="text-[11px] text-text-secondary font-medium block mt-0.5">
-                  {m.label}
+                <span className="text-[11px] text-text-secondary font-medium mt-1 leading-tight">
+                  {item.label}
                 </span>
               </div>
             ))}
