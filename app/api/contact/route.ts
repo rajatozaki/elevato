@@ -9,10 +9,6 @@ interface ContactRequestBody {
   details: string;
 }
 
-// Fallback Telegram Bot Credentials
-const DEFAULT_TELEGRAM_TOKEN = '8849934913:AAFiVILb_aMQdLbvM6x3CXlVYsJr4NHGqYA';
-const DEFAULT_TELEGRAM_CHAT_ID = '-1003734971819'; // Migrated Supergroup Chat ID
-
 // Helper to escape HTML characters for safe Telegram transmission
 function escapeHtml(text: string): string {
   return text
@@ -125,9 +121,9 @@ export async function POST(request: Request) {
 
     const notificationPromises: Promise<unknown>[] = [];
 
-    // 2. Telegram Bot Notification (Always active with default fallback)
-    const telegramToken = process.env.TELEGRAM_BOT_TOKEN || DEFAULT_TELEGRAM_TOKEN;
-    const telegramChatId = process.env.TELEGRAM_CHAT_ID || DEFAULT_TELEGRAM_CHAT_ID;
+    // 2. Telegram Bot Notification (via Secure Environment Variables)
+    const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
+    const telegramChatId = process.env.TELEGRAM_CHAT_ID;
 
     if (telegramToken && telegramChatId) {
       notificationPromises.push(
