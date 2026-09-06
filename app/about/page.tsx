@@ -7,7 +7,7 @@ import { siteConfig } from '@/data/site';
 
 export const metadata: Metadata = {
   title: 'About',
-  description: 'About Elevato and our approach to building technology around real business problems.',
+  description: 'About Alevate and our approach to building technology around real business problems.',
 };
 
 export default function AboutPage() {
@@ -18,7 +18,7 @@ export default function AboutPage() {
       <Container>
         <AnimateIn>
           <SectionHeading 
-            label="About Elevato"
+            label="About Alevate"
             title="Building technology around real business problems" 
             description="We bridge the gap between strong offline operations and modern digital capabilities."
           />
@@ -28,7 +28,7 @@ export default function AboutPage() {
           <AnimateIn delay={100}>
             <div className="space-y-6 text-lg text-text-secondary leading-relaxed p-8 sm:p-10 rounded-3xl border border-border-subtle bg-surface shadow-xs">
               <p>
-                Elevato started with a simple observation. Many strong businesses have websites and internal systems that have fallen behind the business itself.
+                Alevate started with a simple observation. Many strong businesses have websites and internal systems that have fallen behind the business itself.
               </p>
               <p>
                 As companies grow, their processes become more complex, but their digital presence and tools often remain static. The result is a mismatch: excellent real-world services represented by outdated websites, and capable teams slowed down by manual data entry or disconnected tools.

@@ -7,7 +7,7 @@ import { AnimateIn } from '@/components/ui/AnimateIn';
 
 export const metadata: Metadata = {
   title: 'Work',
-  description: 'A selection of websites, digital experiences, and automation systems built by Elevato.',
+  description: 'A selection of websites, digital experiences, and automation systems built by Alevate.',
 };
 
 export default function WorkPage() {
@@ -18,7 +18,7 @@ export default function WorkPage() {
           <SectionHeading 
             label="Portfolio"
             title="Work" 
-            description="A selection of websites, digital experiences, and automation systems built by Elevato."
+            description="A selection of websites, digital experiences, and automation systems built by Alevate."
           />
         </AnimateIn>
 

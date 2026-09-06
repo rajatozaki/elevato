@@ -18,15 +18,15 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Elevato',
-    default: 'Elevato | Websites and AI Automation for Businesses',
+    template: '%s | Alevate',
+    default: 'Alevate | Websites and AI Automation for Businesses',
   },
-  metadataBase: new URL('https://elevato.in'),
+  metadataBase: new URL('https://alevate.in'),
   description: siteConfig.description,
   openGraph: {
-    title: 'Elevato',
+    title: 'Alevate',
     description: siteConfig.description,
-    siteName: 'Elevato',
+    siteName: 'Alevate',
     type: 'website',
   },
   twitter: {
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 const themeScript = `
   (function() {
     try {
-      const storedTheme = localStorage.getItem('elevato-theme');
+      const storedTheme = localStorage.getItem('alevate-theme') || localStorage.getItem('elevato-theme');
       const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
       if (storedTheme === 'dark' || (!storedTheme && supportDarkMode)) {
         document.documentElement.classList.add('dark');

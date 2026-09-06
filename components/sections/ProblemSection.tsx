@@ -27,7 +27,7 @@ export default function ProblemSection() {
                 02 {'//'} The Practical Solution
               </span>
               <p className="text-lg text-text-secondary leading-relaxed">
-                Elevato helps modernise those parts of the business one step at a time. First, we build a stronger digital foundation. Then, where it makes sense, we automate the processes around it.
+                Alevate helps modernise those parts of the business one step at a time. First, we build a stronger digital foundation. Then, where it makes sense, we automate the processes around it.
               </p>
             </div>
           </div>

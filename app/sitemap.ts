@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { getAllProjectSlugs } from '@/data/projects';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://elevato.in';
+  const baseUrl = 'https://alevate.in';
   const slugs = getAllProjectSlugs();
 
   const projectUrls = slugs.map((slug) => ({

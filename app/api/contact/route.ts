@@ -37,7 +37,7 @@ async function sendTelegramNotification(
   const safeService = escapeHtml(data.serviceType);
   const safeDetails = escapeHtml(data.details);
 
-  const htmlMessage = `🚀 <b>New Elevato Client Enquiry!</b>\n\n` +
+  const htmlMessage = `🚀 <b>New Alevate Client Enquiry!</b>\n\n` +
     `👤 <b>Name:</b> ${safeName}\n` +
     `🏢 <b>Company:</b> ${safeCompany}\n` +
     `✉️ <b>Email:</b> ${safeEmail}\n` +
@@ -115,7 +115,7 @@ export async function POST(request: Request) {
 
     // 1. Log lead clearly in Server Logs
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    console.log('🚀 NEW ELEVATO CLIENT ENQUIRY:');
+    console.log('🚀 NEW ALEVATE CLIENT ENQUIRY:');
     console.log(JSON.stringify(leadSummary, null, 2));
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 
@@ -137,7 +137,7 @@ export async function POST(request: Request) {
       const discordPayload = {
         embeds: [
           {
-            title: '🚀 New Client Enquiry Received on Elevato',
+            title: '🚀 New Client Enquiry Received on Alevate',
             color: 0x1db954, // Spotify Green
             fields: [
               { name: '👤 Name', value: name, inline: true },
@@ -147,7 +147,7 @@ export async function POST(request: Request) {
               { name: '🎯 Service Type', value: serviceType, inline: false },
               { name: '📝 Project Details', value: details, inline: false },
             ],
-            footer: { text: `Elevato Contact Flow · ${formattedDate} IST` },
+            footer: { text: `Alevate Contact Flow · ${formattedDate} IST` },
             timestamp: new Date().toISOString(),
           },
         ],
@@ -166,11 +166,11 @@ export async function POST(request: Request) {
     const slackWebhook = process.env.SLACK_WEBHOOK_URL;
     if (slackWebhook) {
       const slackPayload = {
-        text: `🚀 *New Elevato Lead:* ${name} (${company || 'N/A'}) - ${serviceType}`,
+        text: `🚀 *New Alevate Lead:* ${name} (${company || 'N/A'}) - ${serviceType}`,
         blocks: [
           {
             type: 'header',
-            text: { type: 'plain_text', text: '🚀 New Elevato Enquiry' },
+            text: { type: 'plain_text', text: '🚀 New Alevate Enquiry' },
           },
           {
             type: 'section',

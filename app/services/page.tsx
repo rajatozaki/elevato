@@ -19,7 +19,7 @@ export default function ServicesPage() {
           <SectionHeading 
             label="Service Portfolio"
             title="Practical digital services for established businesses" 
-            description="Elevato works with businesses that need a stronger digital presence, more efficient processes, or both."
+            description="Alevate works with businesses that need a stronger digital presence, more efficient processes, or both."
           />
         </AnimateIn>
 

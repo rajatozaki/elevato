@@ -20,7 +20,7 @@ export function Logo({ className, variant = 'auto', showMarkOnly = false }: Logo
       <Link
         href="/"
         className={cn("inline-flex items-center", className)}
-        aria-label="Elevato Home"
+        aria-label="Alevate Home"
       >
         <svg
           viewBox="0 0 28 28"
@@ -49,9 +49,9 @@ export function Logo({ className, variant = 'auto', showMarkOnly = false }: Logo
         textColor,
         className
       )}
-      aria-label="Elevato Home"
+      aria-label="Alevate Home"
     >
-      <span className="text-2xl font-bold tracking-[-0.035em]">Ele</span>
+      <span className="text-2xl font-bold tracking-[-0.035em]">Ale</span>
       {/* Custom Stylized "v" with elevated green ascending stroke */}
       <span className="relative inline-flex items-center justify-center w-[20px] h-[26px] mx-[0.5px]">
         <svg 
@@ -72,7 +72,7 @@ export function Logo({ className, variant = 'auto', showMarkOnly = false }: Logo
           />
         </svg>
       </span>
-      <span className="text-2xl font-bold tracking-[-0.035em]">ato</span>
+      <span className="text-2xl font-bold tracking-[-0.035em]">ate</span>
     </Link>
   );
 }

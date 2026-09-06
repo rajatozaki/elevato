@@ -1,17 +1,17 @@
 export const siteConfig = {
-  name: 'Elevato',
-  url: 'https://elevato.in',
+  name: 'Alevate',
+  url: 'https://alevate.in',
   description:
-    'In a sea of ordinary, Elevato builds high-performance websites and practical workflow systems that elevate your business.',
+    'In a sea of ordinary, Alevate builds high-performance websites and practical workflow systems that elevate your business.',
   tagline: 'In a sea of ordinary, make sure your digital presence elevates your business.',
   availability: {
     status: 'Available for Q3/Q4',
     badge: 'Booking Open',
     spots: '2 client spots available',
   },
-  email: 'hello@elevato.in',
+  email: 'hello@alevate.in',
   social: {
-    linkedin: 'https://linkedin.com/company/elevato',
+    linkedin: 'https://linkedin.com/company/alevate',
     instagram: '',
   },
   founders: {
@@ -22,7 +22,7 @@ export const siteConfig = {
         'Handles sales, client strategy, discovery, pricing, relationships, and automation solution design.',
       social: {
         linkedin: 'https://linkedin.com/in',
-        email: 'yash@elevato.in',
+        email: 'yash@alevate.in',
       },
     },
     rajat: {
@@ -33,7 +33,7 @@ export const siteConfig = {
       social: {
         linkedin: 'https://linkedin.com/in',
         github: 'https://github.com/rajatozaki',
-        email: 'rajat@elevato.in',
+        email: 'rajat@alevate.in',
       },
     },
   },

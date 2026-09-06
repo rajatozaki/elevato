@@ -15,7 +15,7 @@ export default function Hero() {
             <AnimateIn direction="up">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border-subtle bg-surface text-xs font-mono text-text-secondary mb-6 shadow-xs">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                <span className="text-text-primary font-semibold">Elevato Studio</span>
+                <span className="text-text-primary font-semibold">Alevate Studio</span>
                 <span className="text-text-tertiary">/</span>
                 <span>Booking Q3/Q4 · 2 Client Spots</span>
               </div>
@@ -35,7 +35,7 @@ export default function Hero() {
           <div className="lg:col-span-5 lg:pt-14">
             <AnimateIn direction="up" delay={200}>
               <p className="text-base sm:text-lg text-text-secondary leading-relaxed">
-                Elevato helps established businesses modernize their digital foundation and eliminate routine operational bottlenecks through custom Next.js websites and practical automation pipelines.
+                Alevate helps established businesses modernize their digital foundation and eliminate routine operational bottlenecks through custom Next.js websites and practical automation pipelines.
               </p>
             </AnimateIn>
 

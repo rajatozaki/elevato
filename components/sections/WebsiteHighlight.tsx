@@ -26,7 +26,7 @@ export default function WebsiteHighlight() {
                 align="left" 
               />
               <p className="text-text-secondary text-lg mt-6 mb-8 leading-relaxed">
-                Elevato builds professional, highly performant websites designed specifically for established companies. We focus on clarity, reliability, and generating genuine enquiries.
+                Alevate builds professional, highly performant websites designed specifically for established companies. We focus on clarity, reliability, and generating genuine enquiries.
               </p>
               
               <ul className="space-y-3.5 mb-10">

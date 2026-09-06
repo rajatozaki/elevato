@@ -7,7 +7,7 @@ import { siteConfig } from '@/data/site';
 
 export const metadata: Metadata = {
   title: 'Contact',
-  description: 'Get in touch with Elevato for your new website, landing page, or automation project.',
+  description: 'Get in touch with Alevate for your new website, landing page, or automation project.',
 };
 
 export default function ContactPage() {

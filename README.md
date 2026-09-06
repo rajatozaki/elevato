@@ -1,6 +1,6 @@
-# Elevato
+# Alevate
 
-A modern website for Elevato, a company providing websites, digital experiences, and practical AI automation for businesses.
+A modern website for Alevate, a company providing websites, digital experiences, and practical AI automation for businesses.
 
 ## Tech Stack
 
@@ -15,7 +15,7 @@ A modern website for Elevato, a company providing websites, digital experiences,
 1. Clone the repository:
    ```bash
    git clone <repository-url>
-   cd elevato
+   cd alevate
    ```
 
 2. Install dependencies:

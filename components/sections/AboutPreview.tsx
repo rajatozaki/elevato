@@ -17,7 +17,7 @@ export default function AboutPreview() {
         <div className="max-w-2xl mx-auto mt-6 text-center">
           <AnimateIn delay={100}>
             <p className="text-lg text-text-secondary leading-relaxed">
-              Elevato is run by Yash and Rajat. Projects stay close to the people responsible for understanding, building, and delivering the work.
+              Alevate is run by Yash and Rajat. Projects stay close to the people responsible for understanding, building, and delivering the work.
             </p>
           </AnimateIn>
         </div>
@@ -111,7 +111,7 @@ export default function AboutPreview() {
         
         <AnimateIn delay={500} className="mt-10 text-center">
           <Button variant="ghost" href="/about">
-            More About Elevato <span className="ml-1.5">→</span>
+            More About Alevate <span className="ml-1.5">→</span>
           </Button>
         </AnimateIn>
       </Container>

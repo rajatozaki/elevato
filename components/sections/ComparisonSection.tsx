@@ -15,7 +15,7 @@ interface ComparisonItem {
     title: string;
     description: string;
   };
-  elevato: {
+  alevate: {
     title: string;
     description: string;
   };
@@ -30,7 +30,7 @@ const comparisons: ComparisonItem[] = [
       title: 'Bloated WordPress / Site Builders',
       description: 'Slow 5–8 second load times, unmaintained plugins, fragile updates, and failing Core Web Vitals that hurt Google ranking.',
     },
-    elevato: {
+    alevate: {
       title: 'Custom Next.js App Router',
       description: 'Sub-second (0.4s) page loads, zero plugin bloat, static site generation (SSG), and 99+ Core Web Vitals on mobile and desktop.',
     },
@@ -43,7 +43,7 @@ const comparisons: ComparisonItem[] = [
       title: 'Buried in a Shared Email Inbox',
       description: 'Leads take 24–48 hours to be reviewed manually. Unassigned enquiries get lost, and staff forget to follow up.',
     },
-    elevato: {
+    alevate: {
       title: 'Automated Instant Triage (<2 Mins)',
       description: 'Forms automatically validate data, notify the right team member on WhatsApp/Slack, and sync instantly into your CRM.',
     },
@@ -56,7 +56,7 @@ const comparisons: ComparisonItem[] = [
       title: 'Vendor Lock-in & Markups',
       description: 'Proprietary platforms, withheld admin access, and monthly maintenance fees just to change basic text or images.',
     },
-    elevato: {
+    alevate: {
       title: '100% Client Ownership',
       description: 'Clean TypeScript codebase transferred directly to your GitHub and deployed on your own Vercel account with zero hostage fees.',
     },
@@ -69,7 +69,7 @@ const comparisons: ComparisonItem[] = [
       title: 'Disappearing for Weeks',
       description: 'Vague timelines, radio silence after deposit, and surprise delays delivered at the end of an unmonitored deadline.',
     },
-    elevato: {
+    alevate: {
       title: 'Weekly Async Video Updates',
       description: 'Direct Slack/WhatsApp line, weekly async video walkthroughs of real progress, and milestone-based signoffs before launch.',
     },
@@ -82,7 +82,7 @@ const comparisons: ComparisonItem[] = [
       title: 'Passed Down to Junior Staff',
       description: 'Pitched by senior salespeople, then outsourced or handed off to junior interns with minimal technical experience.',
     },
-    elevato: {
+    alevate: {
       title: 'Direct Founder Execution',
       description: 'You work directly with Yash (strategy & automation design) and Rajat (front-end execution & delivery systems).',
     },
@@ -105,7 +105,7 @@ export default function ComparisonSection() {
           <SectionHeading 
             label="The Standard"
             title="The difference between a generic website and real leverage"
-            description="Most web agencies sell static pages that look fine on day one but add zero operational efficiency. Here is how Elevato is built differently."
+            description="Most web agencies sell static pages that look fine on day one but add zero operational efficiency. Here is how Alevate is built differently."
             align="center"
           />
         </AnimateIn>
@@ -166,7 +166,7 @@ export default function ComparisonSection() {
                     </div>
                   </div>
 
-                  {/* Elevato Standard */}
+                  {/* Alevate Standard */}
                   <div className="p-5 rounded-xl border border-accent/30 bg-accent/[0.03] dark:bg-accent/[0.05] flex flex-col justify-between relative overflow-hidden">
                     <div>
                       <div className="flex items-center gap-2 mb-2.5">
@@ -174,14 +174,14 @@ export default function ComparisonSection() {
                           ✓
                         </span>
                         <span className="text-xs font-mono uppercase tracking-wider text-accent-dark dark:text-accent font-semibold">
-                          The Elevato Standard
+                          The Alevate Standard
                         </span>
                       </div>
                       <h4 className="text-base font-bold text-text-primary mb-2">
-                        {item.elevato.title}
+                        {item.alevate.title}
                       </h4>
                       <p className="text-sm text-text-secondary leading-relaxed">
-                        {item.elevato.description}
+                        {item.alevate.description}
                       </p>
                     </div>
                   </div>

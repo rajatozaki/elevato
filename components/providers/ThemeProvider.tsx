@@ -16,7 +16,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 function getStoredTheme(): Theme {
   if (typeof window === 'undefined') return 'system';
   try {
-    const stored = localStorage.getItem('elevato-theme');
+    const stored = localStorage.getItem('alevate-theme') || localStorage.getItem('elevato-theme');
     if (stored === 'light' || stored === 'dark' || stored === 'system') {
       return stored;
     }
@@ -70,7 +70,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);
     try {
-      localStorage.setItem('elevato-theme', newTheme);
+      localStorage.setItem('alevate-theme', newTheme);
     } catch {}
   };
 

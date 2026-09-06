@@ -78,7 +78,7 @@ export default function AISection() {
             />
             <div className="mt-8 space-y-6 text-text-secondary text-lg leading-relaxed">
               <p>
-                Once a fast digital foundation is live, Elevato audits the manual processes that quietly consume hours of your team&apos;s week.
+                Once a fast digital foundation is live, Alevate audits the manual processes that quietly consume hours of your team&apos;s week.
               </p>
               <p>
                 This includes routing incoming client enquiries, updating CRM records, compiling weekly reports, organizing files, and synchronizing customer information across disconnected software tools.
