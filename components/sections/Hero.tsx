@@ -50,22 +50,8 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Architectural Section Header Tag */}
-        <AnimateIn direction="up" delay={350} className="mb-1">
-          <div className="flex items-center justify-between text-xs font-mono text-text-secondary border-b border-border-subtle pb-2.5">
-            <div className="flex items-center gap-2">
-              <span className="text-accent-dark dark:text-accent font-bold">01 //</span>
-              <span className="font-semibold text-text-primary uppercase tracking-wider">Business Architecture Elevation</span>
-              <span className="hidden md:inline text-text-tertiary">/ From Foundational Baseline to Modern Pinnacle Performance</span>
-            </div>
-            <span className="text-[11px] font-mono text-text-tertiary uppercase tracking-widest hidden sm:inline-block">
-              Architectural Progression
-            </span>
-          </div>
-        </AnimateIn>
-
         {/* Architectural Skyline Vector Art */}
-        <AnimateIn direction="up" delay={400} className="w-full">
+        <AnimateIn direction="up" delay={350} className="w-full">
           <ArchitecturalSkyline className="mb-3" />
         </AnimateIn>
 
