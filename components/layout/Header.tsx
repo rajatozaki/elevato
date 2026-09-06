@@ -50,26 +50,34 @@ export function Header() {
             </div>
             
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8 bg-surface px-6 py-2 rounded-full border border-border-subtle shadow-xs">
-              {navLinks.map((link) => (
-                <Link 
-                  key={link.href} 
-                  href={link.href}
-                  className={cn(
-                    "text-sm font-medium transition-colors hover:text-accent-dark dark:hover:text-accent",
-                    pathname === link.href ? "text-text-primary font-semibold" : "text-text-secondary"
-                  )}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
+            <div className="hidden lg:flex items-center gap-6">
+              <nav className="flex items-center gap-6 text-sm font-medium">
+                {navLinks.map((link) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <Link 
+                      key={link.href} 
+                      href={link.href}
+                      className={cn(
+                        "relative py-1 transition-colors hover:text-text-primary flex flex-col items-center",
+                        isActive ? "text-text-primary font-semibold" : "text-text-secondary"
+                      )}
+                    >
+                      <span>{link.label}</span>
+                      {isActive && (
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent absolute -bottom-1" />
+                      )}
+                    </Link>
+                  );
+                })}
+              </nav>
 
-            <div className="hidden lg:flex items-center gap-3">
-              <ThemeToggle />
-              <Button href={ctaLink.href} variant="primary" size="md">
-                {ctaLink.label}
-              </Button>
+              <div className="flex items-center gap-3 pl-2 border-l border-border-subtle">
+                <ThemeToggle />
+                <Button href={ctaLink.href} variant="primary" size="md" className="rounded-lg px-4 py-2 text-xs font-semibold">
+                  {ctaLink.label}
+                </Button>
+              </div>
             </div>
 
             {/* Mobile Actions (Toggle + Menu Button) */}

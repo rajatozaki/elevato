@@ -1,104 +1,77 @@
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { AnimateIn } from '@/components/ui/AnimateIn';
-import { ElevateCraftBackground } from '@/components/ui/ElevateCraftBackground';
-
-const heroPillars = [
-  {
-    num: '01',
-    title: '0.4s Page Load',
-    desc: 'Next.js App Router with 100/100 Core Web Vitals.',
-  },
-  {
-    num: '02',
-    title: 'Lead Funnel Architecture',
-    desc: 'Frictionless enquiry flow engineered for mobile conversion.',
-  },
-  {
-    num: '03',
-    title: 'Instant Lead Routing',
-    desc: 'Automated triage pipelines to WhatsApp, Email, & CRM.',
-  },
-  {
-    num: '04',
-    title: '100% Code Ownership',
-    desc: 'Clean GitHub repo transferred to you with zero lock-in.',
-  },
-];
+import { ArchitecturalSkyline } from '@/components/ui/ArchitecturalSkyline';
+import { SystemFlowWorkspace } from '@/components/ui/SystemFlowWorkspace';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] pt-32 sm:pt-36 pb-20 flex items-center overflow-hidden">
-      {/* Abstract 'Elevate' Craft Background */}
-      <ElevateCraftBackground />
+    <section className="relative pt-32 sm:pt-36 pb-16 overflow-hidden">
+      <Container>
+        {/* Top 2-Column Editorial Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-14 sm:mb-16">
+          {/* Left Column: Big Typography-Led Headline */}
+          <div className="lg:col-span-7">
+            <AnimateIn direction="up">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border-subtle bg-surface text-xs font-mono text-text-secondary mb-6 shadow-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                <span className="text-text-primary font-semibold">Elevato Studio</span>
+                <span className="text-text-tertiary">/</span>
+                <span>Booking Q3/Q4 · 2 Client Spots</span>
+              </div>
+            </AnimateIn>
 
-      <Container className="relative z-10">
-        <div className="max-w-3xl text-left">
-          {/* Studio Status Pill */}
-          <AnimateIn direction="up">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border-subtle bg-surface/90 backdrop-blur-md text-xs font-mono text-text-secondary mb-6 shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-accent inline-block animate-pulse" />
-              <span className="text-text-primary font-semibold">Available for Q3/Q4</span>
-              <span className="text-text-tertiary">/</span>
-              <span>2 Client Spots Open</span>
-            </div>
-          </AnimateIn>
+            <AnimateIn direction="up" delay={100}>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-bold tracking-[-0.035em] leading-[1.08] text-text-primary">
+                We build websites, digital engines, and{' '}
+                <span className="font-serif italic font-normal text-accent-dark dark:text-accent">
+                  automated systems
+                </span>
+              </h1>
+            </AnimateIn>
+          </div>
 
-          {/* Expressive Display Headline (Sample Inspired) */}
-          <AnimateIn direction="up" delay={100}>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[6.5rem] font-extrabold tracking-[-0.045em] leading-[0.92] text-text-primary uppercase">
-              rise{' '}
-              <span className="text-accent-dark dark:text-accent">
-                above.
-              </span>
-            </h1>
-          </AnimateIn>
+          {/* Right Column: Narrative Intro & CTAs */}
+          <div className="lg:col-span-5 lg:pt-14">
+            <AnimateIn direction="up" delay={200}>
+              <p className="text-base sm:text-lg text-text-secondary leading-relaxed">
+                Elevato helps established businesses modernize their digital foundation and eliminate routine operational bottlenecks through custom Next.js websites and practical automation pipelines.
+              </p>
+            </AnimateIn>
 
-          {/* Short Phrase Tagline */}
-          <AnimateIn direction="up" delay={200}>
-            <p className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-text-primary mt-6 max-w-2xl leading-snug">
-              In a sea of ordinary, make sure your website is set apart from the competition.
-            </p>
-          </AnimateIn>
-
-          {/* Supporting Pitch */}
-          <AnimateIn direction="up" delay={250}>
-            <p className="text-base sm:text-lg text-text-secondary mt-3.5 max-w-xl leading-relaxed">
-              Elevato builds high-performance, conversion-focused websites and practical workflow automations for established businesses ready to modernize.
-            </p>
-          </AnimateIn>
-
-          {/* CTAs */}
-          <AnimateIn direction="up" delay={300} className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
-            <Button variant="primary" size="lg" href="/contact" className="w-full sm:w-44 text-center justify-center">
-              Start a Project
-            </Button>
-            <Button variant="secondary" size="lg" href="/work" className="w-full sm:w-44 text-center justify-center">
-              View Our Work
-            </Button>
-          </AnimateIn>
+            <AnimateIn direction="up" delay={300} className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
+              <Button variant="primary" size="md" href="/contact" className="w-full sm:w-44 text-center justify-center font-semibold">
+                Start a Project ↗
+              </Button>
+              <Button variant="secondary" size="md" href="/work" className="w-full sm:w-44 text-center justify-center font-medium">
+                View Selected Work ↗
+              </Button>
+            </AnimateIn>
+          </div>
         </div>
 
-        {/* Capabilities Grid */}
-        <AnimateIn direction="up" delay={400} className="mt-16 sm:mt-20">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 text-left">
-            {heroPillars.map((pillar) => (
-              <div 
-                key={pillar.num}
-                className="p-4 sm:p-5 rounded-xl border border-border-subtle bg-surface/80 backdrop-blur-md shadow-xs hover:border-accent/40 transition-all duration-200 hover:-translate-y-0.5"
-              >
-                <span className="text-xs font-mono text-accent-dark dark:text-accent font-semibold block mb-1.5">
-                  {pillar.num} {'//'}
-                </span>
-                <h3 className="text-sm font-bold text-text-primary mb-1">
-                  {pillar.title}
-                </h3>
-                <p className="text-xs text-text-secondary leading-relaxed">
-                  {pillar.desc}
-                </p>
-              </div>
-            ))}
+        {/* Architectural Section Header Tag */}
+        <AnimateIn direction="up" delay={350} className="mb-1">
+          <div className="flex items-center justify-between text-xs font-mono text-text-secondary border-b border-border-subtle pb-2.5">
+            <div className="flex items-center gap-2">
+              <span className="text-accent-dark dark:text-accent font-bold">01 //</span>
+              <span className="font-semibold text-text-primary uppercase tracking-wider">Elevato Architecture</span>
+              <span className="hidden md:inline text-text-tertiary">/ Web Infrastructure & Triage Flow</span>
+            </div>
+            <span className="text-[11px] font-mono text-text-tertiary uppercase tracking-widest hidden sm:inline-block">
+              Interactive Workspace
+            </span>
           </div>
+        </AnimateIn>
+
+        {/* Architectural Skyline Vector Art */}
+        <AnimateIn direction="up" delay={400} className="w-full">
+          <ArchitecturalSkyline className="mb-3" />
+        </AnimateIn>
+
+        {/* Interactive Systems Showcase Canvas */}
+        <AnimateIn direction="up" delay={450} className="w-full">
+          <SystemFlowWorkspace />
         </AnimateIn>
       </Container>
     </section>
