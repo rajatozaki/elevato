@@ -1,7 +1,7 @@
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { AnimateIn } from '@/components/ui/AnimateIn';
-import { BusinessInfrastructureVisual } from '@/components/ui/ArchitecturalSkyline';
+import { ArchitecturalSkyline } from '@/components/ui/ArchitecturalSkyline';
 import { SystemFlowWorkspace } from '@/components/ui/SystemFlowWorkspace';
 
 export default function Hero() {
@@ -55,18 +55,18 @@ export default function Hero() {
           <div className="flex items-center justify-between text-xs font-mono text-text-secondary border-b border-border-subtle pb-2.5">
             <div className="flex items-center gap-2">
               <span className="text-accent-dark dark:text-accent font-bold">01 //</span>
-              <span className="font-semibold text-text-primary uppercase tracking-wider">Studio Service Blueprint</span>
-              <span className="hidden md:inline text-text-tertiary">/ Web Infrastructure, Lead Triage & Founder Delivery</span>
+              <span className="font-semibold text-text-primary uppercase tracking-wider">Business Architecture Elevation</span>
+              <span className="hidden md:inline text-text-tertiary">/ From Foundational Baseline to Modern Pinnacle Performance</span>
             </div>
             <span className="text-[11px] font-mono text-text-tertiary uppercase tracking-widest hidden sm:inline-block">
-              Interactive Process Flow
+              Architectural Progression
             </span>
           </div>
         </AnimateIn>
 
-        {/* Subtle Animated Business Infrastructure Vector Art */}
+        {/* Architectural Skyline Vector Art */}
         <AnimateIn direction="up" delay={400} className="w-full">
-          <BusinessInfrastructureVisual className="mb-3" />
+          <ArchitecturalSkyline className="mb-3" />
         </AnimateIn>
 
         {/* Interactive Systems Showcase Canvas */}
