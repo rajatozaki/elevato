@@ -18,20 +18,22 @@ export default function Icon() {
         }}
       >
         <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 28"
+          width="22"
+          height="22"
+          viewBox="0 0 100 100"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path
-            d="M3 8.5L9.5 22.5H13L6.5 8.5H3Z"
-            fill="#FFFFFF"
-          />
-          <path
-            d="M8.5 22.5L18.8 3.2C19.4 2.1 20.8 1.7 21.9 2.3C23 2.9 23.4 4.3 22.8 5.4L12.5 22.5H8.5Z"
-            fill="#1DB954"
-          />
+          <g fill="#FFFFFF">
+            <polygon points="6,86 23,86 23,71 12,71" />
+            <polygon points="35,12 47,12 47,46 35,46" />
+            <polygon points="47,12 60,12 94,86 77,86 49,28" />
+          </g>
+          <g fill="#1DB954">
+            <rect x="23" y="71" width="10" height="10" rx="0.5" />
+            <rect x="31" y="60" width="10" height="10" rx="0.5" />
+            <rect x="39" y="49" width="10" height="10" rx="0.5" />
+          </g>
         </svg>
       </div>
     ),

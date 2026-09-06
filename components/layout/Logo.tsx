@@ -7,6 +7,32 @@ interface LogoProps {
   showMarkOnly?: boolean;
 }
 
+export function AlevateMark({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      className={cn("w-7 h-7", className)}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g fill="currentColor">
+        {/* Left Leg Base Foot */}
+        <polygon points="6,86 23,86 23,71 12,71" />
+        {/* Upper Left Stroke to Apex */}
+        <polygon points="35,12 47,12 47,46 35,46" />
+        {/* Right Leg */}
+        <polygon points="47,12 60,12 94,86 77,86 49,28" />
+      </g>
+      {/* 3 Green Elevation Steps */}
+      <g fill="#1DB954">
+        <rect x="23" y="71" width="10" height="10" rx="0.5" />
+        <rect x="31" y="60" width="10" height="10" rx="0.5" />
+        <rect x="39" y="49" width="10" height="10" rx="0.5" />
+      </g>
+    </svg>
+  );
+}
+
 export function Logo({ className, variant = 'auto', showMarkOnly = false }: LogoProps) {
   const textColor =
     variant === 'dark'
@@ -19,24 +45,10 @@ export function Logo({ className, variant = 'auto', showMarkOnly = false }: Logo
     return (
       <Link
         href="/"
-        className={cn("inline-flex items-center", className)}
+        className={cn("inline-flex items-center", textColor, className)}
         aria-label="Alevate Home"
       >
-        <svg
-          viewBox="0 0 28 28"
-          className="w-7 h-7"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M4 9L10.5 23H14L7.5 9H4Z"
-            fill="currentColor"
-          />
-          <path
-            d="M9.5 23L19.8 3.5C20.4 2.4 21.8 2 22.9 2.6C24 3.2 24.4 4.6 23.8 5.7L13.5 23H9.5Z"
-            fill="#1DB954"
-          />
-        </svg>
+        <AlevateMark />
       </Link>
     );
   }
@@ -45,34 +57,16 @@ export function Logo({ className, variant = 'auto', showMarkOnly = false }: Logo
     <Link 
       href="/" 
       className={cn(
-        "inline-flex items-center group font-sans tracking-tight select-none transition-transform duration-200 hover:scale-[1.01]", 
+        "inline-flex items-center gap-0.5 group font-sans tracking-tight select-none transition-transform duration-200 hover:scale-[1.01]", 
         textColor,
         className
       )}
       aria-label="Alevate Home"
     >
-      <span className="text-2xl font-bold tracking-[-0.035em]">Ale</span>
-      {/* Custom Stylized "v" with elevated green ascending stroke */}
-      <span className="relative inline-flex items-center justify-center w-[20px] h-[26px] mx-[0.5px]">
-        <svg 
-          viewBox="0 0 24 28" 
-          className="w-full h-full overflow-visible" 
-          fill="none" 
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {/* Left stroke */}
-          <path 
-            d="M3 8.5L9.5 22.5H13L6.5 8.5H3Z" 
-            fill="currentColor"
-          />
-          {/* Right upward green stroke */}
-          <path 
-            d="M8.5 22.5L18.8 3.2C19.4 2.1 20.8 1.7 21.9 2.3C23 2.9 23.4 4.3 22.8 5.4L12.5 22.5H8.5Z" 
-            fill="#1DB954" 
-          />
-        </svg>
+      <span className="relative inline-flex items-center justify-center w-[26px] h-[26px] mr-[1px]">
+        <AlevateMark className="w-full h-full" />
       </span>
-      <span className="text-2xl font-bold tracking-[-0.035em]">ate</span>
+      <span className="text-2xl font-bold tracking-[-0.035em]">levate</span>
     </Link>
   );
 }
