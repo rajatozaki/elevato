@@ -1,7 +1,7 @@
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { AnimateIn } from '@/components/ui/AnimateIn';
-import { ArchitecturalSkyline } from '@/components/ui/ArchitecturalSkyline';
+import { BusinessInfrastructureVisual } from '@/components/ui/ArchitecturalSkyline';
 import { SystemFlowWorkspace } from '@/components/ui/SystemFlowWorkspace';
 
 export default function Hero() {
@@ -50,32 +50,13 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* 01: Industry Infrastructure Section Tag */}
-        <AnimateIn direction="up" delay={350} className="mb-2">
+        {/* Architectural Section Header Tag */}
+        <AnimateIn direction="up" delay={350} className="mb-1">
           <div className="flex items-center justify-between text-xs font-mono text-text-secondary border-b border-border-subtle pb-2.5">
             <div className="flex items-center gap-2">
               <span className="text-accent-dark dark:text-accent font-bold">01 //</span>
-              <span className="font-semibold text-text-primary uppercase tracking-wider">Industry Infrastructure</span>
-              <span className="hidden md:inline text-text-tertiary">/ Connecting Physical Domains to Scaled Digital Engines</span>
-            </div>
-            <span className="text-[11px] font-mono text-text-tertiary uppercase tracking-widest hidden sm:inline-block">
-              Interactive Sectors Map
-            </span>
-          </div>
-        </AnimateIn>
-
-        {/* Architectural Skyline Vector Art & Industry Visual */}
-        <AnimateIn direction="up" delay={400} className="w-full mb-10">
-          <ArchitecturalSkyline />
-        </AnimateIn>
-
-        {/* 02: Studio Delivery Blueprint Section Tag */}
-        <AnimateIn direction="up" delay={450} className="mb-2">
-          <div className="flex items-center justify-between text-xs font-mono text-text-secondary border-b border-border-subtle pb-2.5">
-            <div className="flex items-center gap-2">
-              <span className="text-accent-dark dark:text-accent font-bold">02 //</span>
               <span className="font-semibold text-text-primary uppercase tracking-wider">Studio Service Blueprint</span>
-              <span className="hidden md:inline text-text-tertiary">/ Web Architecture, Lead Triage & Founder Delivery</span>
+              <span className="hidden md:inline text-text-tertiary">/ Web Infrastructure, Lead Triage & Founder Delivery</span>
             </div>
             <span className="text-[11px] font-mono text-text-tertiary uppercase tracking-widest hidden sm:inline-block">
               Interactive Process Flow
@@ -83,8 +64,13 @@ export default function Hero() {
           </div>
         </AnimateIn>
 
+        {/* Subtle Animated Business Infrastructure Vector Art */}
+        <AnimateIn direction="up" delay={400} className="w-full">
+          <BusinessInfrastructureVisual className="mb-3" />
+        </AnimateIn>
+
         {/* Interactive Systems Showcase Canvas */}
-        <AnimateIn direction="up" delay={500} className="w-full">
+        <AnimateIn direction="up" delay={450} className="w-full">
           <SystemFlowWorkspace />
         </AnimateIn>
       </Container>
