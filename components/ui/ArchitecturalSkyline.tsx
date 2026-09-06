@@ -1,759 +1,866 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 
-interface ElevationStage {
+interface ElevationSector {
   id: string;
   stageNum: string;
   elevation: string;
+  codename: string;
   title: string;
-  subtitle: string;
+  category: string;
   status: string;
   description: string;
-  metrics: { label: string; value: string }[];
-  keyUpgrades: string[];
+  metrics: { label: string; value: string; detail: string }[];
+  techStack: string[];
+  infrastructure: string[];
 }
 
-const stages: ElevationStage[] = [
+const sectors: ElevationSector[] = [
   {
     id: 'foundation',
     stageNum: '01',
     elevation: 'EL +0.0m',
-    title: 'Legacy Baseline & Ground Zero Terminal',
-    subtitle: 'GROUND INFRASTRUCTURE',
-    status: 'SYSTEM_LEGACY // MANUAL',
-    description: 'Delivering exceptional craft offline, but bottlenecked by fragmented spreadsheets, legacy site scripts, manual lead dispatch, and disconnected operational tools.',
+    codename: 'GROUND_ZERO_RUNTIME',
+    title: 'Legacy Baseline & Ground Operations',
+    category: 'Traditional Stack',
+    status: 'SYSTEM: LEGACY // MANUAL_DISPATCH',
+    description: 'Solid offline craftsmanship hindered by legacy server overhead, manual spreadsheets, disconnected email inboxes, and dropped customer inquiries.',
     metrics: [
-      { label: 'Latency', value: '4.8s' },
-      { label: 'Lead Flow', value: 'Manual / CSV' },
-      { label: 'Uptime', value: '98.2%' },
+      { label: 'Page Load Speed', value: '4.6s', detail: 'Bloated WordPress/Wix' },
+      { label: 'Lead Response', value: '4–12 hrs', detail: 'Manual inbox triage' },
+      { label: 'Infrastructure', value: 'Single VPS', detail: 'No edge redundancy' },
     ],
-    keyUpgrades: ['Manual follow-up latency', 'Disconnected CRM channels', 'Slow legacy CMS bloat'],
+    techStack: ['PHP / MySQL', 'Manual CSVs', 'Email Inboxes', 'Shared Hosting'],
+    infrastructure: ['Corrugated Server Depot', 'Lattice Comms Mast', 'HVAC Chiller Fan Unit', 'Substation Transformer'],
   },
   {
     id: 'modernization',
     stageNum: '02',
-    elevation: 'EL +140.0m',
-    title: 'Custom Cloud Architecture & Edge Facility',
-    subtitle: 'EDGE MODERNIZATION',
-    status: 'OPTIMIZED // NEXT.JS SSR',
-    description: 'Engineered on modern Next.js App Router with global edge deployment, sub-second TTFB, mobile-first conversion UX, and crisp editorial brand authority.',
+    elevation: 'EL +180.0m',
+    codename: 'EDGE_SSR_FACILITY',
+    title: 'Next.js Cloud Architecture & Edge Facility',
+    category: 'Engineered Web',
+    status: 'SYSTEM: OPTIMIZED // NEXT.JS_SSR',
+    description: 'Bespoke Next.js App Router engineering with global Vercel edge deployment, sub-second TTFB, 100% Core Web Vitals, and mobile-first conversion UI.',
     metrics: [
-      { label: 'Latency', value: '0.4s' },
-      { label: 'Lighthouse', value: '100 / 100' },
-      { label: 'Edge Nodes', value: '300+ Global' },
+      { label: 'Page Load Speed', value: '0.4s', detail: 'Instant edge hydration' },
+      { label: 'Lighthouse Score', value: '100 / 100', detail: 'Perfect SEO & Perf' },
+      { label: 'Edge Network', value: '300+ Cities', detail: 'Sub-50ms latency' },
     ],
-    keyUpgrades: ['0.4s Next.js Edge SSR', '100% Core Web Vitals', 'Zero plugin vulnerability'],
+    techStack: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS', 'Vercel Edge'],
+    infrastructure: ['Modular Glass Tech HQ', 'Photovoltaic Solar Trackers', 'Pulsing Fiber Trunk', 'Rotating Weather Radar'],
   },
   {
     id: 'scale',
     stageNum: '03',
-    elevation: 'EL +480.0m',
+    elevation: 'EL +540.0m',
+    codename: 'COMMERCIAL_ARCOLOGY',
     title: 'Enterprise Cyber Arcology & Automated Triage',
-    subtitle: 'COMMERCIAL SCALE',
-    status: 'AUTOMATED // REALTIME AI',
-    description: 'High-throughput event webhooks qualify incoming leads, sync relational databases, and dispatch intelligent WhatsApp / Telegram alerts to your team in under 60 seconds.',
+    category: 'Autonomous Ops',
+    status: 'SYSTEM: REALTIME // EVENT_DRIVEN',
+    description: 'High-throughput serverless webhook pipelines qualifying incoming prospects, updating CRM databases, and triggering real-time WhatsApp/Telegram alerts.',
     metrics: [
-      { label: 'Alert Speed', value: '< 60 Sec' },
-      { label: 'Sync Rate', value: 'Realtime' },
-      { label: 'Time Saved', value: '14 hrs/wk' },
+      { label: 'Alert Dispatch', value: '< 45 Sec', detail: 'Instant push pings' },
+      { label: 'Database Sync', value: 'Realtime', detail: 'Zero manual copy' },
+      { label: 'Admin Time Saved', value: '14+ hrs/wk', detail: 'Eliminated data entry' },
     ],
-    keyUpgrades: ['Instant WhatsApp/Telegram Pings', 'Automated CRM & DB Sync', '14+ hrs admin saved / week'],
+    techStack: ['Supabase PG', 'Serverless Webhooks', 'Telegram API', 'n8n / Make', 'Automated CRM'],
+    infrastructure: ['Twin Diagrid Towers', 'Suspension Skybridge', 'Express Glass Elevators', 'Holo HUD Telemetry'],
   },
   {
     id: 'pinnacle',
     stageNum: '04',
-    elevation: 'EL +1050.0m',
+    elevation: 'EL +1180.0m',
+    codename: 'ZENITH_APEX_CITADEL',
     title: 'Zenith Megatower & Autonomous Asset Engine',
-    subtitle: 'PINNACLE APEX',
-    status: 'ZENITH_PEAK // PROPRIETARY',
-    description: 'A sovereign digital acquisition and operations fortress. 100% repository code ownership, direct founder-led engineering, zero vendor lock-in, and autonomous growth pipelines.',
+    category: 'Sovereign Asset',
+    status: 'SYSTEM: ZENITH // PROPRIETARY_IP',
+    description: 'A sovereign digital acquisition fortress. 100% repository code ownership transferred to your GitHub, direct founder access, and zero recurring agency lock-in.',
     metrics: [
-      { label: 'Code Ownership', value: '100% GitHub' },
-      { label: 'Vendor Lock-in', value: '0%' },
-      { label: 'Direct Access', value: 'Yash & Rajat' },
+      { label: 'Code Ownership', value: '100% GitHub', detail: 'Full proprietary IP' },
+      { label: 'Agency Lock-in', value: '0.0%', detail: 'Zero ongoing dependency' },
+      { label: 'Founder Direct SLA', value: 'Yash & Rajat', detail: 'Direct senior builders' },
     ],
-    keyUpgrades: ['100% GitHub Repo Handover', 'Zero recurring agency lock-in', 'Direct founder SLA access'],
+    techStack: ['Proprietary IP', 'CI/CD Pipelines', 'Cloudflare Security', 'Founder Governance'],
+    infrastructure: ['Titan Needle Spire', 'Orbital Ion Laser', 'Drone Sky-Harbor [H]', 'Dual Engine Arcology'],
   },
 ];
 
 export function ArchitecturalSkyline({ className }: { className?: string }) {
-  const [activeStage, setActiveStage] = useState<string>('pinnacle');
-  const activeData = stages.find((s) => s.id === activeStage) || stages[3];
+  const [activeSectorId, setActiveSectorId] = useState<string>('pinnacle');
+  const [showFlightLanes, setShowFlightLanes] = useState<boolean>(true);
+  const [showDataConduits, setShowDataConduits] = useState<boolean>(true);
+  const [isAnimationActive, setIsAnimationActive] = useState<boolean>(true);
+
+  const activeSector = sectors.find((s) => s.id === activeSectorId) || sectors[3];
 
   return (
     <div className={cn("w-full select-none relative flex flex-col gap-3", className)}>
-      {/* Top Cyber Telemetry & Stage Control Ribbon */}
-      <div className="flex flex-wrap items-center justify-between gap-3 px-3.5 py-2.5 rounded-xl bg-surface/90 border border-border-subtle backdrop-blur-md">
-        {/* Stage Selector Pills */}
+      {/* Top Cyber Telemetry & Control Ribbon */}
+      <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-surface/95 border border-border-subtle backdrop-blur-xl shadow-sm">
+        {/* Sector Navigation Selector */}
         <div className="flex items-center gap-1.5 sm:gap-2">
-          {stages.map((stage) => {
-            const isSelected = stage.id === activeStage;
+          {sectors.map((sector) => {
+            const isSelected = sector.id === activeSectorId;
             return (
               <button
-                key={stage.id}
-                onClick={() => setActiveStage(stage.id)}
+                key={sector.id}
+                onClick={() => setActiveSectorId(sector.id)}
                 className={cn(
-                  "px-2.5 sm:px-3 py-1 rounded-lg text-xs font-mono transition-all duration-150 flex items-center gap-1.5",
+                  "px-3 py-1.5 rounded-xl text-xs font-mono transition-all duration-200 flex items-center gap-2 relative",
                   isSelected
-                    ? "bg-surface text-text-primary border border-accent/60 shadow-xs font-bold text-accent-dark dark:text-accent ring-1 ring-accent/30"
-                    : "text-text-secondary hover:text-text-primary hover:bg-surface-elevated/50"
+                    ? "bg-surface text-text-primary border border-accent/60 shadow-xs font-bold text-accent-dark dark:text-accent ring-2 ring-accent/20"
+                    : "text-text-secondary hover:text-text-primary hover:bg-surface-elevated/60"
                 )}
               >
-                <span className={cn("w-1.5 h-1.5 rounded-full", isSelected ? "bg-accent animate-pulse" : "bg-text-tertiary/40")} />
-                <span>{stage.stageNum}</span>
-                <span className="hidden md:inline">{stage.subtitle}</span>
+                <span className={cn("w-2 h-2 rounded-full", isSelected ? "bg-accent animate-pulse" : "bg-text-tertiary/40")} />
+                <span className="font-semibold">{sector.stageNum}</span>
+                <span className="hidden md:inline font-medium">{sector.codename.replace('_', ' ')}</span>
               </button>
             );
           })}
         </div>
 
-        {/* Realtime Cyber Altitude & Status Telemetry */}
-        <div className="flex items-center gap-3 text-xs font-mono">
-          <div className="hidden sm:flex items-center gap-1.5 text-text-tertiary">
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent animate-ping" />
-            <span className="text-[11px] text-text-secondary uppercase">{activeData.status}</span>
-          </div>
-          <div className="flex items-center gap-1.5">
+        {/* Cyber Layer Filters & Animation Controls */}
+        <div className="flex items-center gap-2 text-xs font-mono">
+          <button
+            onClick={() => setShowFlightLanes(!showFlightLanes)}
+            className={cn(
+              "px-2.5 py-1 rounded-lg border text-[11px] transition-colors hidden sm:flex items-center gap-1",
+              showFlightLanes
+                ? "bg-accent/10 border-accent/40 text-accent-dark dark:text-accent font-semibold"
+                : "border-border-subtle text-text-tertiary hover:text-text-secondary"
+            )}
+            title="Toggle Air Transit Flight Lanes"
+          >
+            <span>✈</span>
+            <span>AIR LANES</span>
+          </button>
+
+          <button
+            onClick={() => setShowDataConduits(!showDataConduits)}
+            className={cn(
+              "px-2.5 py-1 rounded-lg border text-[11px] transition-colors hidden sm:flex items-center gap-1",
+              showDataConduits
+                ? "bg-accent/10 border-accent/40 text-accent-dark dark:text-accent font-semibold"
+                : "border-border-subtle text-text-tertiary hover:text-text-secondary"
+            )}
+            title="Toggle Fiber Data Conduits"
+          >
+            <span>⚡</span>
+            <span>DATA FLOW</span>
+          </button>
+
+          <button
+            onClick={() => setIsAnimationActive(!isAnimationActive)}
+            className={cn(
+              "px-2.5 py-1 rounded-lg border text-[11px] transition-colors flex items-center gap-1.5 font-bold",
+              isAnimationActive
+                ? "bg-accent text-dark border-accent"
+                : "border-border-subtle text-text-tertiary"
+            )}
+            title="Play / Pause Scene Animations"
+          >
+            <span className={cn("w-1.5 h-1.5 rounded-full", isAnimationActive ? "bg-dark animate-ping" : "bg-text-tertiary")} />
+            <span>{isAnimationActive ? "LIVE" : "PAUSED"}</span>
+          </button>
+
+          {/* Current Altitude Datum Pill */}
+          <div className="flex items-center gap-1.5 bg-surface-elevated px-2.5 py-1 rounded-lg border border-border-subtle">
             <span className="text-text-tertiary">ALT:</span>
-            <span className="font-bold text-accent-dark dark:text-accent bg-accent/10 border border-accent/20 px-2 py-0.5 rounded">
-              {activeData.elevation}
+            <span className="font-bold text-accent-dark dark:text-accent font-mono">
+              {activeSector.elevation}
             </span>
           </div>
         </div>
       </div>
 
-      {/* Cybercity Architectural Canvas Viewport */}
-      <div className="relative w-full rounded-2xl border border-border-subtle bg-surface/70 p-2 sm:p-4 overflow-hidden group">
-        {/* Cyber Matrix Coordinate Dot Grid */}
-        <div className="absolute inset-0 bg-[radial-gradient(#1DB954_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.04] dark:opacity-[0.08] pointer-events-none" />
+      {/* Cybercity Architectural Vector Canvas */}
+      <div className="relative w-full rounded-2xl border border-border-subtle bg-surface/80 p-2 sm:p-4 overflow-hidden shadow-inner group">
+        {/* Fine Architectural CAD Matrix Dot Grid */}
+        <div className="absolute inset-0 bg-[radial-gradient(#1DB954_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.035] dark:opacity-[0.07] pointer-events-none" />
 
         <svg
-          viewBox="0 0 1400 320"
+          viewBox="0 0 1440 360"
           className="w-full h-auto text-text-primary relative z-10"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
-            <style>{`
-              /* Trajectory Laser Sweep */
-              @keyframes cyberLaser {
-                0% { stroke-dashoffset: 60; }
-                100% { stroke-dashoffset: 0; }
-              }
-              /* Apex Spire Radiant Beacons */
-              @keyframes spireWave {
-                0% { r: 3px; opacity: 1; stroke-width: 2; }
-                100% { r: 24px; opacity: 0; stroke-width: 0.5; }
-              }
-              @keyframes spireWaveSlow {
-                0% { r: 3px; opacity: 0.9; stroke-width: 1.5; }
-                100% { r: 32px; opacity: 0; stroke-width: 0.25; }
-              }
-              /* Express Glass Elevator Movement */
-              @keyframes elevatorRide1 {
-                0%, 15% { transform: translateY(0px); }
-                45%, 60% { transform: translateY(-120px); }
-                85%, 100% { transform: translateY(0px); }
-              }
-              @keyframes elevatorRide2 {
-                0%, 10% { transform: translateY(0px); }
-                50%, 65% { transform: translateY(-165px); }
-                90%, 100% { transform: translateY(0px); }
-              }
-              /* Cyber Drone / Sky-car Flight Paths */
-              @keyframes droneFlight1 {
-                0% { transform: translate(1420px, 60px); opacity: 0; }
-                5% { opacity: 1; }
-                95% { opacity: 1; }
-                100% { transform: translate(-40px, 45px); opacity: 0; }
-              }
-              @keyframes droneFlight2 {
-                0% { transform: translate(-30px, 95px); opacity: 0; }
-                5% { opacity: 1; }
-                95% { opacity: 1; }
-                100% { transform: translate(1430px, 75px); opacity: 0; }
-              }
-              /* Optical Fiber Conduit Data Pulses */
-              @keyframes dataFlowVert {
-                0% { stroke-dashoffset: 80; }
-                100% { stroke-dashoffset: 0; }
-              }
-              /* Living Window Grid Matrix Flickers */
-              @keyframes winFlicker1 {
-                0%, 100% { opacity: 0.25; fill: #1DB954; }
-                30% { opacity: 0.95; fill: #1DB954; }
-                70% { opacity: 0.4; fill: #1DB954; }
-              }
-              @keyframes winFlicker2 {
-                0%, 100% { opacity: 0.85; fill: #1DB954; }
-                50% { opacity: 0.15; fill: #1DB954; }
-              }
-              @keyframes winFlicker3 {
-                0%, 100% { opacity: 0.2; fill: #1DB954; }
-                60% { opacity: 0.9; fill: #1DB954; }
-              }
-              /* Apex Beam Vertical Pulse */
-              @keyframes apexBeamPulse {
-                0%, 100% { opacity: 0.4; transform: scaleY(0.95); }
-                50% { opacity: 0.95; transform: scaleY(1.05); }
-              }
-              /* Cyber Walker Traversal */
-              @keyframes walkerWalk {
-                0% { transform: translateX(20px); }
-                100% { transform: translateX(1360px); }
-              }
-              @keyframes walkerLegL {
-                0%, 100% { transform: rotate(-24deg); }
-                50% { transform: rotate(24deg); }
-              }
-              @keyframes walkerLegR {
-                0%, 100% { transform: rotate(24deg); }
-                50% { transform: rotate(-24deg); }
-              }
+            {/* Real Neon Bloom Glow Filters */}
+            <filter id="neon-glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+              <feMerge>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <filter id="laser-glow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="4" result="laserBlur" />
+              <feMerge>
+                <feMergeNode in="laserBlur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
 
-              .anim-laser { animation: cyberLaser 1.8s linear infinite; }
-              .anim-spire-1 { animation: spireWave 2.4s cubic-bezier(0, 0, 0.2, 1) infinite; transform-origin: center; }
-              .anim-spire-2 { animation: spireWave 2.4s cubic-bezier(0, 0, 0.2, 1) infinite 1.2s; transform-origin: center; }
-              .anim-spire-slow { animation: spireWaveSlow 3.2s cubic-bezier(0, 0, 0.2, 1) infinite 0.6s; transform-origin: center; }
-              .anim-elevator-1 { animation: elevatorRide1 10s ease-in-out infinite; }
-              .anim-elevator-2 { animation: elevatorRide2 14s ease-in-out infinite 2s; }
-              .anim-drone-1 { animation: droneFlight1 22s linear infinite; }
-              .anim-drone-2 { animation: droneFlight2 28s linear infinite 5s; }
-              .anim-data-flow { animation: dataFlowVert 2.5s linear infinite; }
-              .anim-win-1 { animation: winFlicker1 4s ease-in-out infinite; }
-              .anim-win-2 { animation: winFlicker2 5s ease-in-out infinite 1s; }
-              .anim-win-3 { animation: winFlicker3 3.5s ease-in-out infinite 2s; }
-              .anim-beam { animation: apexBeamPulse 2.5s ease-in-out infinite; transform-origin: center bottom; }
-              .anim-walker-track { animation: walkerWalk 34s linear infinite; }
-              .anim-walker-leg-l { animation: walkerLegL 0.5s ease-in-out infinite; transform-origin: 0 0; }
-              .anim-walker-leg-r { animation: walkerLegR 0.5s ease-in-out infinite; transform-origin: 0 0; }
+            <style>{`
+              ${isAnimationActive ? `
+                /* Trajectory Laser Stream */
+                @keyframes laserDash { 0% { stroke-dashoffset: 80; } 100% { stroke-dashoffset: 0; } }
+                /* Spire Concentric Radiant Wave */
+                @keyframes beaconPulse { 0% { r: 3px; opacity: 1; stroke-width: 2.5px; } 100% { r: 36px; opacity: 0; stroke-width: 0.5px; } }
+                @keyframes beaconPulseDelayed { 0% { r: 3px; opacity: 1; stroke-width: 2px; } 100% { r: 28px; opacity: 0; stroke-width: 0.25px; } }
+                /* Double Express Glass Elevator Movement */
+                @keyframes liftCar1 {
+                  0%, 15% { transform: translateY(0px); }
+                  45%, 58% { transform: translateY(-160px); }
+                  85%, 100% { transform: translateY(0px); }
+                }
+                @keyframes liftCar2 {
+                  0%, 10% { transform: translateY(0px); }
+                  50%, 65% { transform: translateY(-210px); }
+                  90%, 100% { transform: translateY(0px); }
+                }
+                /* Transit Sky-Drones Flight Paths */
+                @keyframes skyLaneWest {
+                  0% { transform: translate(1460px, 60px); opacity: 0; }
+                  4% { opacity: 1; }
+                  96% { opacity: 1; }
+                  100% { transform: translate(-60px, 40px); opacity: 0; }
+                }
+                @keyframes skyLaneEast {
+                  0% { transform: translate(-50px, 110px); opacity: 0; }
+                  4% { opacity: 1; }
+                  96% { opacity: 1; }
+                  100% { transform: translate(1480px, 85px); opacity: 0; }
+                }
+                @keyframes skyLaneHigh {
+                  0% { transform: translate(1460px, 20px); opacity: 0; }
+                  5% { opacity: 0.8; }
+                  95% { opacity: 0.8; }
+                  100% { transform: translate(-40px, 25px); opacity: 0; }
+                }
+                /* Radar Dish Continuous Spin */
+                @keyframes dishRotate {
+                  0% { transform: rotate(0deg); }
+                  100% { transform: rotate(360deg); }
+                }
+                /* HVAC Cooling Fan Blade Rotation */
+                @keyframes fanSpin {
+                  0% { transform: rotate(0deg); }
+                  100% { transform: rotate(360deg); }
+                }
+                /* Optical Fiber Data Conduit Pulses */
+                @keyframes fiberDataStream {
+                  0% { stroke-dashoffset: 100; }
+                  100% { stroke-dashoffset: 0; }
+                }
+                /* Living Window & Server Blade Flickers */
+                @keyframes serverGlow1 { 0%, 100% { opacity: 0.2; fill: #1DB954; } 40% { opacity: 0.95; fill: #1DB954; } 80% { opacity: 0.4; fill: #1DB954; } }
+                @keyframes serverGlow2 { 0%, 100% { opacity: 0.85; fill: #1DB954; } 50% { opacity: 0.15; fill: #1DB954; } }
+                @keyframes serverGlow3 { 0%, 100% { opacity: 0.1; fill: #1DB954; } 60% { opacity: 0.9; fill: #1DB954; } }
+                /* Zenith Ion Laser Column Energy Pulse */
+                @keyframes ionBeamEnergy {
+                  0%, 100% { opacity: 0.4; transform: scaleX(0.85); }
+                  50% { opacity: 1; transform: scaleX(1.2); }
+                }
+                /* Cyberwalker Ground Traversal */
+                @keyframes walkerTrack {
+                  0% { transform: translateX(15px); }
+                  100% { transform: translateX(1400px); }
+                }
+                @keyframes walkerLimbL { 0%, 100% { transform: rotate(-26deg); } 50% { transform: rotate(26deg); } }
+                @keyframes walkerLimbR { 0%, 100% { transform: rotate(26deg); } 50% { transform: rotate(-26deg); } }
+                /* Twinkling Starlight Nodes */
+                @keyframes starTwinkle { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.9; } }
+              ` : `
+                /* Animations paused */
+              `}
+
+              .anim-laser { animation: laserDash 1.6s linear infinite; }
+              .anim-beacon-1 { animation: beaconPulse 2.2s cubic-bezier(0, 0, 0.2, 1) infinite; transform-origin: center; }
+              .anim-beacon-2 { animation: beaconPulse 2.2s cubic-bezier(0, 0, 0.2, 1) infinite 1.1s; transform-origin: center; }
+              .anim-beacon-delayed { animation: beaconPulseDelayed 3s cubic-bezier(0, 0, 0.2, 1) infinite 0.5s; transform-origin: center; }
+              .anim-lift-1 { animation: liftCar1 11s ease-in-out infinite; }
+              .anim-lift-2 { animation: liftCar2 15s ease-in-out infinite 2s; }
+              .anim-drone-w { animation: skyLaneWest 24s linear infinite; }
+              .anim-drone-e { animation: skyLaneEast 30s linear infinite 4s; }
+              .anim-drone-h { animation: skyLaneHigh 18s linear infinite 8s; }
+              .anim-radar { animation: dishRotate 4s linear infinite; transform-origin: center; }
+              .anim-fan { animation: fanSpin 1.2s linear infinite; transform-origin: center; }
+              .anim-fiber { animation: fiberDataStream 2.2s linear infinite; }
+              .anim-win-1 { animation: serverGlow1 3.8s ease-in-out infinite; }
+              .anim-win-2 { animation: serverGlow2 4.6s ease-in-out infinite 0.8s; }
+              .anim-win-3 { animation: serverGlow3 3.2s ease-in-out infinite 1.6s; }
+              .anim-ion-beam { animation: ionBeamEnergy 2.4s ease-in-out infinite; transform-origin: center bottom; }
+              .anim-walker { animation: walkerTrack 36s linear infinite; }
+              .anim-walker-l { animation: walkerLimbL 0.5s ease-in-out infinite; transform-origin: 0 0; }
+              .anim-walker-r { animation: walkerLimbR 0.5s ease-in-out infinite; transform-origin: 0 0; }
+              .anim-star { animation: starTwinkle 3s ease-in-out infinite; }
             `}</style>
 
-            {/* Gradient Fades for Depth Silhouettes */}
-            <linearGradient id="bg-cyber-fade" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="currentColor" stopOpacity="0.18" />
-              <stop offset="70%" stopColor="currentColor" stopOpacity="0.06" />
+            {/* High-Fidelity Depth Gradients */}
+            <linearGradient id="bg-silhouette-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.22" />
+              <stop offset="65%" stopColor="currentColor" stopOpacity="0.08" />
               <stop offset="100%" stopColor="currentColor" stopOpacity="0.01" />
             </linearGradient>
 
-            <linearGradient id="laser-path-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <linearGradient id="trajectory-beam-grad" x1="0%" y1="100%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#1DB954" stopOpacity="0.2" />
-              <stop offset="35%" stopColor="#1DB954" stopOpacity="0.5" />
-              <stop offset="70%" stopColor="#1DB954" stopOpacity="0.85" />
+              <stop offset="35%" stopColor="#1DB954" stopOpacity="0.6" />
+              <stop offset="75%" stopColor="#1DB954" stopOpacity="0.9" />
               <stop offset="100%" stopColor="#1DB954" stopOpacity="1" />
             </linearGradient>
 
-            <pattern id="solar-grid" width="8" height="5" patternUnits="userSpaceOnUse">
-              <rect width="7" height="4" stroke="#1DB954" strokeWidth="0.5" strokeOpacity="0.4" fill="#1DB954" fillOpacity="0.08" />
+            <pattern id="solar-pv-mesh" width="8" height="6" patternUnits="userSpaceOnUse">
+              <rect width="7" height="5" stroke="#1DB954" strokeWidth="0.6" strokeOpacity="0.5" fill="#1DB954" fillOpacity="0.12" />
             </pattern>
           </defs>
 
           {/* =========================================================================
-              LAYER 0: CYBER HUD TELEMETRY, ELEVATION DATUM RULERS & AXIS GRID
+              LAYER 0: NIGHT STARFIELD & CALIBRATED ELEVATION AXIS GRID
              ========================================================================= */}
+          {/* Twinkling Starlight Array */}
+          <g fill="#1DB954" opacity="0.6">
+            <circle cx="85" cy="45" r="1" className="anim-star" />
+            <circle cx="210" cy="25" r="1.2" className="anim-star" style={{ animationDelay: '0.7s' }} />
+            <circle cx="360" cy="50" r="0.8" className="anim-star" style={{ animationDelay: '1.4s' }} />
+            <circle cx="510" cy="30" r="1.5" className="anim-star" style={{ animationDelay: '2.1s' }} />
+            <circle cx="680" cy="40" r="1" className="anim-star" style={{ animationDelay: '0.3s' }} />
+            <circle cx="890" cy="20" r="1.3" className="anim-star" style={{ animationDelay: '1.8s' }} />
+            <circle cx="1040" cy="45" r="0.9" className="anim-star" style={{ animationDelay: '0.9s' }} />
+            <circle cx="1280" cy="18" r="1.4" className="anim-star" style={{ animationDelay: '2.5s' }} />
+            <circle cx="1390" cy="55" r="1" className="anim-star" style={{ animationDelay: '1.2s' }} />
+          </g>
+
+          {/* Engineering CAD Axis Lines */}
           <g className="opacity-25 dark:opacity-30" stroke="currentColor" strokeWidth="0.6">
-            <line x1="20" y1="35" x2="1380" y2="35" strokeDasharray="3 9" strokeOpacity="0.4" />
-            <line x1="20" y1="105" x2="1380" y2="105" strokeDasharray="3 9" strokeOpacity="0.3" />
-            <line x1="20" y1="180" x2="1380" y2="180" strokeDasharray="3 9" strokeOpacity="0.3" />
-            <line x1="20" y1="240" x2="1380" y2="240" strokeDasharray="3 9" strokeOpacity="0.3" />
+            <line x1="20" y1="40" x2="1420" y2="40" strokeDasharray="4 10" strokeOpacity="0.4" />
+            <line x1="20" y1="120" x2="1420" y2="120" strokeDasharray="4 10" strokeOpacity="0.3" />
+            <line x1="20" y1="200" x2="1420" y2="200" strokeDasharray="4 10" strokeOpacity="0.3" />
+            <line x1="20" y1="270" x2="1420" y2="270" strokeDasharray="4 10" strokeOpacity="0.3" />
 
-            {/* Crosshair Registration Markers */}
-            <path d="M 160 30 L 160 40 M 155 35 L 165 35" />
-            <path d="M 460 30 L 460 40 M 455 35 L 465 35" />
-            <path d="M 820 30 L 820 40 M 815 35 L 825 35" />
-            <path d="M 1200 30 L 1200 40 M 1195 35 L 1205 35" />
+            {/* Registration Crosshairs */}
+            <path d="M 170 35 L 170 45 M 165 40 L 175 40" />
+            <path d="M 500 35 L 500 45 M 495 40 L 505 40" />
+            <path d="M 860 35 L 860 45 M 855 40 L 865 40" />
+            <path d="M 1240 35 L 1240 45 M 1235 40 L 1245 40" />
 
-            {/* Stage Altitude Markers */}
-            <text x="25" y="244" fontSize="7" fontFamily="monospace" fill="currentColor" opacity="0.6">EL +000m</text>
-            <text x="25" y="184" fontSize="7" fontFamily="monospace" fill="currentColor" opacity="0.6">EL +140m</text>
-            <text x="25" y="109" fontSize="7" fontFamily="monospace" fill="currentColor" opacity="0.6">EL +480m</text>
-            <text x="25" y="39" fontSize="7" fontFamily="monospace" fill="currentColor" opacity="0.6">EL +1050m [ZENITH]</text>
+            {/* Elevation Height Labels */}
+            <text x="25" y="274" fontSize="7.5" fontFamily="monospace" fill="currentColor" opacity="0.65">EL +000m [DATUM]</text>
+            <text x="25" y="204" fontSize="7.5" fontFamily="monospace" fill="currentColor" opacity="0.65">EL +180m [MODERN]</text>
+            <text x="25" y="124" fontSize="7.5" fontFamily="monospace" fill="currentColor" opacity="0.65">EL +540m [SCALE]</text>
+            <text x="25" y="44" fontSize="7.5" fontFamily="monospace" fill="#1DB954" fontWeight="bold">EL +1180m [ZENITH PEAK]</text>
           </g>
 
           {/* =========================================================================
-              LAYER 1: DISTANT BACKGROUND CYBER MEGATOWERS & CITY SILHOUETTES
+              LAYER 1: DISTANT SILHOUETTE MEGATOWERS (ATMOSPHERIC BACKGROUND DEPTH)
              ========================================================================= */}
-          <g className="opacity-30 dark:opacity-35" stroke="currentColor" strokeWidth="0.75">
-            {/* Distant Outpost Blocks */}
-            <rect x="50" y="210" width="45" height="60" fill="url(#bg-cyber-fade)" />
-            <polygon points="120,205 145,185 170,205" fill="url(#bg-cyber-fade)" />
-            <rect x="125" y="205" width="40" height="65" fill="url(#bg-cyber-fade)" />
+          <g className="opacity-35 dark:opacity-40" stroke="currentColor" strokeWidth="0.75">
+            {/* Sector 1 Backing Outpost */}
+            <rect x="55" y="225" width="55" height="75" fill="url(#bg-silhouette-grad)" />
+            <polygon points="130,220 160,195 190,220" fill="url(#bg-silhouette-grad)" />
+            <rect x="135" y="220" width="50" height="80" fill="url(#bg-silhouette-grad)" />
+            <line x1="160" y1="180" x2="160" y2="195" strokeWidth="1" />
+            <circle cx="160" cy="180" r="1.5" fill="#1DB954" />
 
-            {/* Distant Mid-Tier Towers */}
-            <rect x="290" y="160" width="55" height="110" fill="url(#bg-cyber-fade)" />
-            <polygon points="365,150 400,120 435,150" fill="url(#bg-cyber-fade)" />
-            <rect x="370" y="150" width="60" height="120" fill="url(#bg-cyber-fade)" />
-            <rect x="470" y="130" width="65" height="140" fill="url(#bg-cyber-fade)" />
+            {/* Sector 2 Backing Cloud Hubs */}
+            <rect x="310" y="175" width="65" height="125" fill="url(#bg-silhouette-grad)" />
+            <polygon points="390,165 430,135 470,165" fill="url(#bg-silhouette-grad)" />
+            <rect x="395" y="165" width="70" height="135" fill="url(#bg-silhouette-grad)" />
+            <rect x="500" y="145" width="75" height="155" fill="url(#bg-silhouette-grad)" />
 
-            {/* Distant Commercial Arcologies */}
-            <rect x="580" y="90" width="75" height="180" fill="url(#bg-cyber-fade)" />
-            <rect x="680" y="65" width="80" height="205" fill="url(#bg-cyber-fade)" />
-            <line x1="720" y1="40" x2="720" y2="65" strokeWidth="1" />
-            <circle cx="720" cy="40" r="2" fill="#1DB954" opacity="0.6" />
+            {/* Sector 3 Backing Arcology Spires */}
+            <rect x="620" y="105" width="85" height="195" fill="url(#bg-silhouette-grad)" />
+            <polygon points="730,95 775,55 820,95" fill="url(#bg-silhouette-grad)" />
+            <rect x="735" y="95" width="80" height="205" fill="url(#bg-silhouette-grad)" />
+            <line x1="775" y1="35" x2="775" y2="55" strokeWidth="1.2" stroke="#1DB954" />
+            <circle cx="775" cy="35" r="2" fill="#1DB954" opacity="0.8" />
+            <rect x="850" y="80" width="90" height="220" fill="url(#bg-silhouette-grad)" />
 
-            <polygon points="785,75 830,35 875,75" fill="url(#bg-cyber-fade)" />
-            <rect x="790" y="75" width="80" height="195" fill="url(#bg-cyber-fade)" />
-
-            {/* Distant Colossal Zenith Megacity Monoliths */}
-            <rect x="910" y="45" width="90" height="225" fill="url(#bg-cyber-fade)" />
-            <polygon points="1025,35 1070,8 1115,35" fill="url(#bg-cyber-fade)" />
-            <rect x="1030" y="35" width="80" height="235" fill="url(#bg-cyber-fade)" />
-            <line x1="1070" y1="0" x2="1070" y2="8" strokeWidth="1.5" stroke="#1DB954" />
-
-            <rect x="1150" y="20" width="105" height="250" fill="url(#bg-cyber-fade)" />
-            <line x1="1200" y1="2" x2="1200" y2="20" strokeWidth="1.5" stroke="#1DB954" />
-
-            <rect x="1275" y="30" width="95" height="240" fill="url(#bg-cyber-fade)" />
-            <polygon points="1275,30 1320,12 1365,30" fill="url(#bg-cyber-fade)" />
+            {/* Sector 4 Backing Zenith Cyber Megastructures */}
+            <polygon points="980,60 1025,25 1070,60" fill="url(#bg-silhouette-grad)" />
+            <rect x="985" y="60" width="80" height="240" fill="url(#bg-silhouette-grad)" />
+            <rect x="1100" y="30" width="115" height="270" fill="url(#bg-silhouette-grad)" />
+            <line x1="1155" y1="8" x2="1155" y2="30" strokeWidth="1.5" stroke="#1DB954" />
+            <circle cx="1155" cy="8" r="2.5" fill="#1DB954" />
+            
+            <rect x="1245" y="45" width="105" height="255" fill="url(#bg-silhouette-grad)" />
+            <polygon points="1245,45 1300,20 1355,45" fill="url(#bg-silhouette-grad)" />
+            <rect x="1365" y="70" width="60" height="230" fill="url(#bg-silhouette-grad)" />
           </g>
 
           {/* =========================================================================
-              LAYER 2: HIGH-ALTITUDE SKYWAYS, FLYING CYBER DRONES & TRAJECTORY LASER
+              LAYER 2: TRAJECTORY BEAM & TRANSIT SKY-DRONES
              ========================================================================= */}
-          {/* Sky-lane Trajectory Laser */}
+          {/* Main Business Elevation Trajectory Laser */}
           <g>
             <path
-              d="M 20 260 C 260 250, 580 180, 1150 20"
-              stroke="url(#laser-path-grad)"
-              strokeWidth="2"
-              strokeDasharray="6 6"
+              d="M 25 290 C 280 280, 620 200, 1185 24"
+              stroke="url(#trajectory-beam-grad)"
+              strokeWidth="2.25"
+              strokeDasharray="7 7"
               className="anim-laser"
+              filter="url(#neon-glow)"
             />
             <path
-              d="M 20 260 C 260 250, 580 180, 1150 20"
+              d="M 25 290 C 280 280, 620 200, 1185 24"
               stroke="#1DB954"
               strokeWidth="0.5"
-              strokeOpacity="0.4"
+              strokeOpacity="0.5"
             />
           </g>
 
-          {/* Animated Sky-Drones Flying in Transit Lanes */}
-          <g className="anim-drone-1">
-            <rect x="-8" y="-3" width="16" height="6" rx="2" fill="currentColor" />
-            <line x1="-12" y1="-3" x2="12" y2="-3" stroke="#1DB954" strokeWidth="1" />
-            <circle cx="6" cy="0" r="1.5" fill="#1DB954" />
-            <line x1="-6" y1="0" x2="-28" y2="0" stroke="#1DB954" strokeWidth="0.75" strokeDasharray="3 3" opacity="0.6" />
-          </g>
-          <g className="anim-drone-2">
-            <rect x="-6" y="-2.5" width="12" height="5" rx="1.5" fill="currentColor" />
-            <line x1="-9" y1="-2.5" x2="9" y2="-2.5" stroke="#1DB954" strokeWidth="0.75" />
-            <circle cx="-4" cy="0" r="1.2" fill="#1DB954" />
-            <line x1="6" y1="0" x2="24" y2="0" stroke="#1DB954" strokeWidth="0.75" strokeDasharray="2 3" opacity="0.5" />
-          </g>
+          {/* Animated Sky-Drones (Air Lanes) */}
+          {showFlightLanes && (
+            <g>
+              {/* Drone 1: Westbound Express Cargo Drone */}
+              <g className="anim-drone-w">
+                <rect x="-12" y="-4" width="24" height="8" rx="3" fill="currentColor" />
+                <line x1="-16" y1="-4" x2="16" y2="-4" stroke="#1DB954" strokeWidth="1.2" />
+                <circle cx="8" cy="0" r="2" fill="#1DB954" />
+                <line x1="-8" y1="0" x2="-38" y2="0" stroke="#1DB954" strokeWidth="1" strokeDasharray="3 4" opacity="0.7" />
+              </g>
+
+              {/* Drone 2: Eastbound Commuter Sky-pod */}
+              <g className="anim-drone-e">
+                <rect x="-10" y="-3.5" width="20" height="7" rx="2" fill="currentColor" />
+                <line x1="-14" y1="-3.5" x2="14" y2="-3.5" stroke="#1DB954" strokeWidth="1" />
+                <circle cx="-6" cy="0" r="1.8" fill="#1DB954" />
+                <line x1="8" y1="0" x2="35" y2="0" stroke="#1DB954" strokeWidth="1" strokeDasharray="2 3" opacity="0.6" />
+              </g>
+
+              {/* Drone 3: High-Altitude Atmospheric Patrol Drone */}
+              <g className="anim-drone-h">
+                <polygon points="-8,-3 8,-3 0,4" fill="currentColor" />
+                <circle cx="0" cy="-3" r="1.5" fill="#1DB954" />
+                <line x1="-12" y1="-3" x2="-30" y2="-3" stroke="#1DB954" strokeWidth="0.75" opacity="0.5" />
+              </g>
+            </g>
+          )}
 
           {/* =========================================================================
-              LAYER 3: FOREGROUND HYPER-DETAILED CYBERCITY SKYSCRAPERS & INFRASTRUCTURE
+              LAYER 3: FOREGROUND HYPER-DETAILED CYBERCITY METROPOLIS
              ========================================================================= */}
-          <g stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" className="opacity-90 dark:opacity-95">
+          <g stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" className="opacity-95">
 
             {/* =====================================================================
-                STAGE 01: THE LEGACY BASELINE & GROUND ZERO TERMINAL (x: 0 - 275)
+                SECTOR 01: GROUND RUNTIME & LEGACY INFRASTRUCTURE (x: 20 - 320)
                ===================================================================== */}
             <g
-              onClick={() => setActiveStage('foundation')}
+              onClick={() => setActiveSectorId('foundation')}
               className={cn(
                 "cursor-pointer transition-all duration-200",
-                activeStage === 'foundation' ? "opacity-100" : "opacity-65 hover:opacity-90"
+                activeSectorId === 'foundation' ? "opacity-100" : "opacity-70 hover:opacity-95"
               )}
             >
-              {/* Ground Utility Pole & Power Conduits */}
-              <line x1="26" y1="200" x2="26" y2="270" strokeWidth="1.2" />
-              <line x1="18" y1="208" x2="34" y2="208" strokeWidth="1.2" />
-              <line x1="20" y1="216" x2="32" y2="216" strokeWidth="1.2" />
-              <path d="M 26 208 Q 60 215 90 220" stroke="currentColor" strokeWidth="0.6" strokeDasharray="2 3" fill="none" opacity="0.6" />
-              <circle cx="26" cy="200" r="2" fill="#1DB954" className="anim-spire-1" />
+              {/* Telecommunications Lattice Radio Tower */}
+              <line x1="38" y1="185" x2="38" y2="300" strokeWidth="1.5" />
+              <line x1="30" y1="300" x2="38" y2="185" strokeWidth="0.8" />
+              <line x1="46" y1="300" x2="38" y2="185" strokeWidth="0.8" />
+              <line x1="32" y1="270" x2="44" y2="270" strokeWidth="0.8" />
+              <line x1="34" y1="240" x2="42" y2="240" strokeWidth="0.8" />
+              <line x1="36" y1="210" x2="40" y2="210" strokeWidth="0.8" />
+              {/* Flashing Tower Tip Beacon */}
+              <circle cx="38" cy="183" r="2.5" fill="#1DB954" />
+              <circle cx="38" cy="183" r="8" stroke="#1DB954" strokeWidth="0.75" className="anim-beacon-1" fill="none" />
+              {/* Overhead High-Voltage Power Lines connecting to Substation */}
+              <path d="M 38 210 Q 75 225 110 230" stroke="currentColor" strokeWidth="0.7" strokeDasharray="3 3" fill="none" opacity="0.6" />
 
-              {/* Structure 1A: Industrial Brick Warehouse & Legacy Server Depot */}
-              <rect x="42" y="215" width="62" height="55" />
-              {/* Roof Pitched Skylight */}
-              <polygon points="38,215 73,195 108,215" strokeWidth="1.25" fill="currentColor" fillOpacity="0.03" />
-              <line x1="73" y1="195" x2="73" y2="215" strokeWidth="0.75" />
-              <line x1="55" y1="205" x2="55" y2="215" strokeWidth="0.75" />
-              <line x1="91" y1="205" x2="91" y2="215" strokeWidth="0.75" />
-              {/* Corrugated Rolling Shutter Door */}
-              <rect x="50" y="235" width="22" height="35" strokeWidth="1" fill="#1DB954" fillOpacity="0.08" />
-              <line x1="50" y1="242" x2="72" y2="242" strokeWidth="0.5" />
-              <line x1="50" y1="249" x2="72" y2="249" strokeWidth="0.5" />
-              <line x1="50" y1="256" x2="72" y2="256" strokeWidth="0.5" />
-              <line x1="50" y1="263" x2="72" y2="263" strokeWidth="0.5" />
-              {/* Legacy Fluorescent Window Grid */}
-              <rect x="78" y="225" width="20" height="14" strokeWidth="0.75" />
-              <line x1="88" y1="225" x2="88" y2="239" strokeWidth="0.5" />
-              <line x1="78" y1="232" x2="98" y2="232" strokeWidth="0.5" />
-              <rect x="78" y="225" width="20" height="14" fill="#1DB954" fillOpacity="0.15" className="anim-win-1" />
-              {/* Roof Vent & Pipes */}
-              <rect x="88" y="185" width="8" height="10" strokeWidth="0.75" />
-              <path d="M 88 185 Q 92 178 96 185" strokeWidth="0.75" />
+              {/* Building 1A: Corrugated Metal Server Depot & Logistics Bay */}
+              <rect x="58" y="235" width="76" height="65" />
+              {/* Structural Pitched Truss Roof */}
+              <polygon points="54,235 96,210 138,235" strokeWidth="1.25" fill="currentColor" fillOpacity="0.04" />
+              <line x1="96" y1="210" x2="96" y2="235" strokeWidth="0.75" />
+              <line x1="75" y1="222" x2="75" y2="235" strokeWidth="0.75" />
+              <line x1="117" y1="222" x2="117" y2="235" strokeWidth="0.75" />
+              {/* Corrugated Shutter Loading Bay */}
+              <rect x="68" y="255" width="28" height="45" strokeWidth="1.2" fill="#1DB954" fillOpacity="0.08" />
+              <line x1="68" y1="264" x2="96" y2="264" strokeWidth="0.5" />
+              <line x1="68" y1="273" x2="96" y2="273" strokeWidth="0.5" />
+              <line x1="68" y1="282" x2="96" y2="282" strokeWidth="0.5" />
+              <line x1="68" y1="291" x2="96" y2="291" strokeWidth="0.5" />
+              {/* Fluorescent Server Room Windows */}
+              <rect x="104" y="247" width="22" height="18" strokeWidth="0.75" fill="#1DB954" fillOpacity="0.2" className="anim-win-1" />
+              <line x1="115" y1="247" x2="115" y2="265" strokeWidth="0.5" />
+              <line x1="104" y1="256" x2="126" y2="256" strokeWidth="0.5" />
+              {/* Rooftop Exhaust Flue */}
+              <rect x="114" y="198" width="10" height="12" strokeWidth="0.75" />
+              <path d="M 114 198 Q 119 190 124 198" strokeWidth="0.75" />
 
-              {/* Structure 1B: 2-Tier Modular Command Outpost & HVAC Rig */}
-              <rect x="120" y="195" width="68" height="75" />
-              <rect x="128" y="180" width="52" height="15" strokeWidth="1" fill="currentColor" fillOpacity="0.05" />
-              {/* HVAC Heat Exchanger with Fan Blades */}
-              <rect x="134" y="168" width="22" height="12" strokeWidth="0.75" />
-              <circle cx="145" cy="174" r="4" strokeWidth="0.6" />
-              <line x1="145" y1="170" x2="145" y2="178" strokeWidth="0.5" />
-              <line x1="141" y1="174" x2="149" y2="174" strokeWidth="0.5" />
-              {/* Satellite Receiver Dish */}
-              <path d="M 168 178 A 8 8 0 0 1 178 168" strokeWidth="1.25" fill="none" />
-              <line x1="173" y1="173" x2="179" y2="167" strokeWidth="0.75" />
-              <circle cx="180" cy="166" r="1.5" fill="#1DB954" />
-              {/* Outpost Windows & Structural Masonry Lines */}
-              <rect x="128" y="205" width="14" height="16" strokeWidth="0.75" className="anim-win-2" />
-              <rect x="148" y="205" width="14" height="16" strokeWidth="0.75" />
-              <rect x="168" y="205" width="14" height="16" strokeWidth="0.75" className="anim-win-3" />
-              <line x1="120" y1="230" x2="188" y2="230" strokeWidth="1" />
-              <rect x="128" y="238" width="14" height="16" strokeWidth="0.75" className="anim-win-1" />
-              <rect x="148" y="238" width="14" height="16" strokeWidth="0.75" />
-              <rect x="168" y="238" width="14" height="32" strokeWidth="1" fill="#1DB954" fillOpacity="0.1" />
+              {/* Building 1B: 2-Story Concrete Command Outpost & HVAC Platform */}
+              <rect x="148" y="215" width="82" height="85" />
+              <rect x="156" y="198" width="66" height="17" strokeWidth="1" fill="currentColor" fillOpacity="0.06" />
+              {/* Dual-Fan Industrial HVAC Unit */}
+              <g transform="translate(164, 183)">
+                <rect x="0" y="0" width="26" height="15" strokeWidth="0.8" fill="currentColor" fillOpacity="0.08" />
+                <circle cx="7" cy="7.5" r="5" strokeWidth="0.6" />
+                <g transform="translate(7, 7.5)" className="anim-fan">
+                  <line x1="0" y1="-4" x2="0" y2="4" strokeWidth="0.6" />
+                  <line x1="-4" y1="0" x2="4" y2="0" strokeWidth="0.6" />
+                </g>
+                <circle cx="19" cy="7.5" r="5" strokeWidth="0.6" />
+                <g transform="translate(19, 7.5)" className="anim-fan">
+                  <line x1="0" y1="-4" x2="0" y2="4" strokeWidth="0.6" />
+                  <line x1="-4" y1="0" x2="4" y2="0" strokeWidth="0.6" />
+                </g>
+              </g>
+              {/* Satellite Parabolic Transceiver Dish */}
+              <path d="M 205 198 A 10 10 0 0 1 218 186" strokeWidth="1.5" fill="none" />
+              <line x1="211" y1="192" x2="218" y2="185" strokeWidth="1" />
+              <circle cx="219" cy="184" r="2" fill="#1DB954" />
+              {/* Windows Matrix */}
+              <rect x="158" y="227" width="16" height="18" strokeWidth="0.75" className="anim-win-2" />
+              <rect x="181" y="227" width="16" height="18" strokeWidth="0.75" />
+              <rect x="204" y="227" width="16" height="18" strokeWidth="0.75" className="anim-win-3" />
+              <line x1="148" y1="255" x2="230" y2="255" strokeWidth="1.2" />
+              <rect x="158" y="265" width="16" height="18" strokeWidth="0.75" className="anim-win-1" />
+              <rect x="181" y="265" width="16" height="18" strokeWidth="0.75" />
+              <rect x="204" y="265" width="16" height="35" strokeWidth="1.2" fill="#1DB954" fillOpacity="0.12" />
 
-              {/* Structure 1C: Cylindrical Relay Silo & Lattice Radio Tower */}
-              <rect x="204" y="210" width="32" height="60" rx="3" strokeWidth="1.25" />
-              <line x1="204" y1="225" x2="236" y2="225" strokeWidth="0.5" strokeDasharray="2 2" />
-              <line x1="204" y1="245" x2="236" y2="245" strokeWidth="0.5" strokeDasharray="2 2" />
-              {/* Lattice Antenna Mast */}
-              <line x1="248" y1="170" x2="248" y2="270" strokeWidth="1.25" />
-              <line x1="242" y1="270" x2="248" y2="170" strokeWidth="0.75" />
-              <line x1="254" y1="270" x2="248" y2="170" strokeWidth="0.75" />
-              <line x1="244" y1="240" x2="252" y2="240" strokeWidth="0.75" />
-              <line x1="245" y1="210" x2="251" y2="210" strokeWidth="0.75" />
-              <line x1="246" y1="185" x2="250" y2="185" strokeWidth="0.75" />
-              <circle cx="248" cy="168" r="2.5" fill="#1DB954" className="anim-spire-1" />
+              {/* Building 1C: Cylindrical Data Silo & Transformer Substation */}
+              <rect x="245" y="225" width="38" height="75" rx="4" strokeWidth="1.5" />
+              <line x1="245" y1="245" x2="283" y2="245" strokeWidth="0.6" strokeDasharray="3 2" />
+              <line x1="245" y1="268" x2="283" y2="268" strokeWidth="0.6" strokeDasharray="3 2" />
+              {/* Ground Substation Transformer with Hazard Striping */}
+              <rect x="290" y="265" width="24" height="35" strokeWidth="1" fill="#1DB954" fillOpacity="0.1" />
+              <line x1="290" y1="275" x2="314" y2="275" strokeWidth="0.5" />
+              <line x1="294" y1="265" x2="294" y2="260" strokeWidth="1" />
+              <line x1="310" y1="265" x2="310" y2="260" strokeWidth="1" />
+              <circle cx="294" cy="260" r="1.5" fill="#1DB954" />
+              <circle cx="310" cy="260" r="1.5" fill="#1DB954" />
 
-              {/* Stage Selection Active Box Indicator */}
-              {activeStage === 'foundation' && (
-                <rect x="35" y="160" width="225" height="113" stroke="#1DB954" strokeWidth="1" strokeDasharray="4 4" fill="#1DB954" fillOpacity="0.03" rx="4" />
+              {/* Sector Active Bracket Indicator */}
+              {activeSectorId === 'foundation' && (
+                <rect x="30" y="170" width="290" height="135" stroke="#1DB954" strokeWidth="1.2" strokeDasharray="5 5" fill="#1DB954" fillOpacity="0.03" rx="6" />
               )}
             </g>
 
 
             {/* =====================================================================
-                STAGE 02: STRUCTURED DIGITAL MODERNIZATION & EDGE FACILITY (x: 275 - 580)
+                SECTOR 02: CLOUD MODERNIZATION & EDGE FACILITY (x: 330 - 670)
                ===================================================================== */}
             <g
-              onClick={() => setActiveStage('modernization')}
+              onClick={() => setActiveSectorId('modernization')}
               className={cn(
                 "cursor-pointer transition-all duration-200",
-                activeStage === 'modernization' ? "opacity-100" : "opacity-65 hover:opacity-90"
+                activeSectorId === 'modernization' ? "opacity-100" : "opacity-70 hover:opacity-95"
               )}
             >
-              {/* Structure 2A: 4-Story Modular Glass Tech HQ with Solar Array */}
-              <rect x="285" y="145" width="80" height="125" />
-              {/* Rooftop Angled Solar Trackers */}
-              <polygon points="290,145 315,130 330,145" fill="url(#solar-grid)" strokeWidth="0.75" />
-              <polygon points="332,145 357,130 372,145" fill="url(#solar-grid)" strokeWidth="0.75" />
-              {/* Continuous Glass Ribbon Facade Grids */}
-              <rect x="293" y="155" width="64" height="20" strokeWidth="0.75" fill="currentColor" fillOpacity="0.03" />
-              <line x1="309" y1="155" x2="309" y2="175" strokeWidth="0.5" />
-              <line x1="325" y1="155" x2="325" y2="175" strokeWidth="0.5" />
-              <line x1="341" y1="155" x2="341" y2="175" strokeWidth="0.5" />
-              <rect x="293" y="155" width="32" height="20" fill="#1DB954" fillOpacity="0.15" className="anim-win-1" />
+              {/* Building 2A: 5-Story Modular Glass Tech HQ with Solar Arrays */}
+              <rect x="340" y="165" width="95" height="135" />
+              {/* Photovoltaic Solar Tracking Wing */}
+              <polygon points="345,165 375,145 395,165" fill="url(#solar-pv-mesh)" strokeWidth="0.8" />
+              <polygon points="398,165 428,145 448,165" fill="url(#solar-pv-mesh)" strokeWidth="0.8" />
+              {/* Continuous Ribbon Windows with Server Blade Glow */}
+              <rect x="350" y="177" width="75" height="22" strokeWidth="0.75" fill="currentColor" fillOpacity="0.04" />
+              <line x1="368" y1="177" x2="368" y2="199" strokeWidth="0.5" />
+              <line x1="387" y1="177" x2="387" y2="199" strokeWidth="0.5" />
+              <line x1="406" y1="177" x2="406" y2="199" strokeWidth="0.5" />
+              <rect x="350" y="177" width="37" height="22" fill="#1DB954" fillOpacity="0.2" className="anim-win-1" />
 
-              <rect x="293" y="183" width="64" height="20" strokeWidth="0.75" fill="currentColor" fillOpacity="0.03" />
-              <line x1="309" y1="183" x2="309" y2="203" strokeWidth="0.5" />
-              <line x1="325" y1="183" x2="325" y2="203" strokeWidth="0.5" />
-              <line x1="341" y1="183" x2="341" y2="203" strokeWidth="0.5" />
-              <rect x="325" y="183" width="32" height="20" fill="#1DB954" fillOpacity="0.2" className="anim-win-2" />
+              <rect x="350" y="208" width="75" height="22" strokeWidth="0.75" fill="currentColor" fillOpacity="0.04" />
+              <line x1="368" y1="208" x2="368" y2="230" strokeWidth="0.5" />
+              <line x1="387" y1="208" x2="387" y2="230" strokeWidth="0.5" />
+              <line x1="406" y1="208" x2="406" y2="230" strokeWidth="0.5" />
+              <rect x="387" y="208" width="38" height="22" fill="#1DB954" fillOpacity="0.25" className="anim-win-2" />
 
-              <rect x="293" y="211" width="64" height="20" strokeWidth="0.75" fill="currentColor" fillOpacity="0.03" />
-              <line x1="309" y1="211" x2="309" y2="231" strokeWidth="0.5" />
-              <line x1="325" y1="211" x2="325" y2="231" strokeWidth="0.5" />
-              <line x1="341" y1="211" x2="341" y2="231" strokeWidth="0.5" />
-              <rect x="293" y="211" width="16" height="20" fill="#1DB954" fillOpacity="0.18" className="anim-win-3" />
+              <rect x="350" y="239" width="75" height="22" strokeWidth="0.75" fill="currentColor" fillOpacity="0.04" />
+              <line x1="368" y1="239" x2="368" y2="261" strokeWidth="0.5" />
+              <line x1="387" y1="239" x2="387" y2="261" strokeWidth="0.5" />
+              <line x1="406" y1="239" x2="406" y2="261" strokeWidth="0.5" />
+              <rect x="350" y="239" width="18" height="22" fill="#1DB954" fillOpacity="0.2" className="anim-win-3" />
 
-              {/* Edge Server Entrance Port */}
-              <rect x="305" y="243" width="40" height="27" strokeWidth="1.25" fill="#1DB954" fillOpacity="0.1" />
-              <line x1="325" y1="243" x2="325" y2="270" strokeWidth="0.75" />
+              <rect x="365" y="270" width="45" height="30" strokeWidth="1.25" fill="#1DB954" fillOpacity="0.1" />
+              <line x1="387" y1="270" x2="387" y2="300" strokeWidth="0.75" />
 
-              {/* Structure 2B: Stepped Cyber Office Hub & Microwave Mast */}
-              <rect x="382" y="125" width="88" height="145" />
-              <rect x="394" y="105" width="64" height="20" strokeWidth="1" fill="#1DB954" fillOpacity="0.05" />
-              {/* Microwave Dish & Radar Mast */}
-              <line x1="426" y1="78" x2="426" y2="105" strokeWidth="1.5" />
-              <circle cx="426" cy="78" r="3" fill="#1DB954" />
-              <circle cx="426" cy="78" r="10" stroke="#1DB954" strokeWidth="0.75" className="anim-spire-1" fill="none" />
-              <circle cx="426" cy="78" r="18" stroke="#1DB954" strokeWidth="0.5" className="anim-spire-2" fill="none" />
-              {/* Structural Cross-Braced Windows */}
-              <rect x="392" y="135" width="30" height="35" strokeWidth="0.75" />
-              <line x1="392" y1="135" x2="422" y2="170" strokeWidth="0.5" strokeOpacity="0.5" />
-              <line x1="392" y1="170" x2="422" y2="135" strokeWidth="0.5" strokeOpacity="0.5" />
-              <rect x="392" y="135" width="30" height="35" fill="#1DB954" fillOpacity="0.12" className="anim-win-2" />
+              {/* Building 2B: Stepped Cyber Office Hub & Microwave Radar Mast */}
+              <rect x="450" y="140" width="105" height="160" />
+              <rect x="465" y="118" width="75" height="22" strokeWidth="1" fill="#1DB954" fillOpacity="0.06" />
+              {/* Microwave Dish & Radar Transceiver */}
+              <line x1="502" y1="88" x2="502" y2="118" strokeWidth="1.5" />
+              <circle cx="502" cy="88" r="3.5" fill="#1DB954" />
+              <circle cx="502" cy="88" r="12" stroke="#1DB954" strokeWidth="0.75" className="anim-beacon-1" fill="none" />
+              <circle cx="502" cy="88" r="22" stroke="#1DB954" strokeWidth="0.5" className="anim-beacon-2" fill="none" />
+              {/* Rotating Scanning Radar Dish */}
+              <g transform="translate(525, 110)">
+                <line x1="0" y1="0" x2="0" y2="8" strokeWidth="1" />
+                <g className="anim-radar">
+                  <path d="M -6 -4 A 8 8 0 0 1 6 -4" strokeWidth="1.2" fill="none" />
+                  <line x1="0" y1="-4" x2="0" y2="0" strokeWidth="0.75" />
+                </g>
+              </g>
 
-              <rect x="430" y="135" width="30" height="35" strokeWidth="0.75" />
-              <line x1="430" y1="135" x2="460" y2="170" strokeWidth="0.5" strokeOpacity="0.5" />
-              <line x1="430" y1="170" x2="460" y2="135" strokeWidth="0.5" strokeOpacity="0.5" />
+              {/* Structural Diagrid Exoskeleton Windows */}
+              <rect x="462" y="152" width="36" height="40" strokeWidth="0.75" />
+              <line x1="462" y1="152" x2="498" y2="192" strokeWidth="0.5" strokeOpacity="0.6" />
+              <line x1="462" y1="192" x2="498" y2="152" strokeWidth="0.5" strokeOpacity="0.6" />
+              <rect x="462" y="152" width="36" height="40" fill="#1DB954" fillOpacity="0.15" className="anim-win-2" />
 
-              <rect x="392" y="180" width="30" height="35" strokeWidth="0.75" />
-              <rect x="430" y="180" width="30" height="35" strokeWidth="0.75" fill="#1DB954" fillOpacity="0.15" className="anim-win-1" />
+              <rect x="506" y="152" width="36" height="40" strokeWidth="0.75" />
+              <line x1="506" y1="152" x2="542" y2="192" strokeWidth="0.5" strokeOpacity="0.6" />
+              <line x1="506" y1="192" x2="542" y2="152" strokeWidth="0.5" strokeOpacity="0.6" />
 
-              <rect x="406" y="230" width="40" height="40" strokeWidth="1" fill="currentColor" fillOpacity="0.04" />
+              <rect x="462" y="202" width="36" height="40" strokeWidth="0.75" />
+              <rect x="506" y="202" width="36" height="40" strokeWidth="0.75" fill="#1DB954" fillOpacity="0.18" className="anim-win-1" />
+              <rect x="480" y="255" width="45" height="45" strokeWidth="1.2" fill="currentColor" fillOpacity="0.05" />
 
-              {/* Structure 2C: High-Velocity Fiber Distribution Tower & Conduit Rail */}
-              <rect x="488" y="105" width="62" height="165" />
-              {/* Vertical Animated Fiber Optic Conduits */}
-              <line x1="504" y1="105" x2="504" y2="270" stroke="#1DB954" strokeWidth="1.5" strokeDasharray="5 5" className="anim-data-flow" />
-              <line x1="534" y1="105" x2="534" y2="270" stroke="#1DB954" strokeWidth="1.5" strokeDasharray="5 5" className="anim-data-flow" />
+              {/* Building 2C: High-Velocity Fiber Distribution Tower with Live Pulsing Data */}
+              <rect x="570" y="118" width="75" height="182" />
+              {/* Vertical Pulsing Optical Fiber Conduits */}
+              {showDataConduits && (
+                <g>
+                  <line x1="588" y1="118" x2="588" y2="300" stroke="#1DB954" strokeWidth="1.75" strokeDasharray="6 6" className="anim-fiber" filter="url(#neon-glow)" />
+                  <line x1="628" y1="118" x2="628" y2="300" stroke="#1DB954" strokeWidth="1.75" strokeDasharray="6 6" className="anim-fiber" filter="url(#neon-glow)" />
+                </g>
+              )}
               {/* Micro Server Blades Windows */}
-              <rect x="510" y="115" width="18" height="12" strokeWidth="0.75" className="anim-win-3" />
-              <rect x="510" y="135" width="18" height="12" strokeWidth="0.75" className="anim-win-1" />
-              <rect x="510" y="155" width="18" height="12" strokeWidth="0.75" className="anim-win-2" />
-              <rect x="510" y="175" width="18" height="12" strokeWidth="0.75" className="anim-win-1" />
-              <rect x="510" y="195" width="18" height="12" strokeWidth="0.75" className="anim-win-3" />
-              <rect x="502" y="235" width="34" height="35" strokeWidth="1" fill="#1DB954" fillOpacity="0.1" />
+              <rect x="596" y="130" width="22" height="14" strokeWidth="0.75" className="anim-win-3" />
+              <rect x="596" y="152" width="22" height="14" strokeWidth="0.75" className="anim-win-1" />
+              <rect x="596" y="174" width="22" height="14" strokeWidth="0.75" className="anim-win-2" />
+              <rect x="596" y="196" width="22" height="14" strokeWidth="0.75" className="anim-win-1" />
+              <rect x="596" y="218" width="22" height="14" strokeWidth="0.75" className="anim-win-3" />
+              <rect x="586" y="258" width="42" height="42" strokeWidth="1.2" fill="#1DB954" fillOpacity="0.12" />
 
-              {/* Stage Selection Active Box Indicator */}
-              {activeStage === 'modernization' && (
-                <rect x="278" y="70" width="280" height="203" stroke="#1DB954" strokeWidth="1" strokeDasharray="4 4" fill="#1DB954" fillOpacity="0.03" rx="4" />
+              {/* Sector Active Bracket Indicator */}
+              {activeSectorId === 'modernization' && (
+                <rect x="330" y="75" width="325" height="230" stroke="#1DB954" strokeWidth="1.2" strokeDasharray="5 5" fill="#1DB954" fillOpacity="0.03" rx="6" />
               )}
             </g>
 
 
             {/* =====================================================================
-                STAGE 03: ENTERPRISE CYBER ARCOLOGY & AUTOMATED TRIAGE (x: 580 - 885)
+                SECTOR 03: COMMERCIAL SCALE & ENTERPRISE ARCOLOGY (x: 680 - 1040)
                ===================================================================== */}
             <g
-              onClick={() => setActiveStage('scale')}
+              onClick={() => setActiveSectorId('scale')}
               className={cn(
                 "cursor-pointer transition-all duration-200",
-                activeStage === 'scale' ? "opacity-100" : "opacity-65 hover:opacity-90"
+                activeSectorId === 'scale' ? "opacity-100" : "opacity-70 hover:opacity-95"
               )}
             >
-              {/* Structure 3A: Twin Diagrid Exoskeleton Towers with Double Skybridge */}
+              {/* Structure 3A: Twin Diagrid Megatowers with Suspension Skybridge */}
               {/* Tower Left */}
-              <rect x="585" y="65" width="60" height="205" />
-              {/* Diagrid Cross-Lattice */}
-              <line x1="585" y1="65" x2="645" y2="115" strokeWidth="0.75" strokeOpacity="0.6" />
-              <line x1="585" y1="115" x2="645" y2="65" strokeWidth="0.75" strokeOpacity="0.6" />
-              <line x1="585" y1="115" x2="645" y2="165" strokeWidth="0.75" strokeOpacity="0.6" />
-              <line x1="585" y1="165" x2="645" y2="115" strokeWidth="0.75" strokeOpacity="0.6" />
-              <line x1="585" y1="165" x2="645" y2="215" strokeWidth="0.75" strokeOpacity="0.6" />
-              <line x1="585" y1="215" x2="645" y2="165" strokeWidth="0.75" strokeOpacity="0.6" />
-              {/* Internal Lit Floor Plates */}
-              <rect x="593" y="75" width="44" height="12" fill="#1DB954" fillOpacity="0.2" className="anim-win-1" strokeWidth="0.5" />
-              <rect x="593" y="125" width="44" height="12" fill="#1DB954" fillOpacity="0.15" className="anim-win-2" strokeWidth="0.5" />
-              <rect x="593" y="175" width="44" height="12" fill="#1DB954" fillOpacity="0.25" className="anim-win-3" strokeWidth="0.5" />
+              <rect x="690" y="75" width="70" height="225" />
+              {/* Structural Diagrid Shell */}
+              <line x1="690" y1="75" x2="760" y2="135" strokeWidth="0.8" strokeOpacity="0.6" />
+              <line x1="690" y1="135" x2="760" y2="75" strokeWidth="0.8" strokeOpacity="0.6" />
+              <line x1="690" y1="135" x2="760" y2="195" strokeWidth="0.8" strokeOpacity="0.6" />
+              <line x1="690" y1="195" x2="760" y2="135" strokeWidth="0.8" strokeOpacity="0.6" />
+              <line x1="690" y1="195" x2="760" y2="255" strokeWidth="0.8" strokeOpacity="0.6" />
+              <line x1="690" y1="255" x2="760" y2="195" strokeWidth="0.8" strokeOpacity="0.6" />
+              {/* Internal Lit Office Plates */}
+              <rect x="700" y="85" width="50" height="14" fill="#1DB954" fillOpacity="0.25" className="anim-win-1" strokeWidth="0.5" />
+              <rect x="700" y="145" width="50" height="14" fill="#1DB954" fillOpacity="0.18" className="anim-win-2" strokeWidth="0.5" />
+              <rect x="700" y="205" width="50" height="14" fill="#1DB954" fillOpacity="0.3" className="anim-win-3" strokeWidth="0.5" />
 
               {/* Tower Right */}
-              <rect x="685" y="55" width="60" height="215" />
-              <line x1="685" y1="55" x2="745" y2="105" strokeWidth="0.75" strokeOpacity="0.6" />
-              <line x1="685" y1="105" x2="745" y2="55" strokeWidth="0.75" strokeOpacity="0.6" />
-              <line x1="685" y1="105" x2="745" y2="155" strokeWidth="0.75" strokeOpacity="0.6" />
-              <line x1="685" y1="155" x2="745" y2="105" strokeWidth="0.75" strokeOpacity="0.6" />
-              <line x1="685" y1="155" x2="745" y2="205" strokeWidth="0.75" strokeOpacity="0.6" />
-              <line x1="685" y1="205" x2="745" y2="155" strokeWidth="0.75" strokeOpacity="0.6" />
-              <rect x="693" y="65" width="44" height="12" fill="#1DB954" fillOpacity="0.25" className="anim-win-2" strokeWidth="0.5" />
-              <rect x="693" y="115" width="44" height="12" fill="#1DB954" fillOpacity="0.18" className="anim-win-1" strokeWidth="0.5" />
-              <rect x="693" y="165" width="44" height="12" fill="#1DB954" fillOpacity="0.2" className="anim-win-3" strokeWidth="0.5" />
+              <rect x="805" y="60" width="70" height="240" />
+              <line x1="805" y1="60" x2="875" y2="120" strokeWidth="0.8" strokeOpacity="0.6" />
+              <line x1="805" y1="120" x2="875" y2="60" strokeWidth="0.8" strokeOpacity="0.6" />
+              <line x1="805" y1="120" x2="875" y2="180" strokeWidth="0.8" strokeOpacity="0.6" />
+              <line x1="805" y1="180" x2="875" y2="120" strokeWidth="0.8" strokeOpacity="0.6" />
+              <line x1="805" y1="180" x2="875" y2="240" strokeWidth="0.8" strokeOpacity="0.6" />
+              <line x1="805" y1="240" x2="875" y2="180" strokeWidth="0.8" strokeOpacity="0.6" />
+              <rect x="815" y="72" width="50" height="14" fill="#1DB954" fillOpacity="0.25" className="anim-win-2" strokeWidth="0.5" />
+              <rect x="815" y="132" width="50" height="14" fill="#1DB954" fillOpacity="0.2" className="anim-win-1" strokeWidth="0.5" />
+              <rect x="815" y="192" width="50" height="14" fill="#1DB954" fillOpacity="0.25" className="anim-win-3" strokeWidth="0.5" />
 
-              {/* Interconnecting Double-Decker Glass Skybridge */}
-              <rect x="645" y="95" width="40" height="24" strokeWidth="1.25" fill="#1DB954" fillOpacity="0.12" />
-              <line x1="645" y1="107" x2="685" y2="107" strokeWidth="0.75" />
-              <line x1="655" y1="95" x2="655" y2="119" strokeWidth="0.5" />
-              <line x1="665" y1="95" x2="665" y2="119" strokeWidth="0.5" />
-              <line x1="675" y1="95" x2="675" y2="119" strokeWidth="0.5" />
-              {/* Skybridge Suspension Tension Cables */}
-              <line x1="645" y1="65" x2="665" y2="95" stroke="#1DB954" strokeWidth="0.75" />
-              <line x1="685" y1="55" x2="665" y2="95" stroke="#1DB954" strokeWidth="0.75" />
+              {/* Interconnecting Double-Decker Glass Skybridge with Structural Stays */}
+              <rect x="760" y="110" width="45" height="28" strokeWidth="1.25" fill="#1DB954" fillOpacity="0.14" />
+              <line x1="760" y1="124" x2="805" y2="124" strokeWidth="0.8" />
+              <line x1="772" y1="110" x2="772" y2="138" strokeWidth="0.5" />
+              <line x1="784" y1="110" x2="784" y2="138" strokeWidth="0.5" />
+              <line x1="796" y1="110" x2="796" y2="138" strokeWidth="0.5" />
+              {/* Skybridge Suspension Cables */}
+              <line x1="760" y1="75" x2="782" y2="110" stroke="#1DB954" strokeWidth="0.8" />
+              <line x1="805" y1="60" x2="782" y2="110" stroke="#1DB954" strokeWidth="0.8" />
 
-              {/* External Animated Express Elevator Pod */}
-              <line x1="680" y1="55" x2="680" y2="270" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" opacity="0.6" />
-              <g transform="translate(675, 235)" className="anim-elevator-1">
-                <rect x="0" y="0" width="10" height="16" rx="2" fill="#1DB954" fillOpacity="0.85" stroke="#1DB954" strokeWidth="1" />
-                <line x1="2" y1="4" x2="8" y2="4" stroke="#000" strokeWidth="0.75" />
-                <line x1="2" y1="8" x2="8" y2="8" stroke="#000" strokeWidth="0.75" />
+              {/* Express Glass Elevator Track & Moving Glowing Elevator Pods */}
+              <line x1="798" y1="60" x2="798" y2="300" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" opacity="0.6" />
+              <g transform="translate(792, 260)" className="anim-lift-1">
+                <rect x="0" y="0" width="12" height="18" rx="2" fill="#1DB954" fillOpacity="0.9" stroke="#1DB954" strokeWidth="1" filter="url(#neon-glow)" />
+                <line x1="2" y1="5" x2="10" y2="5" stroke="#000" strokeWidth="0.8" />
+                <line x1="2" y1="10" x2="10" y2="10" stroke="#000" strokeWidth="0.8" />
               </g>
 
-              {/* Structure 3B: High-Volume Autonomous Ops Monolith & Holographic HUD */}
-              <rect x="765" y="45" width="95" height="225" />
+              {/* Structure 3B: High-Capacity Automated Ops Monolith & Holographic HUD */}
+              <rect x="895" y="50" width="115" height="250" />
               {/* Stepped Architectural Crown */}
-              <rect x="780" y="28" width="65" height="17" strokeWidth="1" fill="currentColor" fillOpacity="0.06" />
-              {/* Heavy Duty Gantry Crane / Drone Pad on Roof */}
-              <line x1="812" y1="12" x2="812" y2="28" strokeWidth="1.5" />
-              <line x1="795" y1="12" x2="835" y2="12" strokeWidth="1.5" />
-              <line x1="795" y1="12" x2="812" y2="28" strokeWidth="0.75" />
-              <circle cx="835" cy="12" r="2" fill="#1DB954" className="anim-spire-1" />
+              <rect x="912" y="32" width="80" height="18" strokeWidth="1.2" fill="currentColor" fillOpacity="0.07" />
+              {/* Heavy Duty Rooftop Crane / Drone Maintenance Gantry */}
+              <line x1="952" y1="14" x2="952" y2="32" strokeWidth="1.5" />
+              <line x1="930" y1="14" x2="980" y2="14" strokeWidth="1.5" />
+              <line x1="930" y1="14" x2="952" y2="32" strokeWidth="0.75" />
+              <circle cx="980" cy="14" r="2.5" fill="#1DB954" className="anim-beacon-1" />
 
-              {/* Holographic Telemetry Billboard Banner */}
-              <rect x="778" y="55" width="69" height="28" rx="2" fill="#1DB954" fillOpacity="0.15" stroke="#1DB954" strokeWidth="1" />
-              <text x="784" y="67" fontSize="6.5" fontFamily="monospace" fill="#1DB954" fontWeight="bold" stroke="none">AUTO_TRIAGE // 99.9%</text>
-              <text x="784" y="77" fontSize="5.5" fontFamily="monospace" fill="currentColor" opacity="0.8" stroke="none">LATENCY: &lt;60s PING</text>
-              <line x1="778" y1="71" x2="847" y2="71" stroke="#1DB954" strokeWidth="0.5" strokeDasharray="2 2" />
+              {/* Large Holographic HUD Telemetry Billboard */}
+              <rect x="910" y="60" width="85" height="34" rx="3" fill="#1DB954" fillOpacity="0.16" stroke="#1DB954" strokeWidth="1.2" filter="url(#neon-glow)" />
+              <text x="917" y="74" fontSize="7.5" fontFamily="monospace" fill="#1DB954" fontWeight="bold" stroke="none">AUTO_TRIAGE // 99.9%</text>
+              <text x="917" y="86" fontSize="6.5" fontFamily="monospace" fill="currentColor" opacity="0.85" stroke="none">LATENCY: &lt;45s DISPATCH</text>
+              <line x1="910" y1="78" x2="995" y2="78" stroke="#1DB954" strokeWidth="0.6" strokeDasharray="2 2" />
 
-              {/* Dense Server Bank Micro-Grid */}
+              {/* Dense Server Bank Matrix */}
               <g strokeWidth="0.5">
-                {[...Array(6)].map((_, r) => (
-                  <g key={`s3-grid-${r}`}>
-                    <rect x="775" y={95 + r * 22} width="18" height="15" className={r % 2 === 0 ? "anim-win-1" : "anim-win-2"} />
-                    <rect x="797" y={95 + r * 22} width="18" height="15" className={r % 3 === 0 ? "anim-win-3" : "anim-win-1"} />
-                    <rect x="819" y={95 + r * 22} width="18" height="15" className={r % 2 === 1 ? "anim-win-2" : "anim-win-3"} />
-                    <rect x="841" y={95 + r * 22} width="12" height="15" className={r % 3 === 1 ? "anim-win-1" : "anim-win-2"} />
+                {[...Array(7)].map((_, r) => (
+                  <g key={`s3-dense-grid-${r}`}>
+                    <rect x="908" y={106 + r * 25} width="22" height="18" rx="1" className={r % 2 === 0 ? "anim-win-1" : "anim-win-2"} />
+                    <rect x="935" y={106 + r * 25} width="22" height="18" rx="1" className={r % 3 === 0 ? "anim-win-3" : "anim-win-1"} />
+                    <rect x="962" y={106 + r * 25} width="22" height="18" rx="1" className={r % 2 === 1 ? "anim-win-2" : "anim-win-3"} />
+                    <rect x="989" y={106 + r * 25} width="14" height="18" rx="1" className={r % 3 === 1 ? "anim-win-1" : "anim-win-2"} />
                   </g>
                 ))}
               </g>
 
-              {/* Stage Selection Active Box Indicator */}
-              {activeStage === 'scale' && (
-                <rect x="575" y="10" width="295" height="263" stroke="#1DB954" strokeWidth="1" strokeDasharray="4 4" fill="#1DB954" fillOpacity="0.03" rx="4" />
+              {/* Sector Active Bracket Indicator */}
+              {activeSectorId === 'scale' && (
+                <rect x="680" y="8" width="340" height="295" stroke="#1DB954" strokeWidth="1.2" strokeDasharray="5 5" fill="#1DB954" fillOpacity="0.03" rx="6" />
               )}
             </g>
 
 
             {/* =====================================================================
-                STAGE 04: THE PINNACLE CYBERCITY ZENITH MEGATOWERS (x: 885 - 1380)
+                SECTOR 04: ZENITH APEX CITADEL & MEGATOWERS (x: 1050 - 1430)
                ===================================================================== */}
             <g
-              onClick={() => setActiveStage('pinnacle')}
+              onClick={() => setActiveSectorId('pinnacle')}
               className={cn(
                 "cursor-pointer transition-all duration-200",
-                activeStage === 'pinnacle' ? "opacity-100" : "opacity-65 hover:opacity-90"
+                activeSectorId === 'pinnacle' ? "opacity-100" : "opacity-70 hover:opacity-95"
               )}
             >
-              {/* Structure 4A: Cascading Multi-Tier High-Rise Tower (Height: 240px) */}
-              <rect x="895" y="30" width="85" height="240" />
-              <rect x="910" y="15" width="55" height="15" strokeWidth="1" fill="#1DB954" fillOpacity="0.08" />
-              {/* Rooftop Drone Launchpad / Sky-Harbor Deck */}
-              <line x1="885" y1="30" x2="985" y2="30" strokeWidth="1.5" />
-              <circle cx="937" cy="15" r="5" stroke="#1DB954" strokeWidth="0.75" fill="none" />
-              <text x="935" y="17" fontSize="5" fontFamily="monospace" fill="#1DB954" stroke="none">H</text>
-              <circle cx="890" cy="30" r="1.5" fill="#1DB954" className="anim-spire-1" />
-              <circle cx="980" cy="30" r="1.5" fill="#1DB954" className="anim-spire-1" />
+              {/* Structure 4A: Cascading Multi-Tier Skyscraper (Height: 270px) */}
+              <rect x="1035" y="35" width="95" height="265" />
+              <rect x="1055" y="16" width="60" height="19" strokeWidth="1.2" fill="#1DB954" fillOpacity="0.08" />
+              {/* Cantilevered Sky-Harbor Drone Launchpad [H] */}
+              <line x1="1025" y1="35" x2="1140" y2="35" strokeWidth="2" stroke="#1DB954" />
+              <circle cx="1085" cy="16" r="6" stroke="#1DB954" strokeWidth="0.8" fill="none" />
+              <text x="1082.5" y="18.5" fontSize="6.5" fontFamily="monospace" fill="#1DB954" fontWeight="bold" stroke="none">H</text>
+              <circle cx="1030" cy="35" r="2" fill="#1DB954" className="anim-beacon-1" />
+              <circle cx="1135" cy="35" r="2" fill="#1DB954" className="anim-beacon-1" />
 
-              {/* High-Altitude Express Elevator Track & Glowing Moving Car */}
-              <line x1="970" y1="30" x2="970" y2="270" stroke="currentColor" strokeWidth="1" strokeDasharray="2 3" opacity="0.6" />
-              <g transform="translate(965, 220)" className="anim-elevator-2">
-                <rect x="0" y="0" width="10" height="20" rx="2" fill="#1DB954" fillOpacity="0.9" stroke="#1DB954" strokeWidth="1" />
-                <circle cx="5" cy="5" r="1.5" fill="#000" />
-                <line x1="2" y1="10" x2="8" y2="10" stroke="#000" strokeWidth="0.75" />
-                <line x1="2" y1="15" x2="8" y2="15" stroke="#000" strokeWidth="0.75" />
+              {/* Express Vertical Hyperloop Elevator Track */}
+              <line x1="1120" y1="35" x2="1120" y2="300" stroke="currentColor" strokeWidth="1.2" strokeDasharray="2 3" opacity="0.7" />
+              <g transform="translate(1114, 250)" className="anim-lift-2">
+                <rect x="0" y="0" width="12" height="22" rx="2.5" fill="#1DB954" fillOpacity="0.95" stroke="#1DB954" strokeWidth="1.2" filter="url(#neon-glow)" />
+                <circle cx="6" cy="6" r="1.8" fill="#000" />
+                <line x1="2" y1="12" x2="10" y2="12" stroke="#000" strokeWidth="0.8" />
+                <line x1="2" y1="17" x2="10" y2="17" stroke="#000" strokeWidth="0.8" />
               </g>
 
-              {/* Curtain Wall Glazing Grid */}
+              {/* Curtain Wall Matrix */}
+              <g strokeWidth="0.5">
+                {[...Array(10)].map((_, r) => (
+                  <g key={`s4-cw-grid-${r}`}>
+                    <rect x="1045" y={50 + r * 24} width="18" height="17" className={r % 2 === 0 ? "anim-win-1" : "anim-win-3"} />
+                    <rect x="1069" y={50 + r * 24} width="18" height="17" className={r % 3 === 0 ? "anim-win-2" : "anim-win-1"} />
+                    <rect x="1093" y={50 + r * 24} width="18" height="17" className={r % 2 === 1 ? "anim-win-3" : "anim-win-2"} />
+                  </g>
+                ))}
+              </g>
+
+              {/* Structure 4B: The Monolithic Cyber Apex Pinnacle Spire (Zenith Peak Altitude) */}
+              <polygon points="1145,50 1205,12 1265,50" strokeWidth="1.75" fill="#1DB954" fillOpacity="0.18" />
+              <rect x="1145" y="50" width="120" height="250" />
+
+              {/* Orbital Zenith Ion Laser Shooting Upward into Space */}
+              <g className="anim-ion-beam">
+                <line x1="1205" y1="0" x2="1205" y2="12" stroke="#1DB954" strokeWidth="3.5" filter="url(#laser-glow)" />
+                <line x1="1205" y1="0" x2="1205" y2="12" stroke="#FFFFFF" strokeWidth="1.2" />
+                <line x1="1198" y1="0" x2="1212" y2="0" stroke="#1DB954" strokeWidth="2" />
+              </g>
+
+              {/* Spire Radiant Energy Pulse Rings */}
+              <circle cx="1205" cy="12" r="4.5" fill="#1DB954" />
+              <circle cx="1205" cy="12" r="14" stroke="#1DB954" strokeWidth="1.2" className="anim-beacon-1" fill="none" />
+              <circle cx="1205" cy="12" r="26" stroke="#1DB954" strokeWidth="0.8" className="anim-beacon-2" fill="none" />
+              <circle cx="1205" cy="12" r="40" stroke="#1DB954" strokeWidth="0.5" className="anim-beacon-delayed" fill="none" />
+
+              {/* Cantilevered Observation Wings */}
+              <polygon points="1120,105 1145,105 1145,120 1120,110" strokeWidth="1.5" fill="#1DB954" fillOpacity="0.25" />
+              <polygon points="1265,105 1290,105 1290,110 1265,120" strokeWidth="1.5" fill="#1DB954" fillOpacity="0.25" />
+              <circle cx="1120" cy="105" r="2" fill="#1DB954" className="anim-beacon-1" />
+              <circle cx="1290" cy="105" r="2" fill="#1DB954" className="anim-beacon-1" />
+
+              {/* Vertical Glowing Core Data Trunk */}
+              {showDataConduits && (
+                <line x1="1205" y1="50" x2="1205" y2="300" stroke="#1DB954" strokeWidth="2.5" strokeDasharray="7 7" className="anim-fiber" filter="url(#neon-glow)" />
+              )}
+
+              {/* Diagrid Shell Geometry */}
+              <g strokeWidth="0.8" strokeOpacity="0.75">
+                <line x1="1145" y1="50" x2="1265" y2="115" />
+                <line x1="1145" y1="115" x2="1265" y2="50" />
+                <line x1="1145" y1="115" x2="1265" y2="180" />
+                <line x1="1145" y1="180" x2="1265" y2="115" />
+                <line x1="1145" y1="180" x2="1265" y2="245" />
+                <line x1="1145" y1="245" x2="1265" y2="180" />
+              </g>
+
+              {/* Server Matrix Glowing Windows */}
               <g strokeWidth="0.5">
                 {[...Array(9)].map((_, r) => (
-                  <g key={`s4-cw-${r}`}>
-                    <rect x="905" y={45 + r * 23} width="16" height="16" className={r % 2 === 0 ? "anim-win-1" : "anim-win-3"} />
-                    <rect x="925" y={45 + r * 23} width="16" height="16" className={r % 3 === 0 ? "anim-win-2" : "anim-win-1"} />
-                    <rect x="945" y={45 + r * 23} width="16" height="16" className={r % 2 === 1 ? "anim-win-3" : "anim-win-2"} />
+                  <g key={`s4-apex-grid-${r}`}>
+                    <rect x="1155" y={62 + r * 26} width="18" height="18" rx="2" className={r % 2 === 0 ? "anim-win-1" : "anim-win-2"} />
+                    <rect x="1179" y={62 + r * 26} width="18" height="18" rx="2" className={r % 3 === 0 ? "anim-win-3" : "anim-win-1"} />
+                    <rect x="1213" y={62 + r * 26} width="18" height="18" rx="2" className={r % 2 === 1 ? "anim-win-2" : "anim-win-3"} />
+                    <rect x="1237" y={62 + r * 26} width="18" height="18" rx="2" className={r % 3 === 1 ? "anim-win-1" : "anim-win-2"} />
                   </g>
                 ))}
               </g>
 
-              {/* Structure 4B: The Monolithic Cyber Apex Pinnacle Spire (Height: 265px! Zenith Peak) */}
-              <polygon points="1005,45 1060,10 1115,45" strokeWidth="1.5" fill="#1DB954" fillOpacity="0.15" />
-              <rect x="1005" y="45" width="110" height="225" />
-
-              {/* Vertical Zenith Ion Laser Shooting Up to Space */}
-              <g className="anim-beam">
-                <line x1="1060" y1="0" x2="1060" y2="10" stroke="#1DB954" strokeWidth="3" />
-                <line x1="1060" y1="0" x2="1060" y2="10" stroke="#FFFFFF" strokeWidth="1" />
-                <line x1="1054" y1="0" x2="1066" y2="0" stroke="#1DB954" strokeWidth="1.5" />
-              </g>
-
-              {/* Apex Spire Radiant Energy Wave Rings */}
-              <circle cx="1060" cy="10" r="4" fill="#1DB954" />
-              <circle cx="1060" cy="10" r="12" stroke="#1DB954" strokeWidth="1" className="anim-spire-1" fill="none" />
-              <circle cx="1060" cy="10" r="22" stroke="#1DB954" strokeWidth="0.75" className="anim-spire-2" fill="none" />
-              <circle cx="1060" cy="10" r="34" stroke="#1DB954" strokeWidth="0.5" className="anim-spire-slow" fill="none" />
-
-              {/* Cantilevered Wing Sky-Decks */}
-              <polygon points="985,90 1005,90 1005,105 985,95" strokeWidth="1.25" fill="#1DB954" fillOpacity="0.2" />
-              <polygon points="1115,90 1135,90 1135,95 1115,105" strokeWidth="1.25" fill="#1DB954" fillOpacity="0.2" />
-              <circle cx="985" cy="90" r="1.5" fill="#1DB954" className="anim-spire-1" />
-              <circle cx="1135" cy="90" r="1.5" fill="#1DB954" className="anim-spire-1" />
-
-              {/* Multi-Section High-Tech Cyber Facade with Illuminated Core */}
-              <line x1="1060" y1="45" x2="1060" y2="270" stroke="#1DB954" strokeWidth="2" strokeDasharray="6 6" className="anim-data-flow" />
-              
-              {/* Diagrid Cyber Shell Pattern */}
-              <g strokeWidth="0.75" strokeOpacity="0.7">
-                <line x1="1005" y1="45" x2="1115" y2="105" />
-                <line x1="1005" y1="105" x2="1115" y2="45" />
-                <line x1="1005" y1="105" x2="1115" y2="165" />
-                <line x1="1005" y1="165" x2="1115" y2="105" />
-                <line x1="1005" y1="165" x2="1115" y2="225" />
-                <line x1="1005" y1="225" x2="1115" y2="165" />
-              </g>
-
-              {/* Glowing Server Matrix Windows */}
-              <g strokeWidth="0.5">
-                {[...Array(8)].map((_, r) => (
-                  <g key={`s4-apex-${r}`}>
-                    <rect x="1015" y={55 + r * 25} width="16" height="16" rx="2" className={r % 2 === 0 ? "anim-win-1" : "anim-win-2"} />
-                    <rect x="1037" y={55 + r * 25} width="16" height="16" rx="2" className={r % 3 === 0 ? "anim-win-3" : "anim-win-1"} />
-                    <rect x="1067" y={55 + r * 25} width="16" height="16" rx="2" className={r % 2 === 1 ? "anim-win-2" : "anim-win-3"} />
-                    <rect x="1089" y={55 + r * 25} width="16" height="16" rx="2" className={r % 3 === 1 ? "anim-win-1" : "anim-win-2"} />
-                  </g>
-                ))}
-              </g>
-
-              {/* Structure 4C: Zenith Cloud Engine Twin Arcology (Height: 250px) */}
-              <rect x="1145" y="25" width="105" height="245" />
+              {/* Structure 4C: Zenith Cloud Engine Twin Arcology (Height: 275px) */}
+              <rect x="1285" y="28" width="115" height="272" />
               {/* Stepped Spire & Communications Crown */}
-              <polygon points="1140,25 1197,8 1255,25" strokeWidth="1.5" fill="#1DB954" fillOpacity="0.2" />
-              <line x1="1197" y1="0" x2="1197" y2="8" strokeWidth="2" stroke="#1DB954" />
-              <circle cx="1197" cy="0" r="3" fill="#1DB954" />
-              <circle cx="1197" cy="0" r="10" stroke="#1DB954" strokeWidth="0.75" className="anim-spire-1" fill="none" />
-
-              {/* Vertical High-Speed Fiber Conduit Columns */}
-              <line x1="1165" y1="25" x2="1165" y2="270" stroke="#1DB954" strokeWidth="1.5" strokeDasharray="4 4" className="anim-data-flow" />
-              <line x1="1230" y1="25" x2="1230" y2="270" stroke="#1DB954" strokeWidth="1.5" strokeDasharray="4 4" className="anim-data-flow" />
+              <polygon points="1280,28 1342,10 1405,28" strokeWidth="1.75" fill="#1DB954" fillOpacity="0.22" />
+              <line x1="1342" y1="0" x2="1342" y2="10" strokeWidth="2.5" stroke="#1DB954" />
+              <circle cx="1342" cy="0" r="3.5" fill="#1DB954" />
+              <circle cx="1342" cy="0" r="12" stroke="#1DB954" strokeWidth="0.8" className="anim-beacon-1" fill="none" />
 
               {/* Twin Cylinder Windows */}
               <g strokeWidth="0.5">
-                {[...Array(9)].map((_, r) => (
-                  <g key={`s4-c-grid-${r}`}>
-                    <rect x="1173" y={40 + r * 24} width="22" height="16" rx="1" className={r % 2 === 0 ? "anim-win-2" : "anim-win-1"} />
-                    <rect x="1201" y={40 + r * 24} width="22" height="16" rx="1" className={r % 3 === 0 ? "anim-win-1" : "anim-win-3"} />
+                {[...Array(10)].map((_, r) => (
+                  <g key={`s4-twin-grid-${r}`}>
+                    <rect x="1312" y={45 + r * 25} width="26" height="18" rx="1.5" className={r % 2 === 0 ? "anim-win-2" : "anim-win-1"} />
+                    <rect x="1346" y={45 + r * 25} width="26" height="18" rx="1.5" className={r % 3 === 0 ? "anim-win-1" : "anim-win-3"} />
                   </g>
                 ))}
               </g>
 
               {/* Grand Citadel Entrance Atrium */}
-              <rect x="1170" y="235" width="55" height="35" strokeWidth="1.5" fill="#1DB954" fillOpacity="0.15" />
-              <line x1="1197" y1="235" x2="1197" y2="270" strokeWidth="1" />
+              <rect x="1315" y="260" width="60" height="40" strokeWidth="1.5" fill="#1DB954" fillOpacity="0.18" />
+              <line x1="1345" y1="260" x2="1345" y2="300" strokeWidth="1.2" />
 
-              {/* Structure 4D: Perimeter Defensive Node Tower (x: 1275 - 1375) */}
-              <rect x="1275" y="45" width="85" height="225" />
-              <polygon points="1270,45 1317,20 1365,45" strokeWidth="1.25" fill="currentColor" fillOpacity="0.05" />
-              <line x1="1317" y1="10" x2="1317" y2="20" strokeWidth="1.5" stroke="#1DB954" />
-              <circle cx="1317" cy="10" r="2.5" fill="#1DB954" className="anim-spire-1" />
-
-              <g strokeWidth="0.5">
-                {[...Array(8)].map((_, r) => (
-                  <g key={`s4-d-grid-${r}`}>
-                    <rect x="1287" y={60 + r * 24} width="18" height="16" className={r % 2 === 1 ? "anim-win-1" : "anim-win-2"} />
-                    <rect x="1312" y={60 + r * 24} width="18" height="16" className={r % 3 === 1 ? "anim-win-3" : "anim-win-1"} />
-                    <rect x="1337" y={60 + r * 24} width="14" height="16" className={r % 2 === 0 ? "anim-win-2" : "anim-win-3"} />
-                  </g>
-                ))}
-              </g>
-
-              {/* Stage Selection Active Box Indicator */}
-              {activeStage === 'pinnacle' && (
-                <rect x="880" y="0" width="500" height="273" stroke="#1DB954" strokeWidth="1" strokeDasharray="4 4" fill="#1DB954" fillOpacity="0.03" rx="4" />
+              {/* Sector Active Bracket Indicator */}
+              {activeSectorId === 'pinnacle' && (
+                <rect x="1015" y="0" width="415" height="305" stroke="#1DB954" strokeWidth="1.2" strokeDasharray="5 5" fill="#1DB954" fillOpacity="0.03" rx="6" />
               )}
             </g>
           </g>
 
           {/* =========================================================================
-              LAYER 4: HIGH-TECH CYBER TRAVELER TRAVERSING THE ELEVATION DATUM
+              LAYER 4: CYBER TRAVELER TRAVERSING THE ELEVATION DATUM
              ========================================================================= */}
-          <g className="anim-walker-track" transform="translate(0, 270)">
+          <g className="anim-walker" transform="translate(0, 300)">
             <g>
-              {/* Cyber Helmet & HUD Visor */}
-              <circle cx="0" cy="-24" r="3.5" fill="#1DB954" />
-              <path d="M -4 -25 L 4 -25 L 5 -23 L -4 -23 Z" fill="currentColor" />
-              <line x1="-2" y1="-24" x2="4" y2="-24" stroke="#000" strokeWidth="0.75" />
-              {/* Tactical Rig & Cyber Backpack with Scanner Beam */}
-              <rect x="-4" y="-20" width="8" height="11" rx="2" fill="currentColor" />
-              <rect x="-7" y="-19" width="4" height="8" rx="1.5" fill="#1DB954" fillOpacity="0.85" />
-              <line x1="0" y1="-18" x2="4" y2="-12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              {/* Glowing Headlamp & Cyber Helmet */}
+              <circle cx="0" cy="-26" r="4" fill="#1DB954" filter="url(#neon-glow)" />
+              <path d="M -5 -27 L 5 -27 L 6 -24 L -5 -24 Z" fill="currentColor" />
+              <line x1="-3" cy="-26" x2="5" y2="-26" stroke="#000" strokeWidth="0.8" />
+              {/* Forward Scanner Flashlight Beam */}
+              <polygon points="5,-26 28,-18 28,-34" fill="#1DB954" fillOpacity="0.18" />
+              {/* Tactical Exoskeleton Body & Power Pack */}
+              <rect x="-5" y="-22" width="10" height="12" rx="2" fill="currentColor" />
+              <rect x="-8" y="-21" width="4" height="9" rx="1.5" fill="#1DB954" fillOpacity="0.9" />
+              <line x1="0" y1="-19" x2="5" y2="-13" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
             </g>
-            {/* Animated Striding Legs */}
-            <g transform="translate(0, -9)">
-              <line x1="0" y1="0" x2="-3.5" y2="9" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" className="anim-walker-leg-l" />
-              <line x1="0" y1="0" x2="3.5" y2="9" stroke="#1DB954" strokeWidth="1.75" strokeLinecap="round" className="anim-walker-leg-r" />
+            {/* Animated Striding Cyber Legs */}
+            <g transform="translate(0, -10)">
+              <line x1="0" y1="0" x2="-4" y2="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="anim-walker-l" />
+              <line x1="0" y1="0" x2="4" y2="10" stroke="#1DB954" strokeWidth="2" strokeLinecap="round" className="anim-walker-r" />
             </g>
           </g>
 
@@ -762,68 +869,83 @@ export function ArchitecturalSkyline({ className }: { className?: string }) {
              ========================================================================= */}
           <g stroke="currentColor" strokeWidth="1.5" className="text-border-subtle opacity-90">
             {/* Primary Ground Axis Line */}
-            <line x1="0" y1="270" x2="1400" y2="270" strokeWidth="2" />
-            <line x1="0" y1="274" x2="1400" y2="274" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.5" />
+            <line x1="0" y1="300" x2="1440" y2="300" strokeWidth="2.5" />
+            <line x1="0" y1="305" x2="1440" y2="305" strokeWidth="0.75" strokeDasharray="4 4" opacity="0.6" />
 
-            {/* Glowing Neon Ground Nodes */}
-            <circle cx="73" cy="270" r="3.5" fill="#1DB954" />
-            <circle cx="426" cy="270" r="3.5" fill="#1DB954" />
-            <circle cx="720" cy="270" r="4" fill="#1DB954" />
-            <circle cx="1060" cy="270" r="5" fill="#1DB954" />
-            <circle cx="1197" cy="270" r="5" fill="#1DB954" />
+            {/* Radiant Ground Stage Anchor Pins */}
+            <circle cx="96" cy="300" r="4" fill="#1DB954" />
+            <circle cx="495" cy="300" r="4" fill="#1DB954" />
+            <circle cx="840" cy="300" r="4.5" fill="#1DB954" />
+            <circle cx="1205" cy="300" r="5.5" fill="#1DB954" filter="url(#neon-glow)" />
+            <circle cx="1345" cy="300" r="5" fill="#1DB954" />
           </g>
 
           {/* =========================================================================
               LAYER 6: HUD ELEVATION LABELS & ARCHITECTURAL SPECS
              ========================================================================= */}
-          <g fontSize="9" fontFamily="monospace" fill="currentColor" opacity="0.6" stroke="none">
-            <text x="45" y="294">01 // BASELINE FOUNDATION [EL +0.0m]</text>
-            <text x="360" y="294">02 // CLOUD MODERNIZATION [EL +140.0m]</text>
-            <text x="660" y="294">03 // COMMERCIAL ARCOLOGY [EL +480.0m]</text>
-            <text x="1050" y="294">04 // ZENITH CYBERCITY APEX [EL +1050.0m]</text>
+          <g fontSize="9.5" fontFamily="monospace" fill="currentColor" opacity="0.7" stroke="none">
+            <text x="50" y="326">01 // GROUND ZERO [EL +0.0m]</text>
+            <text x="420" y="326">02 // CLOUD EDGE FACILITY [EL +180.0m]</text>
+            <text x="750" y="326">03 // COMMERCIAL ARCOLOGY [EL +540.0m]</text>
+            <text x="1110" y="326">04 // ZENITH APEX CITADEL [EL +1180.0m]</text>
           </g>
-          <g fontSize="7.5" fontFamily="monospace" fill="#1DB954" opacity="0.8" stroke="none">
-            <text x="45" y="308">STATUS: LEGACY / MANUAL</text>
-            <text x="360" y="308">STATUS: EDGE SSR 0.4s</text>
-            <text x="660" y="308">STATUS: AUTO-FLOW SYNC</text>
-            <text x="1050" y="308">STATUS: 100% ASSET ENGINE</text>
+          <g fontSize="8" fontFamily="monospace" fill="#1DB954" fontWeight="bold" opacity="0.9" stroke="none">
+            <text x="50" y="342">STATUS: LEGACY / MANUAL TRIAGE</text>
+            <text x="420" y="342">STATUS: NEXT.JS SSR 0.4s SPEED</text>
+            <text x="750" y="342">STATUS: REALTIME AI EVENT PIPELINE</text>
+            <text x="1110" y="342">STATUS: 100% PROPRIETARY ASSET</text>
           </g>
         </svg>
       </div>
 
-      {/* Cyber Narrative Diagnostic Callout Console */}
-      <div className="p-4 sm:p-5 rounded-xl border border-accent/30 bg-surface/90 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      {/* Cyber Diagnostic Telemetry & System Blueprint Console */}
+      <div className="p-5 sm:p-6 rounded-2xl border border-accent/30 bg-surface/95 shadow-md flex flex-col lg:flex-row lg:items-center justify-between gap-6">
         <div className="max-w-2xl">
-          <div className="flex items-center gap-2 text-xs font-mono text-accent-dark dark:text-accent font-semibold mb-1">
+          {/* Header Tag */}
+          <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-accent-dark dark:text-accent font-semibold mb-2">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            <span>{`■ ARCHITECTURE STAGE ${activeData.stageNum} //`}</span>
-            <span className="uppercase tracking-wider text-text-primary">{activeData.title}</span>
+            <span>{`■ ARCHITECTURE SECTOR ${activeSector.stageNum} //`}</span>
+            <span className="uppercase tracking-wider text-text-primary font-bold">{activeSector.title}</span>
+            <span className="text-text-tertiary">/</span>
+            <span className="text-[11px] text-text-secondary">{activeSector.category}</span>
           </div>
-          <p className="text-xs sm:text-sm text-text-secondary leading-relaxed mt-1">
-            {activeData.description}
+
+          <p className="text-sm text-text-secondary leading-relaxed">
+            {activeSector.description}
           </p>
 
-          {/* Realtime Metrics Strip */}
-          <div className="flex flex-wrap items-center gap-4 mt-3 pt-3 border-t border-border-subtle/60">
-            {activeData.metrics.map((m) => (
-              <div key={m.label} className="flex items-center gap-1.5 text-xs font-mono">
-                <span className="text-text-tertiary uppercase">{m.label}:</span>
-                <span className="font-bold text-text-primary text-accent-dark dark:text-accent">{m.value}</span>
-              </div>
+          {/* Infrastructure Sub-Systems Badges */}
+          <div className="flex flex-wrap items-center gap-2 mt-3.5">
+            <span className="text-[10px] font-mono text-text-tertiary uppercase tracking-wider">Sub-Systems:</span>
+            {activeSector.infrastructure.map((infra) => (
+              <span
+                key={infra}
+                className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[11px] font-mono bg-surface-elevated border border-border-subtle text-text-secondary"
+              >
+                <span className="w-1 h-1 rounded-full bg-accent" />
+                <span>{infra}</span>
+              </span>
             ))}
           </div>
         </div>
 
-        {/* Key Upgrades Badges */}
-        <div className="flex flex-wrap md:flex-col gap-1.5 md:items-end shrink-0">
-          {activeData.keyUpgrades.map((upgrade) => (
-            <span
-              key={upgrade}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono bg-accent/5 dark:bg-accent/10 border border-accent/20 text-text-primary"
+        {/* Quantifiable Realtime Metrics Strip */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 shrink-0 lg:w-[420px]">
+          {activeSector.metrics.map((m) => (
+            <div
+              key={m.label}
+              className="p-3.5 rounded-xl bg-surface-elevated/70 border border-border-subtle flex flex-col justify-between"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-              <span>{upgrade}</span>
-            </span>
+              <span className="text-[10px] font-mono text-text-tertiary uppercase tracking-wider">
+                {m.label}
+              </span>
+              <span className="text-xl font-bold font-mono text-text-primary text-accent-dark dark:text-accent mt-1">
+                {m.value}
+              </span>
+              <span className="text-[10px] text-text-secondary mt-0.5 leading-tight">
+                {m.detail}
+              </span>
+            </div>
           ))}
         </div>
       </div>
