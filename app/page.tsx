@@ -5,6 +5,7 @@ import ComparisonSection from '@/components/sections/ComparisonSection';
 import { ToolsTechnologySection } from '@/components/sections/ToolsTechnologySection';
 import WebsiteHighlight from '@/components/sections/WebsiteHighlight';
 import AISection from '@/components/sections/AISection';
+import { RoiCalculatorSection } from '@/components/sections/RoiCalculatorSection';
 import WorkPreview from '@/components/sections/WorkPreview';
 import ProcessSection from '@/components/sections/ProcessSection';
 import AboutPreview from '@/components/sections/AboutPreview';
@@ -20,6 +21,7 @@ export default function HomePage() {
       <ToolsTechnologySection />
       <WebsiteHighlight />
       <AISection />
+      <RoiCalculatorSection />
       <WorkPreview />
       <ProcessSection />
       <AboutPreview />

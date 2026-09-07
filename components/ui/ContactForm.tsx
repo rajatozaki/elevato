@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Button } from './Button';
 import { cn } from '@/lib/utils';
 
@@ -13,7 +14,8 @@ interface FormData {
   details: string;
 }
 
-export default function ContactForm() {
+function ContactFormInner() {
+  const searchParams = useSearchParams();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     company: '',
@@ -22,6 +24,34 @@ export default function ContactForm() {
     serviceType: '',
     details: '',
   });
+
+  useEffect(() => {
+    const serviceParam = searchParams.get('service');
+    const teamParam = searchParams.get('team');
+    const hoursSavedParam = searchParams.get('hoursSaved');
+    const savingsParam = searchParams.get('savings');
+
+    let initialService = '';
+    let initialDetails = '';
+
+    if (serviceParam) {
+      if (serviceParam.toLowerCase().includes('auto')) initialService = 'AI Automation';
+      else if (serviceParam.toLowerCase().includes('web')) initialService = 'Website';
+      else if (serviceParam.toLowerCase().includes('landing')) initialService = 'Landing Page';
+      else if (serviceParam.toLowerCase().includes('enable')) initialService = 'AI Enablement';
+      else initialService = serviceParam;
+    }
+
+    if (teamParam || savingsParam || hoursSavedParam) {
+      initialDetails = `[Operations ROI Estimate]\nTeam Size: ${teamParam || 'N/A'} members\nTarget Hours to Reclaim: ${hoursSavedParam || 'N/A'}\nProjected Annual Labor Savings: ${savingsParam || 'N/A'}\n\nKey processes we want to automate:\n1. \n2. `;
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      serviceType: initialService || prev.serviceType,
+      details: initialDetails || prev.details,
+    }));
+  }, [searchParams]);
 
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
   const [serverError, setServerError] = useState<string | null>(null);
@@ -255,5 +285,13 @@ export default function ContactForm() {
         </span>
       </div>
     </form>
+  );
+}
+
+export default function ContactForm() {
+  return (
+    <Suspense fallback={<div className="max-w-2xl mx-auto p-12 text-center text-xs font-mono text-text-tertiary">Loading secure form...</div>}>
+      <ContactFormInner />
+    </Suspense>
   );
 }
