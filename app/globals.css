@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :root {
     --color-starlight: #F9F9F7;
@@ -95,4 +97,18 @@ html {
 ::selection {
   background-color: var(--color-accent);
   color: #111111;
+}
+
+/* Strict Logo Theme Display (Prevents system media-query overrides) */
+:root:not(.dark) .logo-for-dark-mode {
+  display: none !important;
+}
+:root:not(.dark) .logo-for-light-mode {
+  display: inline-block !important;
+}
+.dark .logo-for-light-mode {
+  display: none !important;
+}
+.dark .logo-for-dark-mode {
+  display: inline-block !important;
 }

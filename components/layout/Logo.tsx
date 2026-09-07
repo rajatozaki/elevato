@@ -41,7 +41,7 @@ export function Logo({ className, variant = 'auto', showMarkOnly = false }: Logo
               alt="Alevate"
               width={32}
               height={30}
-              className="h-7 w-auto object-contain dark:hidden"
+              className="h-7 w-auto object-contain logo-for-light-mode"
               priority
             />
             <Image
@@ -49,7 +49,7 @@ export function Logo({ className, variant = 'auto', showMarkOnly = false }: Logo
               alt="Alevate"
               width={32}
               height={30}
-              className="h-7 w-auto object-contain hidden dark:block"
+              className="h-7 w-auto object-contain logo-for-dark-mode"
               priority
             />
           </>
@@ -92,7 +92,7 @@ export function Logo({ className, variant = 'auto', showMarkOnly = false }: Logo
             alt="Alevate"
             width={130}
             height={32}
-            className="h-7 sm:h-8 w-auto object-contain dark:hidden"
+            className="h-7 sm:h-8 w-auto object-contain logo-for-light-mode"
             priority
           />
           <Image
@@ -100,7 +100,7 @@ export function Logo({ className, variant = 'auto', showMarkOnly = false }: Logo
             alt="Alevate"
             width={130}
             height={32}
-            className="h-7 sm:h-8 w-auto object-contain hidden dark:block"
+            className="h-7 sm:h-8 w-auto object-contain logo-for-dark-mode"
             priority
           />
         </>
@@ -117,14 +117,14 @@ export const AlevateMark = ({ className }: { className?: string }) => (
       alt="Alevate"
       width={32}
       height={30}
-      className="h-full w-auto object-contain dark:hidden"
+      className="h-full w-auto object-contain logo-for-light-mode"
     />
     <Image
       src="/brand/alevate-mark-white.png"
       alt="Alevate"
       width={32}
       height={30}
-      className="h-full w-auto object-contain hidden dark:block"
+      className="h-full w-auto object-contain logo-for-dark-mode"
     />
   </span>
 );
